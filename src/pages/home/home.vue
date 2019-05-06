@@ -43,10 +43,65 @@
                 </div>
             </div>
             <div class="home-main-two">
-                <div class="main-two-one"></div>
-                <div class="main-two-two"></div>
-                <div class="main-two-three"></div>
-                <div class="main-two-four"></div>
+                <div class="main-two-one">
+                    <p class="news-title">
+                        <span class="title">两岸要闻</span>
+                        <span class="more">
+                            更多
+                            <i class="el-icon-circle-plus-outline"></i>
+                        </span>
+                    </p>
+                    <ul class="news-list">
+                        <li v-for="(item,index) in newsList" :key="index">
+                            <span class="title">{{item.title}}</span>
+                            <span class="time">{{item.time}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="main-two-two">
+                    <p class="news-title">
+                        <span class="title">个人办事</span>
+                        <span class="more">
+                            更多
+                            <i class="el-icon-circle-plus-outline"></i>
+                        </span>
+                    </p>
+                    <ul class="news-list">
+                        <li v-for="(item,index) in personThing" :key="index">
+                            <span class="title">{{item.lable}}</span>
+                        </li>
+                        <li class="more">更多</li>
+                    </ul>
+                </div>
+                <div class="main-two-three">
+                    <p class="news-title">
+                        <span class="title">通导航</span>
+                        <span class="more">
+                            更多
+                            <i class="el-icon-circle-plus-outline"></i>
+                        </span>
+                    </p>
+                    <ul class="news-list">
+                        <li v-for="(item,index) in navList" :key="index">
+                            <img class="nav-img" :src="item.imgUrl" alt="正在加载中......">
+                        </li>
+                    </ul>
+                </div>
+                <div class="main-two-four">
+                    <p class="news-title">
+                        <span class="title">通服务</span>
+                        <span class="more">
+                            更多
+                            <i class="el-icon-circle-plus-outline"></i>
+                        </span>
+                    </p>
+                    <ul class="news-list">
+                        <li v-for="(item,index) in newsList.slice(0,4)" :key="index">
+                            <span class="title">{{item.title}}</span>
+                            <span class="time">{{item.time}}</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -93,6 +148,84 @@ data(){
             {
                 title:'新闻概要--概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要',
                 time:'2019-05-06'
+            },
+            {
+                title:'新闻概要--概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要',
+                time:'2019-05-06'
+            }
+        ],
+        personThing:[
+            {
+                lable:'设立变更'
+            },
+            {
+                lable:'准营准办'
+            },
+            {
+                lable:'资质认证'
+            },
+            {
+                lable:'年检年审'
+            },
+            {
+                lable:'税收财务'
+            },
+            {
+                lable:'人力资源'
+            },
+            {
+                lable:'社会保障'
+            },
+            {
+                lable:'投资审批'
+            },
+            {
+                lable:'融贷信贷'
+            },
+            {
+                lable:'抵押质押'
+            },
+            {
+                lable:'商务贸易'
+            },
+            {
+                lable:'招标拍卖'
+            },
+            {
+                lable:'海关口岸'
+            },
+            {
+                lable:'涉外服务'
+            },
+            {
+                lable:'农林牧渔'
+            },
+        ],
+        navList:[
+            {
+                id:0,
+                imgUrl:require(`../../assets/img/nav1.png`),
+                path:''
+            },
+            {
+                id:1,
+                imgUrl:require(`../../assets/img/nav2.png`),
+                path:''
+            },
+            {
+                id:2,
+                imgUrl:require(`../../assets/img/nav3.png`),
+                path:''
+            },
+            {
+                id:3,
+                imgUrl:require(`../../assets/img/nav3.png`),
+                path:''
+            },
+            {
+                id:4,
+                imgUrl:require(`../../assets/img/nav4.png`),
+                path:''
             }
         ]
     }
@@ -110,7 +243,7 @@ data(){
     .home-main{
         width:1170px;
         min-height: 700px;
-        margin:33px auto;
+        margin:33px auto 0;
         padding:15px;
         border:1px solid #f2f2f2;
         background: #fff;
@@ -184,8 +317,157 @@ data(){
                                 text-align: center;
                             }
                         }
+                    } 
+                }
+            }
+        }
+        .home-main-two{
+            padding:20px 0 20px 20px;
+            overflow: hidden;
+            &>div{
+                width:542px;
+                float: left;
+                &:nth-of-type(2n-1){
+                    margin-right:60px;
+                }
+                .news-title{
+                    border-bottom:2px solid rgba(187, 17, 26);
+                    overflow: hidden;
+                    .title{
+                        height:38px;
+                        width:112px;
+                        text-align: center;
+                        float: left;
+                        line-height: 38px;
+                        color:  #fff;
+                        font-size:20px;
+                        padding:6px 0;
+                        background: rgba(187, 17, 26);
+                        border-bottom:2px solid rgba(187, 17, 26);
+                    }
+                    .more{
+                        cursor: pointer;
+                        float: right;    
+                        position: relative;
+                        top: 23px;
+                        font-size:12px;
+                        i{
+                            color:rgba(187, 17, 26);
+                        }
+                    }
+                }
+            }
+            .main-two-one{
+                .news-list{
+                    margin:30px 0 40px;
+                    li{
+                        height:35px;
+                        line-height:35px;
+                        list-style-type: square!important;
+                        list-style-color: #666!important;
+                        clear: both;
+                        margin-left: 20px;
+                        color:#666;
+                        cursor: pointer;
+                        span{
+                            display: inline-block;
+                            &.title{
+                                width:70%;
+                                float: left;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                            }
+                            &.time{
+                                width:25%;
+                                float: right;
+                                text-align: center;
+                            }
+                        }
                     }
                     
+                }
+            }
+            .main-two-two{
+                .news-list{
+                    margin:30px 0 40px;
+                    overflow: hidden;
+                    li{
+                        cursor: pointer;
+                        float: left;
+                        width:115px;
+                        height:32px;
+                        text-align: center;
+                        line-height: 32px;
+                        color:#333;
+                        background: #f2f2f2;
+                        margin-right:24px;
+                        margin-bottom:25px;
+                        &:nth-of-type(4n){
+                            margin-right:0;
+                        }
+                        &:hover{
+                            background: #dddd;
+                        }
+                        &.more{
+                           color:rgba(187, 17, 26);
+                            background: #ffff; 
+                        }
+                    }
+                    
+                }
+            }
+            .main-two-three{
+                .news-list{
+                    margin:50px 0 40px;
+                    overflow: hidden;
+                    li{
+                        cursor: pointer;
+                        float: left;
+                        width:80px;
+                        height:80px;
+                        margin-right:35px;
+                        border-radius:4px;    
+                        border-radius: 10px;
+                        overflow: hidden;
+                        &:nth-last-of-type(1){
+                            margin-right:0;
+                        }
+                        .nav-img{
+                            width:100%;
+                        }
+                    }
+                    
+                }
+            }
+            .main-two-four{
+                .news-list{
+                    margin-top:20px;
+                    li{
+                        height:35px;
+                        line-height:35px;
+                        list-style-type: square!important;
+                        list-style-color: #666!important;
+                        clear: both;
+                        margin-left: 20px;
+                        color:#666;
+                        cursor: pointer;
+                        span{
+                            display: inline-block;
+                            &.title{
+                                width:70%;
+                                float: left;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                            }
+                            &.time{
+                                width:25%;
+                                float: right;
+                                text-align: center;
+                            }
+                        }
+                    } 
                 }
             }
         }
