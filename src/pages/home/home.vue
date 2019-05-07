@@ -83,7 +83,8 @@
                     </p>
                     <ul class="news-list">
                         <li v-for="(item,index) in navList" :key="index">
-                            <img class="nav-img" :src="item.imgUrl" alt="正在加载中......">
+                            <p class="nav-img" ><img :src="item.imgUrl" alt="正在加载中......"></p>
+                            <p class="nav-name">{{item.name}}</p>
                         </li>
                     </ul>
                 </div>
@@ -205,26 +206,31 @@ data(){
             {
                 id:0,
                 imgUrl:require(`../../assets/img/nav1.png`),
+                name:'求职招聘',
                 path:''
             },
             {
                 id:1,
                 imgUrl:require(`../../assets/img/nav2.png`),
+                name:'租赁',
                 path:''
             },
             {
                 id:2,
                 imgUrl:require(`../../assets/img/nav3.png`),
+                name:'二手买卖',
                 path:''
             },
             {
                 id:3,
                 imgUrl:require(`../../assets/img/nav3.png`),
+                name:'在线交友',
                 path:''
             },
             {
                 id:4,
                 imgUrl:require(`../../assets/img/nav4.png`),
+                name:'线下活动',
                 path:''
             }
         ]
@@ -419,13 +425,13 @@ data(){
             }
             .main-two-three{
                 .news-list{
-                    margin:50px 0 40px;
+                    margin-top:50px;
                     overflow: hidden;
                     li{
                         cursor: pointer;
                         float: left;
-                        width:80px;
-                        height:80px;
+                        // width:80px;
+                        // height:80px;
                         margin-right:35px;
                         border-radius:4px;    
                         border-radius: 10px;
@@ -434,7 +440,18 @@ data(){
                             margin-right:0;
                         }
                         .nav-img{
-                            width:100%;
+                            width: 80px;
+                            height: 80px;
+                            border-radius: 10px;
+                            overflow: hidden;
+                            img{
+                                width:100%;
+                            }
+                        }
+                        .nav-name{
+                            text-align: center;
+                            margin-top: 18px;
+                            font-size: 16px;
                         }
                     }
                     
