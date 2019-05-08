@@ -31,3 +31,42 @@ img{
 .el-pagination.is-background .btn-prev{
     color:rgba(187, 17, 26);
 }
+//复选框
+.el-checkbox__input.is-checked .el-checkbox__inner, 
+.el-checkbox__input.is-indeterminate .el-checkbox__inner{
+    background-color: rgba(187, 17, 26);
+    border-color: rgba(187, 17, 26);
+    color:rgba(187, 17, 26);
+}
+.el-checkbox__input.is-checked+.el-checkbox__label{
+    color:#333;
+}
+//tab表格
+.el-table td{
+    padding:0;
+}
+.el-table .cell,
+.el-table th div,
+.el-table--border td:first-child .cell,
+.el-table--border th:first-child .cell{
+    padding-left: 0;
+}
+.el-table__row.changeCss{
+    td:nth-of-type(1){
+        .cell{
+            color:#409EFF;
+        }
+    }
+}
+.service{
+    .el-table__row.changeCss{
+        td:nth-of-type(3){
+            .cell{
+                color:rgb(255, 216, 152);
+            }
+        }
+    }
+}
+.bene .el-table .el-button--small, .el-button--small.is-round{
+    padding: 0;
+}

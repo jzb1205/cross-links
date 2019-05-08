@@ -7,8 +7,50 @@
             <com-more-condition :tagList='tagList'></com-more-condition>
             <div class="listContion">
                 <div class="left">
-                        a
+                    <span>厦门&nbsp;<i class="el-icon-arrow-down"></i></span>
+                    <span>&nbsp;&nbsp;全部类型<i class="el-icon-arrow-down"></i> &nbsp;&nbsp;&nbsp;</span>
+                    <el-checkbox v-model="checked">可在线申办</el-checkbox>
                 </div>
+                <div class="right">
+                    共1235个事项，其中456项可在线申办
+                </div>
+            </div>
+            <div class="table-list">
+                <el-table :data="tableData"
+                        row-class-name="changeCss"
+                      style="width: 100%">
+                    <el-table-column prop="title"
+                                    label="实施清单事项名称">
+                    </el-table-column>
+                    <el-table-column prop="date"
+                                    label="目录清单事项名称"
+                                    width="220">
+                    </el-table-column>
+                    <el-table-column prop="name"
+                                    width="220"
+                                    label="主管部门">
+                    </el-table-column>
+                    <el-table-column prop="type"
+                                    width="220"
+                                    label="行政划区">
+                    </el-table-column>
+                    <el-table-column width="80"
+                                    align="right"
+                                    label="操作">
+                        <template slot-scope="scope">
+                            <div class="option-btn">
+                                <el-button @click="handleClick(scope.row)" type="text" size="small">在线办理</el-button>
+                                <el-button @click="handleClick(scope.row)" type="text" size="small">申请材料</el-button>
+                            </div>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <el-pagination
+                    background
+                    :page-size="100"
+                    layout="prev, pager, next"
+                    :total="1000">
+                </el-pagination>
             </div>
         </div>
     </div>
@@ -106,6 +148,33 @@ export default {
                 }
             ],
             curTab:'',
+            checked:false,
+            tableData: [
+                {   
+                    title:'和国防经费国家和方式',
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    type:'时政要闻'
+                }, 
+                {
+                    title:'和国防经费国家和方式',
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    type:'时政要闻'
+                }, 
+                {
+                    title:'和国防经费国家和方式',
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    type:'时政要闻'
+                }, 
+                {
+                    title:'和国防经费国家和方式',
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    type:'时政要闻'
+                }
+            ]
         }
     },
     methods:{
@@ -123,8 +192,8 @@ export default {
 .bene{
     .dis-img {
         width: 100%;
-        height: 330px;
-        background: url('../../assets/img/nav-banner.png');
+        // height: 330px;
+        background: url('../../assets/img/bene-banner.jpg');
         overflow: hidden;
         .tab-nav{
             width: 1200px;
@@ -141,6 +210,23 @@ export default {
         padding: 20px 10px;
         border: 1px solid #f2f2f2;
         background: #fff;
+        .listContion{
+            height: 50px;
+            line-height:70px;
+            overflow: hidden;
+            font-size:14px;
+            .left{
+                float: left;
+            }
+            .right{
+                float: right;
+            }
+        }
+    }
+    .option-btn{
+        .el-button+.el-button{
+            margin-left: 0;
+        }
     }
 }
 </style>

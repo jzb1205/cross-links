@@ -1,7 +1,7 @@
 <template>
     <div class="information">
         <div class="dis-img">
-            <img src="../../assets/img/information.png"
+            <img src="../../assets/img/infomation-banner.jpg"
                  alt="">
         </div>
         <div class="info-main">
@@ -45,7 +45,6 @@
                     :total="1000">
                 </el-pagination>
             </div>
-
         </div>
     </div>
 </template>
@@ -122,7 +121,7 @@ export default {
   .dis-img {
     img {
       width: 100%;
-      height: 330px;
+    //   height: 330px;
     }
   }
   .info-main {
@@ -162,7 +161,6 @@ export default {
     .table-list{
         margin-top:30px;
     }
-
   }
 }
 </style>

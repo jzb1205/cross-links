@@ -1,6 +1,10 @@
 <template>
     <div class="tab-nav">
-        <span v-for="item in tablist" :key="item.id" :class="{'active':item.id === curId}" @click="getCurId(item)">{{item.name}}</span>
+        <span v-for="item in tablist" :key="item.id" 
+            :class="{'active':item.id === curId}" 
+            @click="getCurId(item)">
+            {{item.name}}
+        </span>
     </div>
 </template>
 

@@ -10,8 +10,7 @@
         <div class="home-main">
             <div class="home-notice">
                 <div class="home-notice-left">
-                    <i class="el-icon-phone-outline"></i>
-                    &nbsp;
+                    <img src="../../assets/img/icon-notice.png" alt="">
                     通知公告：
                 </div>
                 <div class="home-notice-right">
@@ -115,7 +114,7 @@ data(){
         bannerList:[
             {
                 id:0,
-                imgUrl:require(`../../assets/img/banner.png`),
+                imgUrl:require(`../../assets/img/home-banner1.jpg`),
                 path:''
             },
             {
@@ -244,6 +243,7 @@ data(){
     .home-banner{
         .banner-img{
             width:100%;
+            height:465px;
         }
     }
     .home-main{
@@ -261,7 +261,11 @@ data(){
             .home-notice-left{
                 width:100px;
                 float: left;
-                color: rgba(212, 104, 106)
+                color: rgba(212, 104, 106);
+                img{
+                    width: 12px;
+                    margin-right: 4px;
+                }
             }
             .home-notice-right{
                 width:1070px;

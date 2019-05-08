@@ -70,7 +70,7 @@ export default {
             float: left;
             width: 235px;
             height:112px;
-            background: url('../../assets/img/logo.png')
+            background: url('../../assets/img/logo.png')no-repeat center center;
         }
         .nav{
             float: left;
@@ -82,7 +82,7 @@ export default {
                 padding:0 36px;
                 cursor: pointer;
                 height:100%;
-                color: rgb(184, 184, 184);
+                color: rgb(171, 171, 171);
                 p{
                     text-align: center;
                     &.label{

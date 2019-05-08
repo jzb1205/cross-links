@@ -71,7 +71,7 @@ export default {
                 font-size: 14px;
                 color: #333;
                 background: #ddd;
-                margin-right: 15px;
+                margin-right: 20px;
                 margin-bottom: 15px;
                 cursor: pointer;
                 &:nth-of-type(6n) {

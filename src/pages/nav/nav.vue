@@ -1,7 +1,7 @@
 <template>
     <div class="navigation">
         <div class="dis-img">
-            <img src="../../assets/img/nav-banner.png"
+            <img src="../../assets/img/nav-banner.jpg"
                  alt="">
         </div>
         <div class="nav-main">
