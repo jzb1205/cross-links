@@ -1,6 +1,7 @@
 <template>
     <div class="service">
-        <div class="dis-img">
+        <div class="server-dis-img">
+            <img class="se-img" src="../../assets/img/service-banner.jpg" alt="">
             <com-tab-nav :tablist='tablist' @getChildType='getChildType'></com-tab-nav>
         </div>
         <div class="info-main">
@@ -170,6 +171,9 @@ export default {
             ]
         }
     },
+    mounted(){
+        document.getElementsByClassName('server-dis-img')[0].style.height = (document.body.clientWidth/1920)*329;
+    },
     methods:{
         getChildType(value){
             this.curType = value;
@@ -183,15 +187,17 @@ export default {
 
 <style lang="less" scoped>
 .service{
-    .dis-img {
+    .server-dis-img {
+        position: relative;
         width: 100%;
-        height: 330px;
-        background: url('../../assets/img/service-banner.jpg');
         overflow: hidden;
+        .se-img{
+            width:100%;
+        }
         .tab-nav{
             width: 1200px;
             height: 55px;
-            margin: 275px auto 0;
+            margin: -59px auto 0;
             background: rgba(240, 180, 66, .5);
             display: flex;
         }

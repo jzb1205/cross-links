@@ -1,6 +1,6 @@
 <template>
     <div class="navigation">
-        <div class="dis-img">
+        <div class="nav-dis-img">
             <img src="../../assets/img/nav-banner.jpg"
                  alt="">
         </div>
@@ -19,16 +19,19 @@ export default {
     data(){
         return {
         }
-    }
+    },
+    mounted(){
+        document.getElementsByClassName('nav-dis-img')[0].style.height = (document.body.clientWidth/1920)*329;
+    },
 }
 </script>
 
 <style lang='less' scoped>
 .navigation{
-  .dis-img {
+  .nav-dis-img {
     img {
       width: 100%;
-      height: 330px;
+    //   height: 330px;
     }
   }
   .nav-main {    

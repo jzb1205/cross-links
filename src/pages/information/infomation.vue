@@ -1,7 +1,7 @@
 <template>
     <div class="information">
         <div class="dis-img">
-            <img src="../../assets/img/infomation-banner.jpg"
+            <img class="bg-img" src="../../assets/img/infomation-banner.jpg"
                  alt="">
         </div>
         <div class="info-main">
@@ -107,6 +107,12 @@ export default {
                 }
             ]
         }
+    },
+    mounted(){
+        document.getElementsByClassName('bg-img')[0].style.height = (document.body.clientWidth/1920)*329;
+    },
+    created(){
+        
     },
     methods: {
         getTagId (id) {
