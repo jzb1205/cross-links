@@ -180,6 +180,9 @@ export default {
         },
         getChildTag(value){
             this.curTab = value;
+        },
+        handleClick(){
+            this.$router.push('/serviceDetail')
         }
     }
 }

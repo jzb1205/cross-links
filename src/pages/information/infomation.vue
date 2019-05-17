@@ -117,6 +117,9 @@ export default {
     methods: {
         getTagId (id) {
             this.curTagId = id;
+        },
+        handleClick(){
+            this.$router.push('/informationDetail')
         }
     }
 }

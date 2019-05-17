@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import BMap from 'BMap'
+// import BMap from 'BMap'
 export default {
     name: 'component-header',
     data () {
@@ -35,19 +35,19 @@ export default {
 		methods: {
 			 dz() {
 				var that=this
-				var geolocation = new BMap.Geolocation();
-				geolocation.getCurrentPosition(function getinfo(position) {
-					let city = position.address.city; //获取城市信息       
-					let province = position.address.province;
-                    // console.log(city+'--'+province)
-                    console.log(city)
-					that.locationCity=city		//将城市名称保存到locationCity中
-					that.$store.commit('hqwz',city)
-				}, function(e) {        
-					that.locationCity='定位失败'
-				}, {
-					provider: 'baidu',
-				});
+				// var geolocation = new BMap.Geolocation();
+				// geolocation.getCurrentPosition(function getinfo(position) {
+				// 	let city = position.address.city; //获取城市信息       
+				// 	let province = position.address.province;
+                //     // console.log(city+'--'+province)
+                //     console.log(city)
+				// 	that.locationCity=city		//将城市名称保存到locationCity中
+				// 	that.$store.commit('hqwz',city)
+				// }, function(e) {        
+				// 	that.locationCity='定位失败'
+				// }, {
+				// 	provider: 'baidu',
+				// });
 			}
 		}
 }
