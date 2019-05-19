@@ -1,10 +1,10 @@
 <template>
     <div>
         <com-header></com-header>
-        <com-nav></com-nav>
+        <com-nav v-if="!(footerPage.includes(interShow))"></com-nav>
         <router-view></router-view>
         <com-inter v-if="page.includes(interShow)"></com-inter>
-        <com-footer></com-footer>
+        <com-footer v-if="!(footerPage.includes(interShow))"></com-footer>
     </div>
 </template>
 
@@ -23,8 +23,12 @@ export default {
     data(){
         return {
             interShow:'home',
-            page:["home","nav"]
+            page:["home","nav"],
+            footerPage:["login"],
         }
+    },
+    created(){
+        this.interShow = this.$route.name;
     },
     watch:{
         '$route'(){

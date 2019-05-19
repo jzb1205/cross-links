@@ -3,12 +3,17 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-// import store from './store'
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 require('@/assets/css/reset.less')
 
-Vue.use(ElementUI);
+import { post, get} from "./fetch/http";
+import api from './fetch/api/index'
+
+Vue.use(ElementUI)
+Vue.prototype.$post = post
+Vue.prototype.$get = get
+Vue.prototype.$api = api
 
 Vue.config.productionTip = false
 
@@ -16,7 +21,6 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-//   store,
   components: {
     App
   },

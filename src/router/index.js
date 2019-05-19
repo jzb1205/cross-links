@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import index from '../pages/index.vue'
+//登录注册
+import login from '../pages/login/login.vue'
 //首页
 import home from '../pages/home/home.vue'
 //通惠政
@@ -26,7 +28,7 @@ export default new Router({
             path: '/',
             name: 'index',
             component: index,
-            redirect:'/home',
+            redirect:'/login',
             children: [
                 {
                     path: '/home',
@@ -75,8 +77,13 @@ export default new Router({
                     path: '/informationDetail',
                     name: 'informationDetail',
                     component: informationDetail
-                }
+                },
+                {
+                    path: '/login',
+                    name: 'login',
+                    component: login
+                },
             ]
-        }
+        },
     ]
 })
