@@ -4,10 +4,10 @@
             <ul class="tag-list" v-if="tagList.length>0">
                 <li v-for="item in list"
                     :key="item.id"
-                    :class="{'active':curTabId === item.id}"
-                    @click="getTagId(item.id)">{{item.tagName}}</li>
+                    :class="{'active':curCode === item.code}"
+                    @click="getTagId(item.code)">{{item.value}}</li>
             </ul>
-            <p class="switch" @click="openAll">
+            <p class="switch" @click="openAll" v-if="tagList.length>0">
                 {{btnTxt}}
                 <i v-if="!switchChange" class="el-icon-arrow-down"></i>
                 <i v-else class="el-icon-arrow-up"></i>
@@ -27,8 +27,8 @@ export default {
     data(){
         return {
             list:[],
-            curTabId:'',
-            btnTxt:'全部展開',
+            curCode:'',
+            btnTxt:'全部展开',
             switchChange:false
         }
     },
@@ -36,9 +36,9 @@ export default {
         this.list = this.tagList.slice(0,12);
     },
     methods:{
-        getTagId(id){
-            this.curTabId = id;
-            this.$emit('getChildTag',id)
+        getTagId(code){
+            this.curCode = code;
+            this.$emit('getChildTag',code)
         },
         openAll(){
             if (!this.switchChange) {
@@ -47,7 +47,7 @@ export default {
                 this.switchChange = true;
             }else{
                 this.list = this.tagList.slice(0,12);
-                this.btnTxt = "全部展開";
+                this.btnTxt = "全部展开";
                 this.switchChange = false;
             }
         }

@@ -5,6 +5,7 @@ import navigation from './navigation'
 import service from './service'
 import user from './user'
 import login from './login'
+import common from './common'
 
 const api = {
     bene,
@@ -13,7 +14,8 @@ const api = {
     navigation,
     service,
     user,
-    login
+    login,
+    common
 }
 
 export default api

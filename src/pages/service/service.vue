@@ -2,32 +2,59 @@
     <div class="service">
         <div class="server-dis-img">
             <img class="se-img" src="../../assets/img/service-banner.jpg" alt="">
-            <com-tab-nav :tablist='tablist' @getChildType='getChildType'></com-tab-nav>
+            <com-tab-nav :tablist='typeMap' @getChildType='getChildType'></com-tab-nav>
         </div>
         <div class="info-main">
-            <com-more-condition :tagList='tagList'></com-more-condition>
+            <!-- {{secTypeMap}} -->
+            <com-more-condition :tagList='secTypeMap'></com-more-condition>
             <div class="listContion">
                 <div class="left">
                     全部服务清单
                 </div>
                 <div class="right">
-                    共1235个服务
+                    共{{total}}个服务
                 </div>
             </div>
             <div class="table-list">
-                <el-table :data="tableData"
+                <el-table :data="list"
                         row-class-name="changeCss"
                       style="width: 100%">
                     <el-table-column prop="title"
+                                    width="200"
                                     label="服务标题">
                     </el-table-column>
-                    <el-table-column prop="date"
-                                    label="服务类型"
-                                    width="250">
-                    </el-table-column>
                     <el-table-column prop="name"
-                                    width="250"
+                                    label="服务名称"
+                                    width="120">
+                    </el-table-column>
+                    <el-table-column prop="type"
+                                    label="服务类型"
+                                    width="100">
+                    </el-table-column>
+                    <el-table-column prop="introduction"
+                                    label="服务简介">
+                    </el-table-column>
+                    <el-table-column prop="payType"
+                                    label="是否收费"
+                                    width="10">
+                            <template slot-scope="scope">
+                                <span>{{scope.row.payType==='0'?'否':"是"}}</span>
+                            </template>
+                    </el-table-column>
+                    <el-table-column prop="amount"
+                                    width="100"
                                     label="服务收费">
+                    </el-table-column>
+                    <el-table-column prop="timeLimit"
+                                    label="服务期限"
+                                    width="100">
+                    </el-table-column>
+                    <el-table-column prop="baseCoding"
+                                    label="创建时间"
+                                    width="100">
+                        <template slot-scope="scope">
+                            <span>{{scope.row.createTime | timeFormat}}</span>
+                        </template>
                     </el-table-column>
                     <el-table-column width="80"
                                     align="right"
@@ -39,12 +66,7 @@
                         </template>
                     </el-table-column>
                 </el-table>
-                <el-pagination
-                    background
-                    :page-size="100"
-                    layout="prev, pager, next"
-                    :total="1000">
-                </el-pagination>
+                <com-pagination :rows='rows' :page='page' :total='total' @getList='querySiListPage'></com-pagination>
             </div>
         </div>
     </div>
@@ -60,6 +82,9 @@ export default {
     },
     data(){
         return {
+            page:1,
+            rows:10,
+            total:0,
             tablist:[
                 {
                     id:0,
@@ -143,36 +168,28 @@ export default {
             ],
             curTab:'',
             checked:false,
-            tableData: [
-                {   
-                    title:'和国防经费国家和方式',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    type:'时政要闻'
-                }, 
-                {
-                    title:'和国防经费国家和方式',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    type:'时政要闻'
-                }, 
-                {
-                    title:'和国防经费国家和方式',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    type:'时政要闻'
-                }, 
-                {
-                    title:'和国防经费国家和方式',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    type:'时政要闻'
-                }
-            ]
+            list: []
         }
     },
     mounted(){
         document.getElementsByClassName('server-dis-img')[0].style.height = (document.body.clientWidth/1920)*329;
+    },
+    created () {
+        this.querySiListPage()
+        this.$store.dispatch('getType',{ typeCode:'serviceBigType',class:'1'})
+    },
+    computed:{
+        typeMap(){
+            return this.$store.state.searchList;
+        },
+        secTypeMap(){
+            return this.$store.state.secSearchList;
+        },
+        dataMap(){
+            this.list = this.$store.state.getServiceMap.data.list || []
+            this.total = this.$store.state.getServiceMap.data.total || 0
+            return this.$store.state.getServiceMap;
+        }
     },
     methods:{
         getChildType(value){
@@ -183,6 +200,32 @@ export default {
         },
         handleClick(){
             this.$router.push('/serviceDetail')
+        },
+        querySiListPage(value){
+            let params = {
+                page:value && value.page || 1,
+                rows:value && value.rows || 10,
+                type:this.curTab
+            }
+            params.type = params.type === '0'?'':params.type
+            this.$store.dispatch('querySiListPage',params)
+        },
+    },
+    watch:{
+        'curType'(){
+            let typeCode = 'businessService'
+            switch (this.curType) {
+                case '0':
+                    typeCode = 'businessService'
+                    break;
+                case '1':
+                    typeCode = 'financeService'
+                    break;
+                default:
+                    typeCode = 'lifeService'
+                    break;
+            }
+            this.$store.dispatch('getType',{ typeCode:typeCode,class:'2'})
         }
     }
 }

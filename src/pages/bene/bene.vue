@@ -46,12 +46,7 @@
                         </template>
                     </el-table-column>
                 </el-table>
-                <el-pagination
-                    background
-                    :page-size="100"
-                    layout="prev, pager, next"
-                    :total="1000">
-                </el-pagination>
+                <com-pagination :rows='rows' :page='page' :total='total' @getList='getInfoListPage'></com-pagination>
             </div>
         </div>
     </div>
@@ -67,6 +62,9 @@ export default {
     },
     data(){
         return {
+            page:1,
+            rows:10,
+            total:0,
             tablist:[
                 {
                     id:0,

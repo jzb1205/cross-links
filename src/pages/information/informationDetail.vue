@@ -1,17 +1,17 @@
 <template>
     <div class="detail-main">
         <com-bread-crumbs :breadList='breadList'></com-bread-crumbs>
-        <com-detail-main></com-detail-main>
+        <com-info-detail-main :dataMap='dataMap'></com-info-detail-main>
     </div>
 </template>
 
 <script>
 import ComBreadCrumbs from '@/components/ComBreadCrumbs/ComBreadCrumbs'
-import ComDetailMain from '@/components/ComDetailMain/ComDetailMain'
+import ComInfoDetailMain from '@/components/ComInfoDetailMain/ComInfoDetailMain'
 export default {
     components:{
         ComBreadCrumbs,
-        ComDetailMain
+        ComInfoDetailMain
     },
     data(){
         return {
@@ -24,8 +24,31 @@ export default {
                     path:'',
                     name:'资讯详情'
                 }
-            ]
+            ],
+            dataMap:{}
         }
+    },
+    created(){
+        this.infoDetail()
+    },
+    methods:{
+        //修改数据详情
+        infoDetail () {
+            this.$get(this.$api.information.infoDetail, {
+                params: {
+                    id: this.$route.query.id
+                }
+            }).then(res => {
+                if (res.code === '000' && res.data) {
+                    this.dataMap = res.data
+                } else {
+                    this.$message({
+                        message: '获取资讯信息失败',
+                        type: 'error'
+                    })
+                }
+            })
+        },
     }
 }
 </script>

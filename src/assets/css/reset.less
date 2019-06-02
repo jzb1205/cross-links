@@ -16,7 +16,7 @@ input{
     outline: none;
 }
 img{
-    width:100%;
+    // width:100%;
 }
 //全局分页样式
 .el-pagination{
@@ -50,6 +50,9 @@ img{
 .el-table--border td:first-child .cell,
 .el-table--border th:first-child .cell{
     padding-left: 0;
+    overflow: hidden;
+    text-overflow: hidden;
+    white-space: nowrap;
 }
 .el-table__row.changeCss{
     td:nth-of-type(1){
@@ -69,4 +72,10 @@ img{
 }
 .bene .el-table .el-button--small, .el-button--small.is-round{
     padding: 0;
+}
+.ueditor {
+    img{
+        width:80%;
+        margin-left:10%;
+    }
 }

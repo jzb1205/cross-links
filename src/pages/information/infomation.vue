@@ -4,13 +4,13 @@
             <img class="bg-img" src="../../assets/img/infomation-banner.jpg"
                  alt="">
         </div>
-        <div class="info-main">
+        <div class="info-main" id="info-main">
             <div class="tag">
                 <ul class="tag-list">
-                    <li v-for="item in tagList"
+                    <li v-for="item in typeMap"
                         :key="item.id"
-                        :class="{'active':curTagId === item.id}"
-                        @click="getTagId(item.id)">{{item.tagName}}</li>
+                        :class="{'active':curCode === item.code}"
+                        @click="getTagId(item.code)">{{item.value}}</li>
                 </ul>
             </div>
             <div class="table-list">
@@ -19,13 +19,16 @@
                     <el-table-column prop="title"
                                     label="标题">
                     </el-table-column>
-                    <el-table-column prop="date"
+                    <el-table-column prop="createTime"
                                     label="发布时间"
                                     width="220">
+                        <template slot-scope="scope">
+                            <span>{{scope.row.content | timeFormat}}</span>
+                        </template>
                     </el-table-column>
-                    <el-table-column prop="name"
+                    <el-table-column prop="description"
                                     width="220"
-                                    label="信息来源">
+                                    label="简介">
                     </el-table-column>
                     <el-table-column prop="type"
                                     width="220"
@@ -34,16 +37,11 @@
                     <el-table-column width="120"
                                     label="操作">
                         <template slot-scope="scope">
-                            <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
+                            <el-button @click="handleClick(scope.row.id)" type="text" size="small">详情</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
-                <el-pagination
-                    background
-                    :page-size="100"
-                    layout="prev, pager, next"
-                    :total="1000">
-                </el-pagination>
+                <com-pagination :rows='rows' :page='page' :total='total' @getList='getInfoListPage'></com-pagination>
             </div>
         </div>
     </div>
@@ -53,74 +51,71 @@
 export default {
     data () {
         return {
-            tagList: [
-                {
-                    id: '',
-                    tagName: '全部类型'
-                },
-                {
-                    id: '0',
-                    tagName: '时政要闻'
-                },
-                {
-                    id: '1',
-                    tagName: '财经动态'
-                },
-                {
-                    id: '2',
-                    tagName: '民生广角'
-                },
-                {
-                    id: '3',
-                    tagName: '海峡两岸'
-                },
-                {
-                    id: '4',
-                    tagName: '其他'
-                }
-            ],
-            curTagId: '',
-            tableData: [
-                {   
-                    title:'和国防经费国家和方式',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    type:'时政要闻'
-                }, 
-                {
-                    title:'和国防经费国家和方式',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    type:'时政要闻'
-                }, 
-                {
-                    title:'和国防经费国家和方式',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    type:'时政要闻'
-                }, 
-                {
-                    title:'和国防经费国家和方式',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    type:'时政要闻'
-                }
-            ]
+            page:1,
+            rows:10,
+            total:0,
+            curCode: '',
+            tableData: []
         }
     },
     mounted(){
-        document.getElementsByClassName('bg-img')[0].style.height = (document.body.clientWidth/1920)*329;
+        this.$nextTick(()=>{
+            document.getElementsByClassName('bg-img')[0].style.height = (document.body.clientWidth/1920)*329
+            let w = (document.body.clientWidth/1920)*1400
+            document.getElementById('info-main').style.width = w
+        })
     },
     created(){
-        
+        this.getInfoListPage()
+        this.$store.dispatch('getType',{ typeCode:'infoBigType',class:"1"})
+        if(this.typeMap.length>0){
+            this.curCode = this.typeMap[0].code
+        }
+    },
+    computed:{
+        typeMap(){
+            return this.$store.state.searchList;
+        }
     },
     methods: {
-        getTagId (id) {
-            this.curTagId = id;
+        getTagId (code) {
+            this.curCode = code;
+            this.getInfoListPage()
         },
-        handleClick(){
-            this.$router.push('/informationDetail')
-        }
+        handleClick(id){
+            if (!id) {
+                this.$message({
+                    message:'资讯Id不能为空',
+                    type:'error'
+                })
+                return;
+            }
+            this.$router.push({
+                path:'/informationDetail',
+                query:{
+                    id:id
+                }
+            })
+        },
+        getInfoListPage(value){
+            let params = {
+                type:this.curCode,
+                page:value && value.page || 1,
+                rows:value && value.rows || 10
+            }
+            params.type = params.type === '0'?'':params.type
+            this.$post(this.$api.information.getInfoListPage,params).then(res=>{
+                if (res.code === '000') {
+                    this.tableData = res.data && res.data.list || []
+                    this.total = res.data && res.data.total
+                }else{
+                    this.$message({
+                        message:'发布资讯失败',
+                        type:'error'
+                    })
+                }
+            })
+        },
     }
 }
 </script>

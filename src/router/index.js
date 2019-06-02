@@ -71,7 +71,10 @@ export default new Router({
                 {
                     path: '/user',
                     name: 'user',
-                    component: user
+                    component: user,
+                    beforeEnter: (to, from, next) => {
+                      verifyLogin(next);
+                    }
                 },
                 {
                     path: '/informationDetail',
@@ -87,3 +90,13 @@ export default new Router({
         },
     ]
 })
+
+
+// 未登录状态，个人中心全都跳转login
+function verifyLogin(next) {
+    if (window.localStorage.getItem('userName')) {
+      next();
+    } else {
+      next('/');
+    }
+  }

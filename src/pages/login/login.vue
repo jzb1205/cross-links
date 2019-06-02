@@ -95,13 +95,20 @@ export default {
                 params.mobile = this.curList[2].value
             }
             this.$post(url,params).then((res)=>{
-                this.$message({
-                    message: type==0?'登录成功':'注册成功',
-                    type: 'success'
-                });
-                setTimeout(()=>{
-                    this.$router.push('/home')
-                },1000)
+                if (res.code === '000') {
+                    this.$message({
+                        message: type==0?'登录成功':'注册成功',
+                        type: 'success'
+                    });
+                    setTimeout(()=>{
+                        this.$router.push('/home')
+                    },1000)
+                }else{
+                    this.$message({
+                        message: res.msg,
+                        type: 'error'
+                    });
+                }
             })
         }
 

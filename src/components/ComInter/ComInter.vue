@@ -2,7 +2,7 @@
     <div class="com-inter">
         <ul>
             <li>常用网站</li>
-            <li v-for="(item,index) in interList" :key="index">{{item.name}}</li>
+            <li v-for="(item,index) in interList" :key="index" @click="toLink(item.path)">{{item.name}}</li>
         </ul>
     </div>
 </template>
@@ -14,25 +14,30 @@ export default {
             interList:[
                 {
                     name:'百度',
-                    path:'1'
+                    path:'https://www.baidu.com/'
                 },
                 {
                     name:'淘宝',
-                    path:'2'
+                    path:'https://www.baidu.com/'
                 },
                 {
                     name:'国美电器',
-                    path:'3'
+                    path:'https://www.gome.com.cn/?cmpid=sem_baidu_cpc_yx_pc1_%E5%93%81%E7%89%8C%E8%AF%8D-%E5%9B%BD%E7%BE%8E%E7%94%B5%E5%99%A8-%E5%85%A8%E5%9B%BD_%E5%9B%BD%E7%BE%8E%E7%94%B5%E5%99%A8-%E5%95%86%E5%9F%8E_%E5%9B%BD%E7%BE%8E%E7%94%B5%E5%99%A8%E5%95%86%E5%9F%8E&bd_vid=10921048588912837478'
                 },
                 {
                     name:'京东',
-                    path:'4'
+                    path:'https://www.jd.com/?cu=true&utm_source=baidu-search&utm_medium=cpc&utm_campaign=t_262767352_baidusearch&utm_term=27669656391_0_ef7f0194c66d45c6b072824a6a4fb622'
                 },
                 {
                     name:'12306购买网',
-                    path:'5'
+                    path:'https://kyfw.12306.cn/otn/leftTicket/init'
                 }
             ]
+        }
+    },
+    methods:{
+        toLink(url){
+            window.location.href = url
         }
     }
 }

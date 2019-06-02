@@ -1,9 +1,9 @@
 <template>
     <div class="tab-nav">
         <span v-for="item in tablist" :key="item.id" 
-            :class="{'active':item.id === curId}" 
+            :class="{'active':item.code === curCode}" 
             @click="getCurId(item)">
-            {{item.name}}
+            {{item.value}}
         </span>
     </div>
 </template>
@@ -18,13 +18,13 @@ export default {
     },
     data(){
         return {
-            curId:0
+            curCode:'0'
         }
     },
     methods:{
         getCurId(item){
-            this.curId = item.id;
-            this.$emit('getChildType',item.id)
+            this.curCode = item.code;
+            this.$emit('getChildType',item.code)
         }
     }
 }
@@ -35,8 +35,9 @@ export default {
     width: 1200px;
     height: 55px;
     margin: 275px auto 0;
-    background: rgba(240, 180, 66, .5);
+    background: rgba(240, 180, 66, .1);
     display: flex;
+    position: relative;
     span{
         flex:1;
         height: 55px;

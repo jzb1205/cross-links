@@ -25,8 +25,9 @@ export default {
 
 <style lang='less' scoped>
 .com-detail-aside{
-    width:100px;
+    width:10%;
     float:left;
+    min-width:100px;
     margin-top:150px;
     text-align: center;
     ul{

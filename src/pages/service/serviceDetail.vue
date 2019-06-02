@@ -91,7 +91,6 @@ export default {
     .detail-right{
         margin-left:20px;
         float:left;
-        width:1200px;
     }
 }
 </style>

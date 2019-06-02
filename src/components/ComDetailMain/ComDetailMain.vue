@@ -101,7 +101,8 @@ export default {
     background: #fff;
     min-height:600px;
     margin-top:14px;
-    width:1116px;
+    min-width:900px;
+    max-width:1400px;
     padding:40px 42px;
     .title-box{
         overflow: hidden;

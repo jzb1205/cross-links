@@ -14,7 +14,9 @@
                     通知公告：
                 </div>
                 <div class="home-notice-right">
-                    <marquee width=98% onmouseover=this.stop() onmouseout=this.start()> 此处输入滚动内容此处输入滚动内容此处输入滚动内容此处输入滚动内容此处输入滚动内容此处输入滚动内容此处输入滚动内容此处输入滚动内容此处输入滚动内容此处输入滚动内容此处输入滚动内容此处输入滚动内容此处输入滚动内容此处输入滚动内容此处输入滚动内容此处输入滚动内容 </marquee>
+                    <marquee width=98% onmouseover=this.stop() onmouseout=this.start()>
+                        <li class="marqueeItem" v-for="item in noticeList" :key="item.id" v-html="item.content"></li>
+                    </marquee>
                 </div>
             </div>
             <div class="home-main-one">
@@ -28,15 +30,15 @@
                 <div class="main-one-right">
                     <p class="news-title">
                         <span class="title">两岸要闻</span>
-                        <span class="more">
+                        <span class="more" @click='$router.push("/information")'>
                             更多
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
                     <ul class="news-list">
-                        <li v-for="(item,index) in newsList" :key="index">
+                        <li v-for="(item,index) in infoList" :key="index" @click="toDetail(item.id,'info')">
                             <span class="title">{{item.title}}</span>
-                            <span class="time">{{item.time}}</span>
+                            <span class="time">{{item.createTime | timeFormat('YYYY-MM-DD')}}</span>
                         </li>
                     </ul>
                 </div>
@@ -44,14 +46,14 @@
             <div class="home-main-two">
                 <div class="main-two-one">
                     <p class="news-title">
-                        <span class="title">两岸要闻</span>
-                        <span class="more">
+                        <span class="title">惠台政策</span>
+                        <span class="more" @click='$router.push("/bene")'>
                             更多
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
                     <ul class="news-list">
-                        <li v-for="(item,index) in newsList" :key="index">
+                        <li v-for="(item,index) in serviceList" :key="index">
                             <span class="title">{{item.title}}</span>
                             <span class="time">{{item.time}}</span>
                         </li>
@@ -75,7 +77,7 @@
                 <div class="main-two-three">
                     <p class="news-title">
                         <span class="title">通导航</span>
-                        <span class="more">
+                        <span class="more" @click='$router.push("/nav")'>
                             更多
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
@@ -90,15 +92,15 @@
                 <div class="main-two-four">
                     <p class="news-title">
                         <span class="title">通服务</span>
-                        <span class="more">
+                        <span class="more" @click='$router.push("/service")'>
                             更多
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
                     <ul class="news-list">
-                        <li v-for="(item,index) in newsList.slice(0,4)" :key="index">
+                        <li v-for="(item,index) in serviceList.slice(0,4)" :key="index">
                             <span class="title">{{item.title}}</span>
-                            <span class="time">{{item.time}}</span>
+                            <span class="time">{{item.createTime | timeFormat('YYYY-MM-DD')}}</span>
                         </li>
                     </ul>
                 </div>
@@ -129,32 +131,7 @@ export default {
                     path:''
                 }
             ],
-            newsList:[
-                {
-                    title:'新闻概要--概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要',
-                    time:'2019-05-06'
-                },
-                {
-                    title:'新闻概要--概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要',
-                    time:'2019-05-06'
-                },
-                {
-                    title:'新闻概要--概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要',
-                    time:'2019-05-06'
-                },
-                {
-                    title:'新闻概要--概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要',
-                    time:'2019-05-06'
-                },
-                {
-                    title:'新闻概要--概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要',
-                    time:'2019-05-06'
-                },
-                {
-                    title:'新闻概要--概要概要概要概要概要概要概要概要概要概要概要概要概要概要概要',
-                    time:'2019-05-06'
-                }
-            ],
+            noticeList:[],
             personThing:[
                 {
                     lable:'设立变更'
@@ -236,7 +213,76 @@ export default {
             ]
         }
     },
+    mounted(){
+    },
     created(){
+        this.getNoticeInfoPage()
+        this.getServiceList()
+    },
+    computed:{
+        serviceList(){
+            return this.$store.state && this.$store.state.serviceMap && this.$store.state.serviceMap.data && this.$store.state.serviceMap.data.list || []
+        },
+        infoList(){
+            return this.$store.state && this.$store.state.infoMap && this.$store.state.infoMap.data && this.$store.state.infoMap.data.list || []
+        }
+    },
+    methods:{
+        //获取通知公告
+        getNoticeInfoPage(){
+            let params = {
+                page:1,
+                rows:4
+            }
+            this.$post(this.$api.home.getNoticeInfoPage,params).then(res=>{
+                if (res.code === '000') {
+                    this.noticeList = res.data && res.data.list || []
+                }else{
+                    this.$message({
+                        message:'获取通知公告列表失败',
+                        type:'error'
+                    })
+                }
+            })
+        },
+        //获取服务
+        getServiceList(){
+            let params = {
+                page:1,
+                rows:4,
+                type:''
+            }
+            this.$store.dispatch('querySiListPage',params)
+        },
+        //获取资讯
+        getServiceList(){
+            let params = {
+                type:'',
+                page:1,
+                rows:6
+            }
+            this.$store.dispatch('getInfoListPage',params)
+        },
+        toDetail(id,type){
+            if (!id) {
+                this.$message({
+                    message:'id不能为空',
+                    type:'error'
+                })
+                return
+            }
+            switch (type) {
+                case 'info':
+                    this.$router.push({
+                        path:'/informationDetail',
+                        query:{id:id}
+                    })
+                    break;
+            
+                default:
+                    break;
+            }
+        }
     }
 }
 </script>
@@ -273,6 +319,10 @@ export default {
             .home-notice-right{
                 width:1070px;
                 float: left;
+                .marqueeItem{
+                    display: inline-block;
+                    margin-left:100px;
+                }
             }
         }
         .home-main-one{
@@ -329,6 +379,9 @@ export default {
                                 float: right;
                                 text-align: center;
                             }
+                        }
+                        &:hover{
+                            color:rgba(187, 17, 26);
                         }
                     } 
                 }
@@ -397,6 +450,9 @@ export default {
                                 text-align: center;
                             }
                         }
+                        &:hover{
+                            color:rgba(187, 17, 26);
+                        }
                     }
                     
                 }
@@ -425,6 +481,9 @@ export default {
                         &.more{
                            color:rgba(187, 17, 26);
                             background: #ffff; 
+                        }
+                        &:hover{
+                            color:rgba(187, 17, 26);
                         }
                     }
                     
@@ -460,6 +519,9 @@ export default {
                             margin-top: 18px;
                             font-size: 16px;
                         }
+                        &:hover{
+                            color:rgba(187, 17, 26);
+                        }
                     }
                     
                 }
@@ -490,6 +552,9 @@ export default {
                                 float: right;
                                 text-align: center;
                             }
+                        }
+                        &:hover{
+                            color:rgba(187, 17, 26);
                         }
                     } 
                 }
