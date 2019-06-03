@@ -82,9 +82,9 @@
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
-                    <ul class="news-list">
-                        <li v-for="(item,index) in navList" :key="index">
-                            <p class="nav-img" ><img :src="item.imgUrl" alt="正在加载中......"></p>
+                    <ul class="news-list" v-if="navList.length>0">
+                        <li v-for="(item,index) in navList.slice(0,5)" :key="index">
+                            <p class="nav-img" ><img :src="imgHttp + item.icon" alt="正在加载中......"></p>
                             <p class="nav-name">{{item.name}}</p>
                         </li>
                     </ul>
@@ -179,45 +179,16 @@ export default {
                     lable:'农林牧渔'
                 },
             ],
-            navList:[
-                {
-                    id:0,
-                    imgUrl:require(`../../assets/img/nav1.png`),
-                    name:'求职招聘',
-                    path:''
-                },
-                {
-                    id:1,
-                    imgUrl:require(`../../assets/img/nav2.png`),
-                    name:'租赁',
-                    path:''
-                },
-                {
-                    id:2,
-                    imgUrl:require(`../../assets/img/nav3.png`),
-                    name:'二手买卖',
-                    path:''
-                },
-                {
-                    id:3,
-                    imgUrl:require(`../../assets/img/nav3.png`),
-                    name:'在线交友',
-                    path:''
-                },
-                {
-                    id:4,
-                    imgUrl:require(`../../assets/img/nav4.png`),
-                    name:'线下活动',
-                    path:''
-                }
-            ]
+            imgHttp:this.$imgUrl
         }
     },
     mounted(){
     },
     created(){
         this.getNoticeInfoPage()
-        this.getServiceList()
+        this.querySiListPage()
+        this.getInfoListPage()
+        this.getNavigationList()
     },
     computed:{
         serviceList(){
@@ -225,6 +196,9 @@ export default {
         },
         infoList(){
             return this.$store.state && this.$store.state.infoMap && this.$store.state.infoMap.data && this.$store.state.infoMap.data.list || []
+        },
+        navList(){
+            return this.$store.state && this.$store.state.navMap || []
         }
     },
     methods:{
@@ -246,7 +220,7 @@ export default {
             })
         },
         //获取服务
-        getServiceList(){
+        querySiListPage(){
             let params = {
                 page:1,
                 rows:4,
@@ -255,13 +229,17 @@ export default {
             this.$store.dispatch('querySiListPage',params)
         },
         //获取资讯
-        getServiceList(){
+        getInfoListPage(){
             let params = {
                 type:'',
                 page:1,
                 rows:6
             }
             this.$store.dispatch('getInfoListPage',params)
+        },
+        //获取导航
+        getNavigationList(){
+            this.$store.dispatch('getNavigationList',{})
         },
         toDetail(id,type){
             if (!id) {

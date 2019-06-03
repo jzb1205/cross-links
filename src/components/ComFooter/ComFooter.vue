@@ -45,7 +45,7 @@ export default {
 .com-footer{
     background: rgba(187, 17, 26);
     height:151px;
-    color:#fff;
+    color:#ddd;
     .com-footer-wrap{
         width: 1200px;
         height:116px;
@@ -60,7 +60,12 @@ export default {
                     margin-top:44px;
                     span{
                         padding:0 20px;
+                        color:#ddd;
                         border-right:1px solid #fff;
+                        cursor: pointer;
+                        &:hover{
+                            color:#fff;
+                        }
                         &:nth-last-of-type(1){
                             border:none;
                         }

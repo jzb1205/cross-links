@@ -1,5 +1,5 @@
 const navigation = {
-    'getNavigationPage':'/navigation/getNavigationPage', //查询
+    'getNavigationList':'/navigation/getNavigationList', //查询
 }
 
 export default navigation;

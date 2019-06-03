@@ -176,6 +176,22 @@ export default {
             ]
         }
     },
+    created(){
+        this.secTypeMap = []
+    },
+    computed:{
+        typeMap(){
+            return this.$store.state.searchList;
+        },
+        secTypeMap(){
+            return this.$store.state.secSearchList;
+        },
+        dataMap(){
+            // this.list = this.$store.state.getServiceMap.data.list || []
+            // this.total = this.$store.state.getServiceMap.data.total || 0
+            return this.$store.state.getServiceMap;
+        }
+    },
     mounted(){
         document.getElementsByClassName('bene-dis-img')[0].style.height = (document.body.clientWidth/1920)*329;
     },

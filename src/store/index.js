@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { post, get} from "@/fetch/http"
@@ -12,6 +13,7 @@ export default new Vuex.Store({
         secSearchList:[],
         serviceMap:{},
         infoMap:{},
+        navMap:[]
     },
     mutations: {
         getIsCollapse(state,pload){
@@ -25,11 +27,13 @@ export default new Vuex.Store({
         },
         getServiceMap(state,pload){
             state.serviceMap = pload
-            console.log(state.serviceMap)
         },
         getInfoMap(state,pload){
             state.infoMap = pload
-            console.log(state.infoMap)
+        },
+        getNavMap(state,pload){
+            state.navMap = pload
+            console.log(state.navMap)
         }
     },
     actions: {
@@ -62,5 +66,12 @@ export default new Vuex.Store({
                 }
             })
         },
+        getNavigationList(context,pload){
+            post(api.navigation.getNavigationList,{}).then(res=>{
+                if (res.code === '000') {
+                    context.commit('getNavMap',res.data)
+                }
+            })
+        }
     }
 })

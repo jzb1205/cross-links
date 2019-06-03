@@ -5,7 +5,6 @@
             <com-tab-nav :tablist='typeMap' @getChildType='getChildType'></com-tab-nav>
         </div>
         <div class="info-main">
-            <!-- {{secTypeMap}} -->
             <com-more-condition :tagList='secTypeMap'></com-more-condition>
             <div class="listContion">
                 <div class="left">
@@ -175,6 +174,7 @@ export default {
         document.getElementsByClassName('server-dis-img')[0].style.height = (document.body.clientWidth/1920)*329;
     },
     created () {
+        this.secTypeMap = []
         this.querySiListPage()
         this.$store.dispatch('getType',{ typeCode:'serviceBigType',class:'1'})
     },

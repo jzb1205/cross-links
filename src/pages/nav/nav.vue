@@ -4,6 +4,7 @@
             <img src="../../assets/img/nav-banner.jpg"
                  alt="">
         </div>
+        <span v-show="1===0">{{dataList}}</span>
         <div class="nav-main">
             <div class="com-nav-list-wrap" v-for="(item,index) in serviceList" :key="index">
                 <p class="title">{{item.title}}</p>
@@ -43,38 +44,34 @@ export default {
         document.getElementsByClassName('nav-dis-img')[0].style.height = (document.body.clientWidth/1920)*329;
     },
     created(){
-        this.getNavigationPage()
+        this.getNavigationList()
+    },
+    computed:{
+        dataList(){
+            let list = this.$store.state.navMap || []
+            if (list && list.length>0) {
+                list.map((item)=>{
+                    switch (item.type) {
+                        case '0':
+                            this.serviceList.goverList.children.push(item)
+                            break;
+                    
+                        case '1':
+                            this.serviceList.convenientList.children.push(item)
+                            break;
+                    
+                        default:
+                            this.serviceList.enterpriseList.children.push(item)
+                            break;
+                    }
+                })
+            }
+            return list
+        }
     },
     methods:{
-        getNavigationPage(){
-            let _this = this
-            this.$post(this.$api.navigation.getNavigationPage,{}).then(res=>{
-                if (res.code === '000') {
-                    let list = res.data && res.data.list || []
-                    if (list && list.length>0) {
-                        list.map((item)=>{
-                            switch (item.type) {
-                                case '0':
-                                    _this.serviceList.goverList.children.push(item)
-                                    break;
-                            
-                                case '1':
-                                    _this.serviceList.convenientList.children.push(item)
-                                    break;
-                            
-                                default:
-                                    _this.serviceList.enterpriseList.children.push(item)
-                                    break;
-                            }
-                        })
-                    }
-                }else{
-                    this.$message({
-                        message:'获取导航列表失败',
-                        type:'error'
-                    })
-                }
-            })
+        getNavigationList(){
+            this.$store.dispatch('getNavigationList',{})
         },
         toLink(url){
             window.location.href = url

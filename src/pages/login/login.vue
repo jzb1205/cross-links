@@ -22,6 +22,7 @@
 <script>
 import axios from 'axios'
 import { setTimeout } from 'timers';
+import { sep } from 'path';
 export default {
     data(){
         return{
@@ -62,11 +63,14 @@ export default {
     mouted(){
     },
     created(){
+        //回到登陆页面先清空token及登录信息
+        sessionStorage.clear()
+        // this.type = this.$route.query.type
         this.$nextTick(()=>{
             let width = window.screen.width;
             let height = window.screen.height;
-            this.$refs.loginBox.style.width = width+148+'px';
-            this.$refs.loginBox.style.height = height-42+'px';
+            // this.$refs.loginBox.style.width = width-148+'px';
+            this.$refs.loginBox.style.height = height-150+'px';
             this.$refs.innerBox.style.marginTop = (parseInt(this.$refs.loginBox.style.height) - 480)/2+'px';
         });
         this.curList = this.login;
@@ -75,7 +79,6 @@ export default {
         toHome(type){
             let len = this.curList.length;
             for (let index = 0; index < len; index++) {
-                console.log(this.curList[index].value)
                 if (!this.curList[index].value) {
                     this.$message({
                         message: `${this.curList[index].label}不能为空`,
@@ -96,6 +99,8 @@ export default {
             }
             this.$post(url,params).then((res)=>{
                 if (res.code === '000') {
+                    sessionStorage.setItem('token',res.data && res.data.token)
+                    sessionStorage.setItem('userInfo',res.data && JSON.stringify(res.data.userInfo))
                     this.$message({
                         message: type==0?'登录成功':'注册成功',
                         type: 'success'
@@ -115,7 +120,7 @@ export default {
     },
     watch:{
         'type'(){
-            this.curList = this.type !== 0?this.register:this.login;
+            this.curList = this.type !== 0?this.register:this.login
         }
         
     }

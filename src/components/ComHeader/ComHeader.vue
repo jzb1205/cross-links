@@ -6,6 +6,18 @@
                 <span>{{locationCity}}</span>
                 <i class="el-icon-arrow-down"></i>
             </div>
+            <div class="loginNotice" v-if="isShow">
+                <div class="token" v-if="isLogin">
+                    <span>{{userName}}</span>
+                    |
+                    <span @click="tologin(0)">退出</span>
+                </div>
+                <div  v-else class='token'>
+                    <span @click="tologin(0)">登陆</span>
+                    |
+                    <span @click="tologin(1)">注册</span>
+                </div>
+            </div>
             <div class="languge">
                 <span>无障碍</span>
                 <span>繁体</span>
@@ -26,30 +38,48 @@ export default {
     data () {
         return {
             searchText: '',
-            locationCity:'加载中...'
+            locationCity:'加载中...',
+            isLogin:sessionStorage.getItem('token') || '',
+            userName:sessionStorage.getItem('userInfo') && JSON.parse(sessionStorage.getItem('userInfo')).userName || {},
+            isShow:'false'
         }
     },
     mounted() {
         // this.dz()
     },
-		methods: {
-			 dz() {
-				var that=this
-				// var geolocation = new BMap.Geolocation();
-				// geolocation.getCurrentPosition(function getinfo(position) {
-				// 	let city = position.address.city; //获取城市信息       
-				// 	let province = position.address.province;
-                //     // console.log(city+'--'+province)
-                //     console.log(city)
-				// 	that.locationCity=city		//将城市名称保存到locationCity中
-				// 	that.$store.commit('hqwz',city)
-				// }, function(e) {        
-				// 	that.locationCity='定位失败'
-				// }, {
-				// 	provider: 'baidu',
-				// });
-			}
-		}
+    methods: {
+        dz() {
+            var that=this
+            var geolocation = new BMap.Geolocation();
+            geolocation.getCurrentPosition(function getinfo(position) {
+            	let city = position.address.city; //获取城市信息       
+            	let province = position.address.province;
+                // console.log(city+'--'+province)
+                console.log(city)
+            	that.locationCity=city		//将城市名称保存到locationCity中
+            	that.$store.commit('hqwz',city)
+            }, function(e) {        
+            	that.locationCity='定位失败'
+            }, {
+            	provider: 'baidu',
+            });
+        },
+        tologin(type){
+            this.$router.push({
+                path:'/login',
+                query:{
+                    type:type
+                }
+            })
+        }
+    },
+    watch:{
+        '$route.fullPath'(){
+            this.isLogin = sessionStorage.getItem('token') || ''
+            this.userName = sessionStorage.getItem('userInfo') && JSON.parse(sessionStorage.getItem('userInfo')).userName || {}
+            this.isShow = !this.$route.fullPath.includes('/login')
+        }
+    }
 }
 </script>
 
@@ -75,6 +105,20 @@ export default {
             top: 3px;
             margin-right: 4px;
         }
+      }
+      &.loginNotice{
+          margin-left:15px;
+          font-size: 12px;
+          &>div{
+              span{
+                  cursor: pointer;
+                  margin-left:5px;
+                  margin-right:5px;
+                  &:hover{
+                      color:#888;
+                  }
+              }
+          }
       }
       &.languge,&.search {
         float: right;
