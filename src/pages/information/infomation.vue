@@ -91,7 +91,7 @@ export default {
                 return;
             }
             this.$router.push({
-                path:'/informationDetail',
+                path:'/infoContaner/informationDetail',
                 query:{
                     id:id
                 }
@@ -125,7 +125,7 @@ export default {
   .dis-img {
     img {
       width: 100%;
-    //   height: 330px;
+      min-width:1200px;
     }
   }
   .info-main {

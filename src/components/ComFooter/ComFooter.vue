@@ -46,6 +46,7 @@ export default {
     background: rgba(187, 17, 26);
     height:151px;
     color:#ddd;
+    min-width: 1200px;
     .com-footer-wrap{
         width: 1200px;
         height:116px;
@@ -54,7 +55,7 @@ export default {
             overflow: hidden;
             .top-left{
                 float: left;
-                margin-left:240px;
+                // margin-left:240px;
                 font-size: 14px;
                 .link{
                     margin-top:44px;

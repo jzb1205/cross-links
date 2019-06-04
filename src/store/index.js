@@ -13,7 +13,8 @@ export default new Vuex.Store({
         secSearchList:[],
         serviceMap:{},
         infoMap:{},
-        navMap:[]
+        navMap:[],
+        beneMap:[]
     },
     mutations: {
         getIsCollapse(state,pload){
@@ -33,6 +34,10 @@ export default new Vuex.Store({
         },
         getNavMap(state,pload){
             state.navMap = pload
+            console.log(state.navMap)
+        },
+        getBeneMap(state,pload){
+            state.beneMap = pload
             console.log(state.navMap)
         }
     },
@@ -67,9 +72,16 @@ export default new Vuex.Store({
             })
         },
         getNavigationList(context,pload){
-            post(api.navigation.getNavigationList,{}).then(res=>{
+            post(api.navigation.getNavigationList,pload).then(res=>{
                 if (res.code === '000') {
                     context.commit('getNavMap',res.data)
+                }
+            })
+        },
+        getPolicyPage(context,pload){
+            post(api.bene.getPolicyPage,pload).then(res=>{
+                if (res.code === '000') {
+                    context.commit('getBeneMap',res.data)
                 }
             })
         }

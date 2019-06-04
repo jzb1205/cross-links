@@ -2,8 +2,8 @@ import axios from 'axios'
 
 axios.defaults.timeout = 20000;
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
-axios.defaults.headers.post['Authorization'] = sessionStorage.getItem('token');
-axios.defaults.headers.get['Authorization'] = sessionStorage.getItem('token');
+axios.defaults.headers.post['Authorization'] = sessionStorage.getItem('token') || '';
+axios.defaults.headers.get['Authorization'] = sessionStorage.getItem('token') || '';
 axios.defaults.baseURL = '/api'
 
 /**

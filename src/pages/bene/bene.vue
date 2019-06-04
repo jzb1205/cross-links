@@ -2,10 +2,10 @@
     <div class="bene">
         <div class="bene-dis-img">
             <img class="se-img" src="../../assets/img/bene-banner.jpg" alt="">
-            <com-tab-nav :tablist='tablist' @getChildType='getChildType'></com-tab-nav>
+            <com-tab-nav :tablist='typeMap' @getChildType='getChildType'></com-tab-nav>
         </div>
         <div class="info-main">
-            <com-more-condition :tagList='tagList'></com-more-condition>
+            <com-more-condition :tagList='secTypeMap'></com-more-condition>
             <div class="listContion">
                 <div class="left">
                     <span>厦门&nbsp;<i class="el-icon-arrow-down"></i></span>
@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="table-list">
-                <el-table :data="tableData"
+                <el-table :data="dataMap && dataMap.list"
                         row-class-name="changeCss"
                       style="width: 100%">
                     <el-table-column prop="title"
@@ -46,7 +46,7 @@
                         </template>
                     </el-table-column>
                 </el-table>
-                <com-pagination :rows='rows' :page='page' :total='total' @getList='getInfoListPage'></com-pagination>
+                <com-pagination :rows='rows' :page='page' :total='dataMap && dataMap.total' @getList='getPolicyPage'></com-pagination>
             </div>
         </div>
     </div>
@@ -65,119 +65,14 @@ export default {
             page:1,
             rows:10,
             total:0,
-            tablist:[
-                {
-                    id:0,
-                    name:'个人办事'
-                },
-                {
-                    id:1,
-                    name:'法人办事'
-                },
-                {
-                    id:2,
-                    name:'惠台政策'
-                },
-            ],
             curType:0,
-            tagList: [
-                {
-                    id: '',
-                    tagName: '全部类型'
-                },
-                {
-                    id: '0',
-                    tagName: '时政要闻'
-                },
-                {
-                    id: '1',
-                    tagName: '财经动态'
-                },
-                {
-                    id: '2',
-                    tagName: '民生广角'
-                },
-                {
-                    id: '3',
-                    tagName: '海峡两岸'
-                },
-                {
-                    id: '4',
-                    tagName: '其他'
-                },
-                {
-                    id: '5',
-                    tagName: '时政要闻'
-                },
-                {
-                    id: '6',
-                    tagName: '财经动态'
-                },
-                {
-                    id: '7',
-                    tagName: '民生广角'
-                },
-                {
-                    id: '8',
-                    tagName: '海峡两岸'
-                },
-                {
-                    id: '9',
-                    tagName: '其他'
-                },
-                {
-                    id: '10',
-                    tagName: '时政要闻'
-                },
-                {
-                    id: '11',
-                    tagName: '财经动态'
-                },
-                {
-                    id: '12',
-                    tagName: '民生广角'
-                },
-                {
-                    id: '13',
-                    tagName: '海峡两岸'
-                },
-                {
-                    id: '14',
-                    tagName: '其他'
-                }
-            ],
             curTab:'',
             checked:false,
-            tableData: [
-                {   
-                    title:'和国防经费国家和方式',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    type:'时政要闻'
-                }, 
-                {
-                    title:'和国防经费国家和方式',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    type:'时政要闻'
-                }, 
-                {
-                    title:'和国防经费国家和方式',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    type:'时政要闻'
-                }, 
-                {
-                    title:'和国防经费国家和方式',
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    type:'时政要闻'
-                }
-            ]
+            list: []
         }
     },
     created(){
-        this.secTypeMap = []
+        this.getPolicyPage()
     },
     computed:{
         typeMap(){
@@ -187,9 +82,7 @@ export default {
             return this.$store.state.secSearchList;
         },
         dataMap(){
-            // this.list = this.$store.state.getServiceMap.data.list || []
-            // this.total = this.$store.state.getServiceMap.data.total || 0
-            return this.$store.state.getServiceMap;
+            return this.$store.state.beneMap.data;
         }
     },
     mounted(){
@@ -201,7 +94,19 @@ export default {
         },
         getChildTag(value){
             this.curTab = value;
-        }
+        },
+        handleClick(){
+            this.$router.push('/beneContaner/serviceDetail')
+        },
+        getPolicyPage(value){
+            let params = {
+                page:value && value.page || 1,
+                rows:value && value.rows || 10,
+                type:this.curTab
+            }
+            params.type = params.type === '0'?'':params.type
+            this.$store.dispatch('getPolicyPage',params)
+        },
     }
 }
 </script>
@@ -212,6 +117,7 @@ export default {
         position: relative;
         width: 100%;
         overflow: hidden;
+        min-width:1200px;
         .se-img{
             width:100%;
         }

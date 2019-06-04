@@ -4,9 +4,8 @@
             <img src="../../assets/img/nav-banner.jpg"
                  alt="">
         </div>
-        <span v-show="1===0">{{dataList}}</span>
         <div class="nav-main">
-            <div class="com-nav-list-wrap" v-for="(item,index) in serviceList" :key="index">
+            <div class="com-nav-list-wrap" v-for="(item,index) in dataList" :key="index">
                 <p class="title">{{item.title}}</p>
                 <ul class="list-block">
                     <li class="list-item" v-for="it in item.children" :key="it.id" @click="toLink(it.url)">
@@ -49,6 +48,9 @@ export default {
     computed:{
         dataList(){
             let list = this.$store.state.navMap || []
+            this.serviceList.goverList.children = []
+            this.serviceList.convenientList.children = []
+            this.serviceList.enterpriseList.children = []
             if (list && list.length>0) {
                 list.map((item)=>{
                     switch (item.type) {
@@ -66,12 +68,12 @@ export default {
                     }
                 })
             }
-            return list
-        }
+            return this.serviceList
+        },
     },
     methods:{
-        getNavigationList(){
-            this.$store.dispatch('getNavigationList',{})
+        async getNavigationList(){
+            await this.$store.dispatch('getNavigationList',{})
         },
         toLink(url){
             window.location.href = url
@@ -85,7 +87,7 @@ export default {
   .nav-dis-img {
     img {
       width: 100%;
-    //   height: 330px;
+      min-width:1200px;
     }
   }
   .nav-main {    

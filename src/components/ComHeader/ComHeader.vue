@@ -74,7 +74,7 @@ export default {
         }
     },
     watch:{
-        '$route.fullPath'(){
+        'route.fullPath'(){
             this.isLogin = sessionStorage.getItem('token') || ''
             this.userName = sessionStorage.getItem('userInfo') && JSON.parse(sessionStorage.getItem('userInfo')).userName || {}
             this.isShow = !this.$route.fullPath.includes('/login')
@@ -85,6 +85,7 @@ export default {
 
 <style lang='less' scoped>
 .com-header {
+  min-width: 1200px;
   height: 38px;
   overflow: hidden;
   line-height: 38px;

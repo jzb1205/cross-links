@@ -1,9 +1,9 @@
 <template>
     <div class="home">
         <div class="home-banner">
-            <el-carousel :height="bannerHeight" arrow='hover'>
+            <el-carousel width='1200' :height="bannerHeight" arrow='hover'>
                 <el-carousel-item v-for="item in bannerList" :key="item.id">
-                    <img class="banner-img" :src="item.imgUrl" alt="正在加载中......">
+                    <img class="banner-img banner" :src="item.imgUrl" alt="正在加载中......">
                 </el-carousel-item>
             </el-carousel>
         </div>
@@ -11,7 +11,7 @@
             <div class="home-notice">
                 <div class="home-notice-left">
                     <img src="../../assets/img/icon-notice.png" alt="">
-                    通知公告：
+                    通知公告：的沙发但是
                 </div>
                 <div class="home-notice-right">
                     <marquee width=98% onmouseover=this.stop() onmouseout=this.start()>
@@ -268,13 +268,18 @@ export default {
 <style lang='less' scoped>
 .home{
     .home-banner{
+        width:100%;  
+        min-width:1200px;  
+        .banner{
+            width:1200px;
+        }
         .banner-img{
             width:100%;
             height:465px;
         }
     }
     .home-main{
-        width:1170px;
+        width:1200px;
         min-height: 700px;
         margin:33px auto 0;
         padding:15px;
@@ -295,7 +300,7 @@ export default {
                 }
             }
             .home-notice-right{
-                width:1070px;
+                width:1050px;
                 float: left;
                 .marqueeItem{
                     display: inline-block;

@@ -14,7 +14,7 @@ import informationDetail from '../pages/information/informationDetail.vue'
 //通导航
 import nav from '../pages/nav/nav.vue'
 //通服务
-import serviceIndex from '../pages/service/index.vue'
+import contaner from '../pages/contaner.vue'
 import service from '../pages/service/service.vue'
 import serviceDetail from '../pages/service/serviceDetail.vue'
 //用户中心
@@ -41,9 +41,21 @@ export default new Router({
                     component: bene
                 },
                 {
-                    path: '/information',
-                    name: 'information',
-                    component: information
+                    path: '/infoContaner',
+                    name: 'infoContaner',
+                    component: contaner,
+                    children:[
+                        {
+                            path: '',
+                            name: 'information',
+                            component: information
+                        },
+                        {
+                            path: 'informationDetail',
+                            name: 'informationDetail',
+                            component: informationDetail
+                        },
+                    ]
                 },
                 {
                     path: '/nav',
@@ -51,18 +63,17 @@ export default new Router({
                     component: nav
                 },
                 {
-                    path: '/serviceIndex',
-                    name: 'serviceIndex',
-                    component: serviceIndex,
-                    redirect:'/service',
+                    path: '/beneContaner',
+                    name: 'beneContaner',
+                    component: contaner,
                     children:[
                         {
-                            path: '/service',
+                            path: '',
                             name: 'service',
                             component: service
                         },
                         {
-                            path: '/serviceDetail',
+                            path: 'serviceDetail',
                             name: 'serviceDetail',
                             component: serviceDetail
                         },
@@ -75,11 +86,6 @@ export default new Router({
                     beforeEnter: (to, from, next) => {
                       verifyLogin(next);
                     }
-                },
-                {
-                    path: '/informationDetail',
-                    name: 'informationDetail',
-                    component: informationDetail
                 },
                 {
                     path: '/login',

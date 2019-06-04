@@ -67,11 +67,11 @@ export default {
         sessionStorage.clear()
         // this.type = this.$route.query.type
         this.$nextTick(()=>{
-            let width = window.screen.width;
-            let height = window.screen.height;
-            // this.$refs.loginBox.style.width = width-148+'px';
-            this.$refs.loginBox.style.height = height-150+'px';
-            this.$refs.innerBox.style.marginTop = (parseInt(this.$refs.loginBox.style.height) - 480)/2+'px';
+            // let width = window.screen.width;
+            // let height = window.screen.height;
+            // // this.$refs.loginBox.style.width = width-148+'px';
+            // this.$refs.loginBox.style.height = height-150+'px';
+            // this.$refs.innerBox.style.marginTop = (parseInt(this.$refs.loginBox.style.height) - 480)/2+'px';
         });
         this.curList = this.login;
     },
@@ -99,15 +99,30 @@ export default {
             }
             this.$post(url,params).then((res)=>{
                 if (res.code === '000') {
-                    sessionStorage.setItem('token',res.data && res.data.token)
-                    sessionStorage.setItem('userInfo',res.data && JSON.stringify(res.data.userInfo))
-                    this.$message({
-                        message: type==0?'登录成功':'注册成功',
-                        type: 'success'
-                    });
-                    setTimeout(()=>{
-                        this.$router.push('/home')
-                    },1000)
+                    if (type===1) {
+                        this.$message({
+                            message: '注册成功',
+                            type: 'success'
+                        });
+                        let params = {
+                            userName:this.curList[0].value,
+                            password:this.curList[1].value
+                        }
+                        this.toHome(type = 0)
+                        setTimeout(()=>{
+                            this.$router.push('/home')
+                        },1000)
+                    }else{
+                        sessionStorage.setItem('token',res.data && res.data.token)
+                        sessionStorage.setItem('userInfo',res.data && JSON.stringify(res.data.userInfo))
+                        this.$message({
+                            message: '登录成功',
+                            type: 'success'
+                        });
+                        setTimeout(()=>{
+                            this.$router.push('/home')
+                        },1000)
+                    }
                 }else{
                     this.$message({
                         message: res.msg,
@@ -130,10 +145,11 @@ export default {
 <style lang='less' scoped>
 .login-wrap{
     overflow: hidden;
+    min-width: 1200px;
     .inner-wrap{
         background: rgba(187, 17, 26);
         width:400px;
-        margin:50px auto 0;
+        margin:50px auto;
         padding:40px;
         border-radius:10px;
         .register{

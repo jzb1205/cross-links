@@ -84,87 +84,7 @@ export default {
             page:1,
             rows:10,
             total:0,
-            tablist:[
-                {
-                    id:0,
-                    name:'商事服务'
-                },
-                {
-                    id:1,
-                    name:'金融服务'
-                },
-                {
-                    id:2,
-                    name:'生活服务'
-                },
-            ],
             curType:0,
-            tagList: [
-                {
-                    id: '',
-                    tagName: '全部类型'
-                },
-                {
-                    id: '0',
-                    tagName: '时政要闻'
-                },
-                {
-                    id: '1',
-                    tagName: '财经动态'
-                },
-                {
-                    id: '2',
-                    tagName: '民生广角'
-                },
-                {
-                    id: '3',
-                    tagName: '海峡两岸'
-                },
-                {
-                    id: '4',
-                    tagName: '其他'
-                },
-                {
-                    id: '5',
-                    tagName: '时政要闻'
-                },
-                {
-                    id: '6',
-                    tagName: '财经动态'
-                },
-                {
-                    id: '7',
-                    tagName: '民生广角'
-                },
-                {
-                    id: '8',
-                    tagName: '海峡两岸'
-                },
-                {
-                    id: '9',
-                    tagName: '其他'
-                },
-                {
-                    id: '10',
-                    tagName: '时政要闻'
-                },
-                {
-                    id: '11',
-                    tagName: '财经动态'
-                },
-                {
-                    id: '12',
-                    tagName: '民生广角'
-                },
-                {
-                    id: '13',
-                    tagName: '海峡两岸'
-                },
-                {
-                    id: '14',
-                    tagName: '其他'
-                }
-            ],
             curTab:'',
             checked:false,
             list: []
@@ -174,7 +94,6 @@ export default {
         document.getElementsByClassName('server-dis-img')[0].style.height = (document.body.clientWidth/1920)*329;
     },
     created () {
-        this.secTypeMap = []
         this.querySiListPage()
         this.$store.dispatch('getType',{ typeCode:'serviceBigType',class:'1'})
     },
@@ -183,7 +102,7 @@ export default {
             return this.$store.state.searchList;
         },
         secTypeMap(){
-            return this.$store.state.secSearchList;
+            return this.$store.state.secSearchList || [];
         },
         dataMap(){
             this.list = this.$store.state.getServiceMap.data.list || []
@@ -237,8 +156,10 @@ export default {
         position: relative;
         width: 100%;
         overflow: hidden;
+        min-width:1200px;
         .se-img{
             width:100%;
+            min-width:1200px;
         }
         .tab-nav{
             width: 1200px;

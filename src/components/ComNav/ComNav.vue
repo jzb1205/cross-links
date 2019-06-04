@@ -3,7 +3,11 @@
         <div class="com-nav-wrap">
             <div class="logo"></div>
             <ul class="nav">
-                <router-link class="nav-li" v-for="item in navList" @click="getCurPath" router-link-active='active' exact tag="li" :key="item.path" :to="item.path">
+                <router-link class="nav-li" v-for="item in navList" @click="getCurPath" 
+                    router-link-active='active' 
+                    :class="{'router-link-active':curPathSlice === item.path}"
+                    exact tag="li" 
+                    :key="item.path" :to="item.path">
                     <p class="label">{{item.label}}</p>
                     <p class="name">{{item.name}}</p>
                 </router-link>
@@ -20,10 +24,10 @@ export default {
                 {
                     path:'/home',
                     label:'首页',
-                    name:'HOME'
+                    name:'HOME',
                 },
                 {
-                    path:'/information',
+                    path:'/infoContaner',
                     label:'通资讯',
                     name:'INFORMATION'
                 },
@@ -33,7 +37,7 @@ export default {
                     name:'HUI ZHENG'
                 },
                 {
-                    path:'/service',
+                    path:'/beneContaner',
                     label:'通服务',
                     name:'SERVICE'
                 },
@@ -48,14 +52,23 @@ export default {
                     name:'USER CENTER'
                 }
             ],
-            curpath:'/home'
+            curpath:'/home',
+            curPathSlice:''
         }
+    },
+    created(){
+        this.curPathSlice = '/'+ this.$route.path.split('/')[1]
     },
     methods:{
         getCurPath(item){
             this.curpath = item.path;
         }
-    }
+    },
+    watch: {
+        '$route.path'(){
+            this.curPathSlice = '/'+ this.$route.path.split('/')[1]
+        }
+    },
 }
 </script>
 
