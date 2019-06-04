@@ -73,11 +73,7 @@ export default {
             curType:0,
             curTab:'',
             checked:false,
-<<<<<<< Updated upstream
             list: []
-=======
-            tableData: []
->>>>>>> Stashed changes
         }
     },
     created(){
@@ -106,38 +102,18 @@ export default {
         },
         getChildTag(value){
             this.curTab = value;
-<<<<<<< Updated upstream
         },
         handleClick(){
             this.$router.push('/beneContaner/serviceDetail')
-=======
-            this.getPolicyPage()
->>>>>>> Stashed changes
         },
         getPolicyPage(value){
             let params = {
                 page:value && value.page || 1,
                 rows:value && value.rows || 10,
-<<<<<<< Updated upstream
                 type:this.curTab
             }
             params.type = params.type === '0'?'':params.type
             this.$store.dispatch('getPolicyPage',params)
-=======
-                type:this.curTab,
-            }
-            this.$post(this.$api.bene.getPolicyPage,params).then(res=>{
-                if (res.code === '000') {
-                    this.tableData = res.data && res.data.list || []
-                    this.total = res.data && res.data.total || 0
-                }else{
-                    this.$message({
-                        message:'获取惠政列表失败',
-                        type:'error'
-                    })
-                }
-            })
->>>>>>> Stashed changes
         },
     }
 }
