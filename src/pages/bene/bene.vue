@@ -21,19 +21,24 @@
                         row-class-name="changeCss"
                       style="width: 100%">
                     <el-table-column prop="title"
-                                    label="实施清单事项名称">
-                    </el-table-column>
-                    <el-table-column prop="date"
-                                    label="目录清单事项名称"
-                                    width="220">
-                    </el-table-column>
-                    <el-table-column prop="name"
                                     width="220"
-                                    label="主管部门">
+                                    label="标题">
+                    </el-table-column>
+                    <el-table-column prop="authorId"
+                                    label="	发布人ID"
+                                    width="120">
                     </el-table-column>
                     <el-table-column prop="type"
+                                    width="180"
+                                    label="类型">
+                    </el-table-column>
+                    <el-table-column prop="source"
                                     width="220"
-                                    label="行政划区">
+                                    label="来源">
+                    </el-table-column>
+                    <el-table-column prop="policyStatus"
+                                    width="120"
+                                    label="状态">
                     </el-table-column>
                     <el-table-column width="80"
                                     align="right"
@@ -68,7 +73,11 @@ export default {
             curType:0,
             curTab:'',
             checked:false,
+<<<<<<< Updated upstream
             list: []
+=======
+            tableData: []
+>>>>>>> Stashed changes
         }
     },
     created(){
@@ -88,24 +97,47 @@ export default {
     mounted(){
         document.getElementsByClassName('bene-dis-img')[0].style.height = (document.body.clientWidth/1920)*329;
     },
+    created(){
+        this.getPolicyPage()
+    },
     methods:{
         getChildType(value){
             this.curType = value;
         },
         getChildTag(value){
             this.curTab = value;
+<<<<<<< Updated upstream
         },
         handleClick(){
             this.$router.push('/beneContaner/serviceDetail')
+=======
+            this.getPolicyPage()
+>>>>>>> Stashed changes
         },
         getPolicyPage(value){
             let params = {
                 page:value && value.page || 1,
                 rows:value && value.rows || 10,
+<<<<<<< Updated upstream
                 type:this.curTab
             }
             params.type = params.type === '0'?'':params.type
             this.$store.dispatch('getPolicyPage',params)
+=======
+                type:this.curTab,
+            }
+            this.$post(this.$api.bene.getPolicyPage,params).then(res=>{
+                if (res.code === '000') {
+                    this.tableData = res.data && res.data.list || []
+                    this.total = res.data && res.data.total || 0
+                }else{
+                    this.$message({
+                        message:'获取惠政列表失败',
+                        type:'error'
+                    })
+                }
+            })
+>>>>>>> Stashed changes
         },
     }
 }
