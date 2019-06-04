@@ -2,7 +2,7 @@
     <div class="user-wrap">
         <h3>用户基本信息设置</h3>
         <p v-for="it in userInfo" :key="it.label" class="item">
-            <span class="label">{{it.label}}</span>
+            <span>{{it.label}}</span>
             <el-input v-if="it.inputType === 'input'" v-model="it.value" :disabled="it.isOption === 0" :placeholder="it.placeholder"></el-input>
             <el-select v-if="it.inputType === 'select'" v-model="it.value">
                 <el-option v-for="is in it.children" :key="is.id" :value="is.name">{{is.name}}</el-option>
@@ -89,15 +89,23 @@ export default {
                     placeholder:"请输入手机号码"
                 },
                 
-            ]
+            ],
+            userInfoSession:sessionStorage.getItem('userInfo') && JSON.parse(sessionStorage.getItem('userInfo'))
         }
     },
     created(){
-        
+        this.userInfo[0].value = this.userInfoSession.userName
+        this.userInfo[1].value = this.userInfoSession.password
+        this.userInfo[2].value = this.userInfoSession.eMail
+        this.userInfo[3].value = this.userInfoSession.nickName
+        this.userInfo[4].value = this.userInfoSession.sex
+        this.userInfo[5].value = this.userInfoSession.realName
+        this.userInfo[6].value = this.userInfoSession.mobile
     },
     methods:{
         updateUiById(){
             let params = {
+                id:this.userInfoSession.id,
                 userName:this.userInfo[0].value,
                 password:this.userInfo[1].value,
                 eMail:this.userInfo[2].value,
@@ -113,7 +121,7 @@ export default {
                 });
             })
         }
-    }
+    },
 }
 </script>
 

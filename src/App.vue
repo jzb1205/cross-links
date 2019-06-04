@@ -13,5 +13,6 @@ export default {
 <style>
 #app{
     background: rgba(249, 245, 233);
+    min-width: 1200px;
 }
 </style>

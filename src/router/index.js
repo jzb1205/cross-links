@@ -63,8 +63,8 @@ export default new Router({
                     component: nav
                 },
                 {
-                    path: '/beneContaner',
-                    name: 'beneContaner',
+                    path: '/serviceContaner',
+                    name: 'serviceContaner',
                     component: contaner,
                     children:[
                         {
@@ -100,7 +100,7 @@ export default new Router({
 
 // 未登录状态，个人中心全都跳转login
 function verifyLogin(next) {
-    if (window.localStorage.getItem('userName')) {
+    if (window.sessionStorage.getItem('token')) {
       next();
     } else {
       next('/');

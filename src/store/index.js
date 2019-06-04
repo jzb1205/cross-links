@@ -34,11 +34,9 @@ export default new Vuex.Store({
         },
         getNavMap(state,pload){
             state.navMap = pload
-            console.log(state.navMap)
         },
         getBeneMap(state,pload){
             state.beneMap = pload
-            console.log(state.navMap)
         }
     },
     actions: {

@@ -11,7 +11,7 @@
             <div class="home-notice">
                 <div class="home-notice-left">
                     <img src="../../assets/img/icon-notice.png" alt="">
-                    通知公告：的沙发但是
+                    通知公告：
                 </div>
                 <div class="home-notice-right">
                     <marquee width=98% onmouseover=this.stop() onmouseout=this.start()>
@@ -30,13 +30,13 @@
                 <div class="main-one-right">
                     <p class="news-title">
                         <span class="title">两岸要闻</span>
-                        <span class="more" @click='$router.push("/information")'>
+                        <span class="more" @click='$router.push("/infoContaner")'>
                             更多
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
                     <ul class="news-list">
-                        <li v-for="(item,index) in infoList" :key="index" @click="toDetail(item.id,'info')">
+                        <li v-for="(item,index) in infoList" :key="index" @click="toDetail(item,'info')">
                             <span class="title">{{item.title}}</span>
                             <span class="time">{{item.createTime | timeFormat('YYYY-MM-DD')}}</span>
                         </li>
@@ -53,9 +53,9 @@
                         </span>
                     </p>
                     <ul class="news-list">
-                        <li v-for="(item,index) in serviceList" :key="index">
+                        <li v-for="(item,index) in beneList" :key="index" @click="toDetail(item,'bene1')">
                             <span class="title">{{item.title}}</span>
-                            <span class="time">{{item.time}}</span>
+                            <span class="time">{{item.createTime | timeFormat('YYYY-MM-DD')}}</span>
                         </li>
                     </ul>
                 </div>
@@ -68,7 +68,7 @@
                         </span>
                     </p>
                     <ul class="news-list">
-                        <li v-for="(item,index) in personThing" :key="index">
+                        <li v-for="(item,index) in personThing" :key="index" @click="toDetail(item,'bene1')">
                             <span class="title">{{item.lable}}</span>
                         </li>
                         <li class="more">更多</li>
@@ -83,7 +83,7 @@
                         </span>
                     </p>
                     <ul class="news-list" v-if="navList.length>0">
-                        <li v-for="(item,index) in navList.slice(0,5)" :key="index">
+                        <li v-for="(item,index) in navList.slice(0,5)" :key="index"  @click="toDetail(item,'navigation')">
                             <p class="nav-img" ><img :src="imgHttp + item.icon" alt="正在加载中......"></p>
                             <p class="nav-name">{{item.name}}</p>
                         </li>
@@ -92,13 +92,13 @@
                 <div class="main-two-four">
                     <p class="news-title">
                         <span class="title">通服务</span>
-                        <span class="more" @click='$router.push("/service")'>
+                        <span class="more" @click='$router.push("/beneContaner")'>
                             更多
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
                     <ul class="news-list">
-                        <li v-for="(item,index) in serviceList.slice(0,4)" :key="index">
+                        <li v-for="(item,index) in serviceList.slice(0,4)" :key="index"  @click="toDetail(item,'service')">
                             <span class="title">{{item.title}}</span>
                             <span class="time">{{item.createTime | timeFormat('YYYY-MM-DD')}}</span>
                         </li>
@@ -189,6 +189,7 @@ export default {
         this.querySiListPage()
         this.getInfoListPage()
         this.getNavigationList()
+        this.getPolicyPage()
     },
     computed:{
         serviceList(){
@@ -199,6 +200,10 @@ export default {
         },
         navList(){
             return this.$store.state && this.$store.state.navMap || []
+        },
+        beneList(){
+            console.log(this.$store.state.beneMap)
+            return this.$store.state && this.$store.state.beneMap && this.$store.state.beneMap && this.$store.state.beneMap.list || []
         }
     },
     methods:{
@@ -241,8 +246,18 @@ export default {
         getNavigationList(){
             this.$store.dispatch('getNavigationList',{})
         },
-        toDetail(id,type){
-            if (!id) {
+        //获取导航
+        getPolicyPage(){
+            let params = {
+                // type:'huiTaipolicy',
+                type:'',
+                page:1,
+                rows:6
+            }
+            this.$store.dispatch('getPolicyPage',params)
+        },
+        toDetail(item,type){
+            if (!item.id) {
                 this.$message({
                     message:'id不能为空',
                     type:'error'
@@ -251,6 +266,24 @@ export default {
             }
             switch (type) {
                 case 'info':
+                    this.$router.push({
+                        path:'/informationDetail',
+                        query:{id:item.id}
+                    })
+                    break;
+                case 'service':
+                    this.$router.push({
+                        path:'/informationDetail',
+                        query:{id:item.id}
+                    })
+                    break;
+                case 'bene1':
+                    this.$router.push({
+                        path:'/informationDetail',
+                        query:{id:id}
+                    })
+                    break;
+                case 'bene2':
                     this.$router.push({
                         path:'/informationDetail',
                         query:{id:id}
@@ -351,14 +384,14 @@ export default {
                         span{
                             display: inline-block;
                             &.title{
-                                width:70%;
+                                width:69%;
                                 float: left;
                                 overflow: hidden;
                                 text-overflow: ellipsis;
                                 white-space: nowrap;
                             }
                             &.time{
-                                width:25%;
+                                width:31%;
                                 float: right;
                                 text-align: center;
                             }
@@ -421,14 +454,14 @@ export default {
                         span{
                             display: inline-block;
                             &.title{
-                                width:70%;
+                                width:69%;
                                 float: left;
                                 overflow: hidden;
                                 text-overflow: ellipsis;
                                 white-space: nowrap;
                             }
                             &.time{
-                                width:25%;
+                                width:31%;
                                 float: right;
                                 text-align: center;
                             }
@@ -524,14 +557,14 @@ export default {
                         span{
                             display: inline-block;
                             &.title{
-                                width:70%;
+                                width:69%;
                                 float: left;
                                 overflow: hidden;
                                 text-overflow: ellipsis;
                                 white-space: nowrap;
                             }
                             &.time{
-                                width:25%;
+                                width:31%;
                                 float: right;
                                 text-align: center;
                             }

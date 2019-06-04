@@ -14,6 +14,7 @@
                 </div>
                 <div class="right">
                     共1235个事项，其中456项可在线申办
+                    {{dataMap}}
                 </div>
             </div>
             <div class="table-list">
@@ -94,6 +95,8 @@ export default {
         document.getElementsByClassName('bene-dis-img')[0].style.height = (document.body.clientWidth/1920)*329;
     },
     created(){
+        this.$store.dispatch('getType',{ typeCode:'policyBigType',class:'1'})
+        this.$store.dispatch('getType',{ typeCode:'policyPersonal',class:'2'})
         this.getPolicyPage()
     },
     methods:{
@@ -104,7 +107,7 @@ export default {
             this.curTab = value;
         },
         handleClick(){
-            this.$router.push('/beneContaner/serviceDetail')
+            this.$router.push('/serviceContaner/serviceDetail')
         },
         getPolicyPage(value){
             let params = {
@@ -115,6 +118,23 @@ export default {
             params.type = params.type === '0'?'':params.type
             this.$store.dispatch('getPolicyPage',params)
         },
+    },
+    watch:{
+        'curType'(){
+            let typeCode = 'huiTaipolicy'
+            switch (this.curType) {
+                case '0':
+                    typeCode = 'policyPersonal'
+                    break;
+                case '2':
+                    typeCode = 'huiTaipolicy'
+                    break;
+                default:
+                    typeCode = 'corporateAffairs'
+                    break;
+            }
+            this.$store.dispatch('getType',{ typeCode:typeCode,class:'2'})
+        }
     }
 }
 </script>

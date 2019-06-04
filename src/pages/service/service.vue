@@ -5,21 +5,21 @@
             <com-tab-nav :tablist='typeMap' @getChildType='getChildType'></com-tab-nav>
         </div>
         <div class="info-main">
-            <com-more-condition :tagList='secTypeMap'></com-more-condition>
+            <com-more-condition :tagList='secTypeMap' @getChildTag='getChildTag'></com-more-condition>
             <div class="listContion">
                 <div class="left">
                     全部服务清单
                 </div>
                 <div class="right">
-                    共{{total}}个服务
+                    共{{dataMap.total}}个服务
                 </div>
             </div>
             <div class="table-list">
-                <el-table :data="list"
+                <el-table :data="dataMap.list"
                         row-class-name="changeCss"
                       style="width: 100%">
                     <el-table-column prop="title"
-                                    width="200"
+                                    width="240"
                                     label="服务标题">
                     </el-table-column>
                     <el-table-column prop="name"
@@ -35,7 +35,7 @@
                     </el-table-column>
                     <el-table-column prop="payType"
                                     label="是否收费"
-                                    width="10">
+                                    width="80">
                             <template slot-scope="scope">
                                 <span>{{scope.row.payType==='0'?'否':"是"}}</span>
                             </template>
@@ -46,14 +46,7 @@
                     </el-table-column>
                     <el-table-column prop="timeLimit"
                                     label="服务期限"
-                                    width="100">
-                    </el-table-column>
-                    <el-table-column prop="baseCoding"
-                                    label="创建时间"
-                                    width="100">
-                        <template slot-scope="scope">
-                            <span>{{scope.row.createTime | timeFormat}}</span>
-                        </template>
+                                    width="140">
                     </el-table-column>
                     <el-table-column width="80"
                                     align="right"
@@ -65,7 +58,7 @@
                         </template>
                     </el-table-column>
                 </el-table>
-                <com-pagination :rows='rows' :page='page' :total='total' @getList='querySiListPage'></com-pagination>
+                <com-pagination :rows='rows' :page='page' :total='dataMap.total' @getList='querySiListPage'></com-pagination>
             </div>
         </div>
     </div>
@@ -87,7 +80,6 @@ export default {
             curType:0,
             curTab:'',
             checked:false,
-            list: []
         }
     },
     mounted(){
@@ -96,6 +88,7 @@ export default {
     created () {
         this.querySiListPage()
         this.$store.dispatch('getType',{ typeCode:'serviceBigType',class:'1'})
+        this.$store.dispatch('getType',{ typeCode:'businessService',class:'2'})
     },
     computed:{
         typeMap(){
@@ -105,9 +98,11 @@ export default {
             return this.$store.state.secSearchList || [];
         },
         dataMap(){
-            this.list = this.$store.state.getServiceMap.data.list || []
-            this.total = this.$store.state.getServiceMap.data.total || 0
-            return this.$store.state.getServiceMap;
+            let mapList = this.$store.state.serviceMap && this.$store.state.serviceMap.data
+            return {
+                list: mapList &&  mapList.list || [],
+                total: mapList &&  mapList.total  || 0
+            }
         }
     },
     methods:{
@@ -116,9 +111,15 @@ export default {
         },
         getChildTag(value){
             this.curTab = value;
+            this.querySiListPage()
         },
-        handleClick(){
-            this.$router.push('/serviceDetail')
+        handleClick(row){
+            this.$router.push({
+                path:'/serviceContaner/serviceDetail',
+                query:{ 
+                    id:row.id
+                }
+            })
         },
         querySiListPage(value){
             let params = {

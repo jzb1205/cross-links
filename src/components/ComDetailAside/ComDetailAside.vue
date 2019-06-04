@@ -1,7 +1,7 @@
 <template>
     <div class="com-detail-aside">
         <ul>
-            <li v-for="item in asideList" :key="item.id">
+            <li v-for="(item,index) in asideList" :key="item.id" @click="getId(index)" :class='{"active":curIndex === index}'>
                 <a :href="'#'+item.id">{{item.name}}</a>
             </li>
         </ul>
@@ -18,6 +18,12 @@ export default {
     },
     data(){
         return {
+            curIndex:0
+        }
+    },
+    methods:{
+        getId(index){
+            this.curIndex = index
         }
     }
 }
@@ -25,7 +31,7 @@ export default {
 
 <style lang='less' scoped>
 .com-detail-aside{
-    width:10%;
+    width:120px;
     float:left;
     min-width:100px;
     margin-top:150px;
@@ -39,6 +45,13 @@ export default {
                 line-height: 40px;
                 font-size: 16px;
                 color: #333;
+            }
+            &.active{
+                background: rgba(187, 17, 26);
+                color:#fff;
+                a{
+                    color:#fff;
+                }
             }
         }
     }

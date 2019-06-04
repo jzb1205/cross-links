@@ -1,7 +1,7 @@
 <template>
     <div class="com-nav">
         <div class="com-nav-wrap">
-            <div class="logo"></div>
+            <div class="logo" @click="$router.push('/home')"></div>
             <ul class="nav">
                 <router-link class="nav-li" v-for="item in navList" @click="getCurPath" 
                     router-link-active='active' 
@@ -37,7 +37,7 @@ export default {
                     name:'HUI ZHENG'
                 },
                 {
-                    path:'/beneContaner',
+                    path:'/serviceContaner',
                     label:'通服务',
                     name:'SERVICE'
                 },

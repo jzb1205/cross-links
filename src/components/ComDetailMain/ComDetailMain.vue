@@ -2,79 +2,113 @@
     <div class="com-detail-main">
         <div class="title-box">
             <div class="title-box-l">
-                <p class="title">关于出入境事项的申请审批</p>
-                <p class="service-type">台湾居民来往大陆的通行证签发</p>
-                <p class="base">基本编码：465156156151</p>
-                <p class="base">实施编码：562+62626+62+6</p>
+                <p class="title">{{dataMap.title}}</p>
+                <p class="service-type">{{dataMap.introduction}}</p>
+                <p class="base">基本编码：{{dataMap.baseCoding}}</p>
+                <p class="base">实施编码：{{dataMap.implementCoding}}</p>
             </div>
             <div class="title-box-r">
                 <button>立即办理</button>
             </div>
         </div>
-        <div :id="item.id"  v-for="item in asideList" :key="item.id" class="item">
+        <div id="serve_aside_0" class="asideCom">
             <div class="item-title">
                 <img src="@/assets/img/logo.png" alt="">
-                <span>{{item.name}}</span>
+                <span>服务类型</span>
+            </div>
+            <div class="item-content-wrap f14">
+                {{dataMap.type}}
+            </div>
+        </div>
+        <div id="serve_aside_1" class="asideCom">
+            <div class="item-title">
+                <img src="@/assets/img/logo.png" alt="">
+                <span>服务名称</span>
+            </div>
+            <div class="item-content-wrap f14">
+                {{dataMap.name}}
+            </div>
+        </div>
+        <div id="serve_aside_2" class="asideCom">
+            <div class="item-title">
+                <img src="@/assets/img/logo.png" alt="">
+                <span>服务状态</span>
+            </div>
+            <div class="item-content-wrap f14">
+                {{dataMap.status==='0'?'无效':"有效"}}
+            </div>
+        </div>
+        <div id="serve_aside_3" class="asideCom">
+            <div class="item-title">
+                <img src="@/assets/img/logo.png" alt="">
+                <span>服务费用</span>
+            </div>
+            <div class="item-content-wrap f14">
+                {{dataMap.amount}}
+            </div>
+        </div>
+        <div id="serve_aside_4" class="asideCom">
+            <div class="item-title">
+                <img src="@/assets/img/logo.png" alt="">
+                <span>服务简介</span>
+            </div>
+            <div class="item-content-wrap f14">
+                {{dataMap.introduction}}
+            </div>
+        </div>
+        <div id="serve_aside_5" class="asideCom">
+            <div class="item-title">
+                <img src="@/assets/img/logo.png" alt="">
+                <span>服务内容</span>
+            </div>
+            <div class="item-content-wrap" v-html='dataMap.content'></div>
+        </div>
+        <div id="serve_aside_6" class="asideCom">
+            <div class="item-title">
+                <img src="@/assets/img/logo.png" alt="">
+                <span>表单模板</span>
+            </div>
+            <div class="item-content-wrap formTemplate f14" v-if="dataMap.formTemplate && JSON.parse(dataMap.formTemplate).dataList.length>0" >
+                <ul class="fromHead" :class="{'borderB':JSON.parse(dataMap.formTemplate).dataList.length==0}">
+                    <li>名称</li>
+                    <li>信息</li>
+                </ul>
+                <ul class="fromItem"
+                        v-for="(it,index) in JSON.parse(dataMap.formTemplate).dataList" :key="index">
+                    <li>
+                        {{it.name}}
+                    </li>
+                    <li>
+                        {{it.value}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="serve_aside_7" class="asideCom">
+            <div class="item-title">
+                <img src="@/assets/img/logo.png" alt="">
+                <span>服务流程</span>
             </div>
             <div class="item-content-wrap">
-                <div class="item-content">
-                    <ul>
-                        <li>
-                            <span class="item-detail-title">事项类型</span>
-                            <span class="item-detail-val">行政许可</span>
-                        </li>
-                        <li>
-                            <span class="item-detail-title">事项类型</span>
-                            <span class="item-detail-val">行政许可</span>
-                        </li>
-                        <li>
-                            <span class="item-detail-title">事项类型</span>
-                            <span class="item-detail-val">行政许可</span>
-                        </li>
-                        <li>
-                            <span class="item-detail-title">事项类型</span>
-                            <span class="item-detail-val">行政许可</span>
-                        </li>
-                        <li>
-                            <span class="item-detail-title">事项类型</span>
-                            <span class="item-detail-val">行政许可</span>
-                        </li>
-                        <li>
-                            <span class="item-detail-title">事项类型</span>
-                            <span class="item-detail-val">行政许可</span>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <span class="item-detail-title">事项类型</span>
-                            <span class="item-detail-val">行政许可</span>
-                        </li>
-                        <li>
-                            <span class="item-detail-title">事项类型</span>
-                            <span class="item-detail-val">行政许可</span>
-                        </li>
-                        <li>
-                            <span class="item-detail-title">事项类型</span>
-                            <span class="item-detail-val">行政许可</span>
-                        </li>
-                        <li>
-                            <span class="item-detail-title">事项类型</span>
-                            <span class="item-detail-val">行政许可</span>
-                        </li>
-                        <li>
-                            <span class="item-detail-title">事项类型</span>
-                            <span class="item-detail-val">行政许可</span>
-                        </li>
-                        <li>
-                            <span class="item-detail-title">事项类型</span>
-                            <span class="item-detail-val">行政许可</span>
-                        </li>
-                        <li>
-                            <span class="item-detail-title">事项类型</span>
-                            <span class="item-detail-val">行政许可</span>
-                        </li>
-                    </ul>
-                </div>
+                <img :src="imgHttp+dataMap.process" alt="">
+            </div>
+        </div>
+        <div id="serve_aside_8" class="asideCom">
+            <div class="item-title">
+                <img src="@/assets/img/logo.png" alt="">
+                <span>服务期限</span>
+            </div>
+            <div class="item-content-wrap f14">
+                {{dataMap.timeLimit | timeFormat}}
+            </div>
+        </div>
+        <div id="serve_aside_9" class="asideCom">
+            <div class="item-title">
+                <img src="@/assets/img/logo.png" alt="">
+                <span>附件下载</span>
+            </div>
+            <div class="item-content-wrap f14">
+                {{dataMap.status}}
             </div>
         </div>
     </div>
@@ -86,10 +120,18 @@ export default {
         asideList:{
             type:Array,
             default:[]
-        }
+        },
+        dataMap:{
+            type:Object,
+            default:()=>{
+                return {}
+            }
+        },
+
     },
     data(){
         return {
+            imgHttp:this.$imgUrl
         }
     }
 }
@@ -138,7 +180,7 @@ export default {
             }
         }
     }
-    .item{
+    .asideCom{
         margin-top: 40px;
         .item-title{
             img{
@@ -154,10 +196,51 @@ export default {
             }
         }
         .item-content-wrap{
-            margin-top: 28px;
+            margin-top: 28px;    
+            margin-left: 6%;
+            width: 85%;
+            font-size:14px;
+            img{
+                width:200px;
+            }
             .item-content{
                 width:1005px;
                 margin:0 auto;
+            }
+        }
+        .f14{
+            font-size: 14px;
+            color:#666;
+        }
+        .formTemplate{
+            .fromHead,.fromItem{
+                display: flex;
+                border:1px solid #ccc;
+                border-bottom:none;
+                li{
+                    flex:1;
+                    height:50px;
+                    line-height: 50px;
+                    text-align: center;
+                    &:nth-of-type(1){
+                        text-indent: 15px;
+                    }
+                    &:nth-last-of-type(1){
+                        cursor: pointer;
+                    }
+                }
+            }
+            .fromItem{
+                color:#666;
+                &:nth-last-of-type(1){
+                    border-bottom:1px solid #ccc;
+                }
+            }
+            .fromHead{
+                background: #f5f5f5;
+                &.borderB{
+                    border-bottom: 1px solid #ccc;
+                }
             }
         }
     }

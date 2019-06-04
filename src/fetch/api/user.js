@@ -1,5 +1,6 @@
 const user = {
-    'updateUiById' :'/user/updateUiById'
+    'updateUiById' :'/user/updateUiById',
+    'getSuById':'/sysUser/getSuById'
 }
 
 export default user;
