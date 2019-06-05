@@ -1,32 +1,33 @@
 <template>
     <div class="login-wrap" ref="loginBox">
         <div class="inner-wrap"  ref="innerBox">
-            <ul class="register">
-                <li v-for="it in curList" :key="it.label">
-                    <span>{{it.label}}：</span>
-                    <el-input :type="it.type" v-model="it.value"></el-input>
-                </li>
-                <p class="btn" v-show="type===0">
-                    <el-button type="danger" @click="toHome(0)">登陆</el-button>
-                </p>
-                <p class="toOption" v-show="type===0">没有账号<span @click="type=1">去注册</span></p>
-                <p class="btn" v-show="type===1">
-                    <el-button type="danger" @click="toHome(1)">注册</el-button>
-                </p>
-                <p class="toOption" v-show="type===1">已有账号<span @click="type=0">去登陆</span></p>
-            </ul>
+            <transition name="el-zoom-in-center">
+                <ul class="register" v-if="show">
+                    <li v-for="it in curList" :key="it.label">
+                        <span>{{it.label}}：</span>
+                        <el-input :type="it.type" v-model="it.value"></el-input>
+                    </li>
+                    <p class="btn" v-show="type===0">
+                        <el-button type="danger" @click="toHome(0)">登陆</el-button>
+                    </p>
+                    <p class="toOption" v-show="type===0">没有账号<span @click="type=1">去注册</span></p>
+                    <p class="btn" v-show="type===1">
+                        <el-button type="danger" @click="toHome(1)">注册</el-button>
+                    </p>
+                    <p class="toOption" v-show="type===1">已有账号<span @click="type=0">去登陆</span></p>
+                </ul>
+            </transition>
         </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
-import { setTimeout } from 'timers';
-import { sep } from 'path';
 export default {
     data(){
         return{
             type:0,
+            show:false,
             register:[
                 {
                     label:'用户名',
@@ -65,14 +66,9 @@ export default {
     created(){
         //回到登陆页面先清空token及登录信息
         sessionStorage.clear()
-        // this.type = this.$route.query.type
-        this.$nextTick(()=>{
-            // let width = window.screen.width;
-            // let height = window.screen.height;
-            // // this.$refs.loginBox.style.width = width-148+'px';
-            // this.$refs.loginBox.style.height = height-150+'px';
-            // this.$refs.innerBox.style.marginTop = (parseInt(this.$refs.loginBox.style.height) - 480)/2+'px';
-        });
+        setTimeout(()=>{
+            this.show = true;
+        },100)
         this.curList = this.login;
     },
     methods:{
