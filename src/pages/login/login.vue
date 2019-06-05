@@ -26,7 +26,6 @@ import axios from 'axios'
 export default {
     data(){
         return{
-            
             type:0,
             show:false,
             register:[
