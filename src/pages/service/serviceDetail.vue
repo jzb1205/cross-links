@@ -56,10 +56,6 @@ export default {
                     name:'服务内容'
                 },
                 {
-                    id:'serve_aside_6',
-                    name:'表单模板'
-                },
-                {
                     id:'serve_aside_7',
                     name:'服务流程'
                 },

@@ -63,27 +63,6 @@
             </div>
             <div class="item-content-wrap" v-html='dataMap.content'></div>
         </div>
-        <div id="serve_aside_6" class="asideCom">
-            <div class="item-title">
-                <img src="@/assets/img/logo.png" alt="">
-                <span>表单模板</span>
-            </div>
-            <div class="item-content-wrap formTemplate f14" v-if="dataMap.formTemplate && JSON.parse(dataMap.formTemplate).dataList.length>0" >
-                <ul class="fromHead" :class="{'borderB':JSON.parse(dataMap.formTemplate).dataList.length==0}">
-                    <li>名称</li>
-                    <li>信息</li>
-                </ul>
-                <ul class="fromItem"
-                        v-for="(it,index) in JSON.parse(dataMap.formTemplate).dataList" :key="index">
-                    <li>
-                        {{it.name}}
-                    </li>
-                    <li>
-                        {{it.value}}
-                    </li>
-                </ul>
-            </div>
-        </div>
         <div id="serve_aside_7" class="asideCom">
             <div class="item-title">
                 <img src="@/assets/img/logo.png" alt="">
