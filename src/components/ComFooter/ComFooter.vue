@@ -4,12 +4,12 @@
             <div class="top">
                 <div class="top-left">
                     <p class="link">
-                        <span>关于两岸通</span>
-                        <span>商贸通服务</span>
-                        <span>推广服务</span>
-                        <span>帮助中心</span>
-                        <span>友情链接</span>
-                        <span>联系我们</span>
+                        <span @click="$router.push('/aboutMe')">关于两岸通</span>
+                        <span @click="$router.push('/aboutMe')">商贸通服务</span>
+                        <span @click="$router.push('/aboutMe')">推广服务</span>
+                        <span @click="$router.push('/aboutMe')">帮助中心</span>
+                        <span @click="$router.push('/aboutMe')">友情链接</span>
+                        <span @click="$router.push('/aboutMe')">联系我们</span>
                     </p>
                     <p class="bf">
                         技术支持：厦门回拨网络科技有限公司 || 闵ICP备123156号-1

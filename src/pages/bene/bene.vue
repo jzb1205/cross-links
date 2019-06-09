@@ -8,13 +8,15 @@
             <com-more-condition :tagList='secTypeMap'></com-more-condition>
             <div class="listContion">
                 <div class="left">
-                    <span>厦门&nbsp;<i class="el-icon-arrow-down"></i></span>
+                    <div class='adressSelect'>
+                        <span>厦门&nbsp;<i class="el-icon-arrow-down"></i></span>
+                        <com-dist-picker class="select" :address='address' @getAddress='getAddress'></com-dist-picker>
+                    </div>
                     <span>&nbsp;&nbsp;全部类型<i class="el-icon-arrow-down"></i> &nbsp;&nbsp;&nbsp;</span>
                     <el-checkbox v-model="checked">可在线申办</el-checkbox>
                 </div>
                 <div class="right">
-                    共1235个事项，其中456项可在线申办
-                    {{dataMap}}
+                    共{{dataMap && dataMap.total}}个事项
                 </div>
             </div>
             <div class="table-list">
@@ -33,15 +35,21 @@
                                     width="180"
                                     label="类型">
                     </el-table-column>
-                    <el-table-column prop="source"
-                                    width="220"
-                                    label="来源">
+                    <el-table-column width="180"
+                                    label="区域">
+                        <template slot-scope="scope">
+                            <span>{{scope.row.provinceName + scope.row.cityName }}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column 
+                            prop="description"
+                            label="内容">
                     </el-table-column>
                     <el-table-column prop="policyStatus"
                                     width="120"
                                     label="状态">
                     </el-table-column>
-                    <el-table-column width="80"
+                    <el-table-column width="120"
                                     align="right"
                                     label="操作">
                         <template slot-scope="scope">
@@ -74,7 +82,14 @@ export default {
             curType:0,
             curTab:'',
             checked:false,
-            list: []
+            list: [],
+            
+            address: {
+                cityCode:'',
+                cityName:'',
+                provinceCode:'',
+                provinceName:'',
+            }
         }
     },
     created(){
@@ -88,7 +103,9 @@ export default {
             return this.$store.state.secSearchList;
         },
         dataMap(){
-            return this.$store.state.beneMap.data;
+            console.log('this.$store.state.beneMap')
+            console.log(this.$store.state.beneMap)
+            return this.$store.state.beneMap || {};
         }
     },
     mounted(){
@@ -100,14 +117,28 @@ export default {
         this.getPolicyPage()
     },
     methods:{
+        //获取区域信息
+        getAddress(value){
+            this.address = {
+                cityCode:value.city.code,
+                cityName:value.city.value,
+                provinceCode:value.province.code,
+                provinceName:value.province.value,
+            }
+        },
         getChildType(value){
             this.curType = value;
         },
         getChildTag(value){
             this.curTab = value;
         },
-        handleClick(){
-            this.$router.push('/serviceContaner/serviceDetail')
+        handleClick(row){
+            this.$router.push({
+                path:'/benContaner/beneDetail',
+                query:{ 
+                    id:row.id
+                }
+            })
         },
         getPolicyPage(value){
             let params = {
@@ -171,6 +202,16 @@ export default {
             font-size:14px;
             .left{
                 float: left;
+                .adressSelect{
+                    position: relative;
+                    &>span{
+
+                    }
+                    .select{
+                        position: absolute;
+                        z-index: 2;
+                    }
+                }
             }
             .right{
                 float: right;

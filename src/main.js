@@ -13,8 +13,12 @@ import api from './fetch/api/index'
 import comPagination from './components/comPagination/comPagination'
 import Moment from 'moment'
 import imgUrl from '../static/imgUrl'
+import VDistpicker from 'v-distpicker'
+import comDIstPicker from './components/comDIstPicker/comDIstPicker'
 
 Vue.component('com-pagination',comPagination)
+Vue.component('v-distpicker', VDistpicker);
+Vue.component('com-dist-picker',comDIstPicker)
 Vue.use(ElementUI)
 
 Vue.filter('timeFormat',function(value,type){

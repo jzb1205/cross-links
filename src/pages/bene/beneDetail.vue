@@ -3,7 +3,7 @@
         <com-detail-aside :asideList='asideList'></com-detail-aside>
         <div class="detail-right">
             <com-bread-crumbs :breadList='breadList'></com-bread-crumbs>
-            <com-detail-main :asideList='asideList'></com-detail-main>
+            <com-service-detail-main :asideList='asideList' :dataMap="dataMap" :id='$route.query.id'></com-service-detail-main>
         </div>
     </div>
 </template>
@@ -11,12 +11,12 @@
 <script>
 import ComDetailAside from '@/components/ComDetailAside/ComDetailAside'
 import ComBreadCrumbs from '@/components/ComBreadCrumbs/ComBreadCrumbs'
-import ComDetailMain from '@/components/ComDetailMain/ComDetailMain'
+import ComServiceDetailMain from '@/components/ComDetailMain/ComServiceDetailMain'
 export default {
     components:{
         ComDetailAside,
         ComBreadCrumbs,
-        ComDetailMain
+        ComServiceDetailMain
     },
     data(){
         return {
@@ -75,8 +75,26 @@ export default {
                     id:'aside_10',
                     name:'常见问题'
                 }
-            ]
+            ],
+            dataMap:{}
         }
+    },
+    methods:{
+        //修改数据详情
+        getPolicyById () {
+            this.$post(this.$api.bene.getPolicyById, {
+                id: this.$route.query.id
+            }).then(res => {
+                if (res.code === '000' && res.data) {
+                    this.dataMap = Object.assign({},res.data)
+                } else {
+                    this.$message({
+                        message: '获取惠政信息失败',
+                        type: 'error'
+                    })
+                }
+            })
+        },
     }
 }
 </script>

@@ -3,6 +3,7 @@
         <h3>用户基本信息设置</h3>
         <p v-for="it in userInfo" :key="it.label" class="item">
             <span>{{it.label}}</span>
+            <el-input v-if="it.inputType === 'password'" type="password" v-model="it.value" :disabled="it.isOption === 0" :placeholder="it.placeholder"></el-input>
             <el-input v-if="it.inputType === 'input'" v-model="it.value" :disabled="it.isOption === 0" :placeholder="it.placeholder"></el-input>
             <el-select v-if="it.inputType === 'select'" v-model="it.value">
                 <el-option v-for="is in it.children" :key="is.id" :value="is.name">{{is.name}}</el-option>
@@ -29,10 +30,10 @@ export default {
                 },
                 {
                     label:'密码：',
-                    value:'',
+                    value:'******',
                     type:'text',
                     isOption:0,
-                    inputType:'input'
+                    inputType:'password'
                 },
                 {
                     label:'邮箱：',
@@ -95,7 +96,7 @@ export default {
     },
     created(){
         this.userInfo[0].value = this.userInfoSession.userName
-        this.userInfo[1].value = this.userInfoSession.password
+        this.userInfo[1].value = '******'
         this.userInfo[2].value = this.userInfoSession.eMail
         this.userInfo[3].value = this.userInfoSession.nickName
         this.userInfo[4].value = this.userInfoSession.sex
@@ -107,7 +108,7 @@ export default {
             let params = {
                 id:this.userInfoSession.id,
                 userName:this.userInfo[0].value,
-                password:this.userInfo[1].value,
+                // password:this.userInfo[1].value,
                 eMail:this.userInfo[2].value,
                 nickName:this.userInfo[3].value,
                 sex:this.userInfo[4].value,
@@ -127,10 +128,6 @@ export default {
 
 <style lang='less' scoped>
 .user-wrap{
-    width:1000px;
-    margin: 50px auto;
-    padding:50px 100px;
-    background: #fff;
     h3{
         border-left:6px solid rgba(187, 17, 26);
         color:rgba(187, 17, 26);

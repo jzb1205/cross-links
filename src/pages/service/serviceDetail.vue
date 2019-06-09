@@ -3,7 +3,7 @@
         <com-detail-aside :asideList='asideList'></com-detail-aside>
         <div class="detail-right">
             <com-bread-crumbs :breadList='breadList'></com-bread-crumbs>
-            <com-detail-main :asideList='asideList' :dataMap="dataMap"></com-detail-main>
+            <com-service-detail-main :asideList='asideList' :dataMap="dataMap" :attachmentList='attachmentList' :id='id'></com-service-detail-main>
         </div>
     </div>
 </template>
@@ -11,12 +11,12 @@
 <script>
 import ComDetailAside from '@/components/ComDetailAside/ComDetailAside'
 import ComBreadCrumbs from '@/components/ComBreadCrumbs/ComBreadCrumbs'
-import ComDetailMain from '@/components/ComDetailMain/ComDetailMain'
+import ComServiceDetailMain from '@/components/ComDetailMain/ComServiceDetailMain'
 export default {
     components:{
         ComDetailAside,
         ComBreadCrumbs,
-        ComDetailMain
+        ComServiceDetailMain
     },
     data(){
         return {
@@ -68,11 +68,14 @@ export default {
                     name:'附件下载'
                 }
             ],
-            dataMap:{}
+            dataMap:{},
+            attachmentList:[],
+            id:this.$route.query.id
         }
     },
     created(){
         this.querySiById()
+        this.getAttachmentList()
     },
     methods:{
         querySiById(){
@@ -88,7 +91,25 @@ export default {
                     });
                 }
             })
-        }
+        },
+        //附件
+        getAttachmentList () {
+            //businessType 资讯0 惠政1 办事指南2 服务3
+            this.$post(this.$api.attatch.getAttachmentList, {
+                businessId: this.$route.query.id,
+                businessType:'3'  
+            }).then(res => {
+                if (res.code === '000' && res.data) {
+                    this.attachmentList = res.data || []
+
+                } else {
+                    this.$message({
+                        message: '获取服务信息失败',
+                        type: 'error'
+                    })
+                }
+            })
+        },
             
     }
 }

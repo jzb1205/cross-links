@@ -22,8 +22,8 @@
             <div class="home-main-one">
                 <div class="main-one-left">
                     <el-carousel height="380px" arrow='hover'>
-                        <el-carousel-item v-for="item in bannerList" :key="item.id">
-                            <img class="banner-img"  :src="item.imgUrl" alt="正在加载中......">
+                        <el-carousel-item v-for="item in infoList" :key="item.id">
+                            <img class="info-banner-img"  @click="toDetail(item,'info')" :src="$imgUrl+item.imgPath" alt="正在加载中......">
                         </el-carousel-item>
                     </el-carousel>
                 </div>
@@ -131,6 +131,7 @@ export default {
                     path:''
                 }
             ],
+            infoBannerList:[],
             noticeList:[],
             personThing:[
                 {
@@ -267,13 +268,13 @@ export default {
             switch (type) {
                 case 'info':
                     this.$router.push({
-                        path:'/informationDetail',
+                        path:'/infoContaner/informationDetail',
                         query:{id:item.id}
                     })
                     break;
                 case 'service':
                     this.$router.push({
-                        path:'/informationDetail',
+                        path:'/serviceContaner/serviceDetail',
                         query:{id:item.id}
                     })
                     break;
@@ -350,6 +351,7 @@ export default {
                 width:683px;
                 .banner-img{
                     width:100%;
+                    cursor: pointer;
                 }
             }
             .main-one-right{

@@ -8,7 +8,7 @@
                 <p class="base">实施编码：{{dataMap.implementCoding}}</p>
             </div>
             <div class="title-box-r">
-                <button>立即办理</button>
+                <button @click="toOption">立即办理</button>
             </div>
         </div>
         <div id="serve_aside_0" class="asideCom">
@@ -86,9 +86,9 @@
                 <img src="@/assets/img/logo.png" alt="">
                 <span>附件下载</span>
             </div>
-            <div class="item-content-wrap f14">
-                {{dataMap.status}}
-            </div>
+            <p class="affixList" v-if='attachmentList.length>0' v-for="it in attachmentList" :key="it.id">
+                <a :href="$imgUrl+it.urlPath+it.realName" :download="it.realName">{{it.realName}}</a>
+            </p>
         </div>
     </div>
 </template>
@@ -106,11 +106,31 @@ export default {
                 return {}
             }
         },
+        attachmentList:{
+            type:Array,
+            default:()=>{
+                return []
+            }
+        },
+        id:{
+            type:Number,
+            default:''
+        }
 
     },
     data(){
         return {
             imgHttp:this.$imgUrl
+        }
+    },
+    methods:{
+        toOption(){
+            this.$router.push({
+                path:'/serviceContaner/serviceOrder',
+                query:{
+                    id:this.id
+                }
+            })
         }
     }
 }
@@ -221,6 +241,11 @@ export default {
                     border-bottom: 1px solid #ccc;
                 }
             }
+        }
+        .affixList{
+            margin-top:15px;
+            margin-left: 6%;
+            width: 85%;
         }
     }
 }

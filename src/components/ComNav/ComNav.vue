@@ -32,7 +32,7 @@ export default {
                     name:'INFORMATION'
                 },
                 {
-                    path:'/bene',
+                    path:'/benContaner',
                     label:'通惠政',
                     name:'HUI ZHENG'
                 },
@@ -47,7 +47,7 @@ export default {
                     name:'NAVIGATION'
                 },
                 {
-                    path:'/user',
+                    path:'/userContanter',
                     label:'个人中心',
                     name:'USER CENTER'
                 }

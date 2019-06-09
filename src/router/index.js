@@ -8,6 +8,7 @@ import login from '../pages/login/login.vue'
 import home from '../pages/home/home.vue'
 //通惠政
 import bene from '../pages/bene/bene.vue'
+import beneDetail from '../pages/bene/beneDetail.vue'
 //通资讯
 import information from '../pages/information/infomation.vue'
 import informationDetail from '../pages/information/informationDetail.vue'
@@ -17,8 +18,14 @@ import nav from '../pages/nav/nav.vue'
 import contaner from '../pages/contaner.vue'
 import service from '../pages/service/service.vue'
 import serviceDetail from '../pages/service/serviceDetail.vue'
+import serviceOrder from '../pages/order/serviceOrder.vue'
 //用户中心
+import userContanter from '../pages/user/index.vue'
 import user from '../pages/user/user.vue'
+import orderMnage from '../pages/user/orderMnage.vue'
+
+//关于我们
+import aboutMe from '../pages/aboutMe/aboutMe.vue'
 
 Vue.use(Router)
 
@@ -36,9 +43,21 @@ export default new Router({
                     component: home
                 },
                 {
-                    path: '/bene',
-                    name: 'bene',
-                    component: bene
+                    path: '/benContaner',
+                    name: 'benContaner',
+                    component: contaner,
+                    children:[
+                        {
+                            path: '',
+                            name: 'bene',
+                            component: bene
+                        },
+                        {
+                            path: 'beneDetail',
+                            name: 'beneDetail',
+                            component: beneDetail
+                        },
+                    ]
                 },
                 {
                     path: '/infoContaner',
@@ -77,15 +96,37 @@ export default new Router({
                             name: 'serviceDetail',
                             component: serviceDetail
                         },
+                        {
+                            path: 'serviceOrder',
+                            name: 'serviceOrder',
+                            component: serviceOrder
+                        },
                     ]
                 },
                 {
-                    path: '/user',
-                    name: 'user',
-                    component: user,
+                    path: '/userContanter',
+                    name: 'userContanter',
+                    component: userContanter,
+                    children:[
+                        {
+                            path: '',
+                            name: 'user',
+                            component: user
+                        },
+                        {
+                            path: 'orderMnage',
+                            name: 'orderMnage',
+                            component: orderMnage
+                        }
+                    ],
                     beforeEnter: (to, from, next) => {
                       verifyLogin(next);
                     }
+                },
+                {
+                    path: '/aboutMe',
+                    name: 'aboutMe',
+                    component: aboutMe
                 },
                 {
                     path: '/login',

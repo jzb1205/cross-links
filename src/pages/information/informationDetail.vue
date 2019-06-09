@@ -7,7 +7,7 @@
 
 <script>
 import ComBreadCrumbs from '@/components/ComBreadCrumbs/ComBreadCrumbs'
-import ComInfoDetailMain from '@/components/ComInfoDetailMain/ComInfoDetailMain'
+import ComInfoDetailMain from '@/components/ComDetailMain/ComInfoDetailMain'
 export default {
     components:{
         ComBreadCrumbs,

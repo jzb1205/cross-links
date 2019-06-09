@@ -6,6 +6,9 @@ import service from './service'
 import user from './user'
 import login from './login'
 import common from './common'
+import order from './order'
+import attatch from './attatch'
+import webSetting from './webSetting'
 
 const api = {
     bene,
@@ -15,7 +18,10 @@ const api = {
     service,
     user,
     login,
-    common
+    common,
+    order,
+    attatch,
+    webSetting
 }
 
 export default api
