@@ -575,7 +575,7 @@ export default {
                     li{
                         cursor: pointer;
                         float: left;
-                        // width:80px;
+                        width:80px;
                         // height:80px;
                         margin-right:35px;
                         border-radius:4px;    
@@ -590,7 +590,12 @@ export default {
                             border-radius: 10px;
                             overflow: hidden;
                             img{
-                                width:100%;
+                                width: 100%;
+                                height: 100%;
+                                &:hover{
+                                    transform: scale(1.15);
+                                    transition: all ease-in .1s;
+                                }
                             }
                         }
                         .nav-name{
