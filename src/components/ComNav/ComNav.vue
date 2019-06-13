@@ -8,8 +8,11 @@
                     :class="{'router-link-active':curPathSlice === item.path}"
                     exact tag="li" 
                     :key="item.path" :to="item.path">
-                    <p class="label">{{item.label}}</p>
-                    <p class="name">{{item.name}}</p>
+                    <div class="wrap"></div>
+                    <div class="content">
+                        <p class="label">{{item.label}}</p>
+                        <p class="name">{{item.name}}</p>
+                    </div>
                 </router-link>
             </ul>
         </div>
@@ -87,10 +90,31 @@ export default {
             .nav-li{
                 float: left;
                 line-height:26px;
-                padding:0 36px;
+                width:192px;
                 cursor: pointer;
                 height:100%;
                 color: rgb(171, 171, 171);
+                position: relative;
+                overflow: hidden;
+                .wrap,.content{
+                    width:192px;  
+                    height: 112px;
+                }
+                .content{
+                    position: relative;
+                    z-index: 103;
+                }
+                .wrap{
+                    width: 100%;
+                    height:4px;
+                    position: absolute;
+                    top:108px;
+                    left:0;
+                    z-index: 102;
+                    background: rgba(187, 17, 26);
+                    margin-left:-192px;
+                    transition: all ease .4s;
+                }
                 p{
                     text-align: center;
                     &.label{
@@ -100,6 +124,11 @@ export default {
                 &.router-link-active{
                     background: rgba(187, 17, 26);
                     color:#fff;
+                }
+                &:hover{
+                    .wrap{
+                        margin-left:0;
+                    }
                 }
             }
         }

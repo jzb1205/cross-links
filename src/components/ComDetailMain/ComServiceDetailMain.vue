@@ -31,13 +31,14 @@
             <div class="asideCom" v-if="dataMap.process">
                 <p class="item-title">服务流程：</p>
                 <div class="item-content-wrap">
-                    <img :src="imgHttp+dataMap.process" alt="">
+                    <img class="processImg" :src="imgHttp+dataMap.process" alt="">
                 </div>
             </div>
             <div class="asideCom" v-if='attachmentList.length>0' >
                 <p class="item-title">附件下载：</p>
                 <p class="affixList" v-for="it in attachmentList" :key="it.id">
-                    <a :href="$imgUrl+it.urlPath+it.realName" :download="it.realName">{{it.realName}}</a>
+                    <!-- <a :href="$imgUrl+it.urlPath+it.realName" :download="it.realName">{{it.realName}}</a> -->
+                    <a href="#" @click="downLoad(it.id)">{{it.realName}}</a>
                 </p>
             </div>
         </div>
@@ -118,6 +119,9 @@ export default {
                     });
                 }
             })
+        },
+        downLoad(id){
+            window.location.href = 'http://47.101.183.77:8089/file/downloadFile?id='+id.toString()
         }
     }
 }
@@ -181,6 +185,9 @@ export default {
                 .item-content{
                     width:1005px;
                     margin:0 auto;
+                }
+                .processImg{
+                    width:200px;
                 }
             }
             .f14{

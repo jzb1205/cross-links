@@ -22,34 +22,50 @@ export default {
         tagList:{
             type:Array,
             default:[]
+        },
+        curTab:{
+            type:String,
+            default:'0'
         }
     },
     data(){
         return {
             list:[],
-            curCode:'',
+            curCode:'0',
             btnTxt:'全部展开',
             switchChange:false
         }
     },
     created(){
-        this.list = this.tagList.slice(0,12);
     },
     methods:{
         getTagId(code){
             this.curCode = code;
             this.$emit('getChildTag',code)
         },
-        openAll(){
+        openAll(){ 
             if (!this.switchChange) {
                 this.list = this.tagList;
                 this.btnTxt = "收起";
                 this.switchChange = true;
             }else{
+                this.list = this.tagList;
                 this.list = this.tagList.slice(0,12);
                 this.btnTxt = "全部展开";
                 this.switchChange = false;
             }
+        }
+    },
+    watch:{
+        'tagList':{
+            handler(newValue,oldValue){
+                this.list = this.tagList
+                this.openAll()
+            },
+            deep:true
+        },
+        'curTab'(){
+            this.curCode = this.curTab
         }
     }
 }

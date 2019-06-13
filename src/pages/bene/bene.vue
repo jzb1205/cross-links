@@ -5,7 +5,7 @@
             <com-tab-nav :tablist='typeMap' @getChildType='getChildType'></com-tab-nav>
         </div>
         <div class="info-main">
-            <com-more-condition :tagList='secTypeMap'></com-more-condition>
+            <com-more-condition :tagList='secTypeMap' @getChildTag='getChildTag' :curTab='curTab'></com-more-condition>
             <div class="listContion">
                 <div class="left">
                     <div class='adressSelect'>
@@ -106,9 +106,13 @@ export default {
         },
         getChildType(value){
             this.curType = value;
+            //点击一级查询 默认全部
+            this.curTab = '0'
+            this.getPolicyPage()
         },
         getChildTag(value){
             this.curTab = value;
+            this.getPolicyPage()
         },
         toDetail(id){
             if (!id) {
@@ -137,6 +141,7 @@ export default {
     },
     watch:{
         'curType'(){
+            this.curTab = '0' //一级类型改变时 二级类型默认 全部类型 项
             let typeCode = 'huiTaipolicy'
             switch (this.curType) {
                 case '0':

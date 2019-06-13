@@ -8,7 +8,7 @@
             <div class="com-nav-list-wrap" v-for="(item,index) in dataList" :key="index">
                 <p class="title">{{item.title}}</p>
                 <ul class="list-block">
-                    <li class="list-item" v-for="it in item.children" :key="it.id" @click="toLink(it.url)">
+                    <li class="list-item" v-for="it in item.children.slice(0,10)" :key="it.id" @click="toLink(it.url)">
                         <div class="nav-img"><img :src="imgHttp+it.icon" alt=""></div>
                         <div class="nav-name">
                             <p>{{it.name}}</p>
@@ -135,6 +135,10 @@ export default {
                     img{    
                         width: 216px;
                         height: 146px;
+                        &:hover{
+                            transform: scale(1.2);
+                            transition: all ease .3s;
+                        }
                     }
                 }
                 .nav-name{

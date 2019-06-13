@@ -5,20 +5,19 @@
             padding: 15px;
             overflow: hidden;
             margin-top:10px;
-            cursor: pointer;
             transition: all ease .8s;    
             border: 1px solid #eee;
             .itemImg{
                 width: 150px;
                 height: 100px;
-                transition: all ease-in .3s;
+                cursor: pointer;
                 img{    
                     width: 100%;
                     height: 100%;
-                }
-                &:hover{
-                    width:160px;
-                    height:106px;
+                    &:hover{
+                        transform: scale(1.1);
+                        transition: all ease-in .3s;
+                    }
                 }
             }
             .itemDetail{
@@ -28,6 +27,7 @@
                 }
                 .title{
                     font-size: 18px;
+                    cursor: pointer;
                 }
                 .type,.tag,.address{
                     color:#444;

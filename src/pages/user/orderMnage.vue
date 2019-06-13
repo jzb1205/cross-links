@@ -3,15 +3,20 @@
         <el-table :data="list"
                 row-class-name="changeCss"
                 style="width: 100%">
+            <el-table-column prop="serviceInfoId"
+                            width="120"
+                            align="center"
+                            label="服务订单编号">
+            </el-table-column>
             <el-table-column prop="serviceType"
-                            width="155"
+                            width="150"
                             align="center"
                             label="服务类型">
             </el-table-column>
             <el-table-column prop="serviceName"
                             label="服务名称"
                             align="center"
-                            width="150">
+                            width="140">
             </el-table-column>
             <el-table-column label="服务状态"
                             align="center"
@@ -21,7 +26,7 @@
                 </template>
             </el-table-column>
             <el-table-column prop="serviceAmount"
-                            width="150"
+                            width="140"
                             align="center"
                             label="服务收费">
             </el-table-column>

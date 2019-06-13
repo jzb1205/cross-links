@@ -6,7 +6,10 @@
                     :class="{'activeUser':curId === it.id}" 
                     @click="getCurId(it)"
                     v-for="it in userAside" 
-                    :key="it.id">{{it.name}}
+                    :key="it.id">
+                    <span class="wrap"></span>
+                    <span>{{it.name}}</span>
+                    
                 </li>
             </ul>
         </aside>
@@ -49,7 +52,11 @@ export default {
     overflow: hidden;
     width:1200px;
     margin:50px auto;
-    .userAside{
+    position: relative;
+    .userAside{    
+        position: absolute;
+        top: 0;
+        left: 0;
         width:150px;
         float: left;
         background: #fff;
@@ -57,18 +64,41 @@ export default {
             text-align: center;
             line-height:50px;
             font-size: 16px;
+            position: relative;
             color:#333;
             cursor: pointer;
+            span{
+                display: block;
+                width:100%;
+                height:100%;
+                position: relative;
+                z-index: 103;
+            }
+            .wrap{
+                position: absolute;
+                top:0;
+                left:0;
+                z-index: 102;
+                background: rgba(187, 17, 26);
+                margin-left:-150px;
+                transition: all ease .4s;
+            }
             &.activeUser{
                 color:#fff;
                 background: rgba(187, 17, 26);
+            }
+            &:hover{
+                color:#fff;
+                .wrap{
+                    margin-left:0;
+                }
             }
         }
     }
     .userMain{
         float: left;
         width:830px;
-        margin-left: 20px;
+        margin-left: 170px;
         padding:50px 100px;
         background: #fff;
     }
