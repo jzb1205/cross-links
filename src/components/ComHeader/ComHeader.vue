@@ -1,16 +1,16 @@
 <template>
     <div class="com-header">
         <div class="com-header-wrap">
-            <div class="address">
+            <!-- <div class="address">
                 <img src="../../assets/img/icon-location.png" alt="">
                 <span>{{locationCity}}</span>
                 <i class="el-icon-arrow-down"></i>
-            </div>
+            </div> -->
             <div class="loginNotice" v-if="isShow">
                 <div class="token" v-if="isLogin">
-                    <span>{{userName}}</span>
+                    <span @click="$router.push('/userContanter')">{{userName}}</span>
                     |
-                    <span @click="tologin(0)">退出</span>
+                    <span @click="tologin(0)">注销</span>
                 </div>
                 <div  v-else class='token'>
                     <span @click="tologin(0)">登陆</span>
@@ -19,9 +19,10 @@
                 </div>
             </div>
             <div class="languge">
-                <span>无障碍</span>
+                <!-- <span>无障碍</span>
                 <span>繁体</span>
-                <span>English</span>
+                <span>English</span> -->
+                <span @click="$router.push('/userContanter')">个人中心</span>
             </div>
             <div class="search">
                 <input type="text" placeholder="全文搜索" v-model="searchText">
@@ -64,6 +65,7 @@ export default {
             });
         },
         tologin(type){
+            sessionStorage.clear()
             this.$router.push({
                 path:'/login',
                 query:{
@@ -73,7 +75,7 @@ export default {
         }
     },
     watch:{
-        'route.fullPath'(){
+        '$route.fullPath'(){
             this.isLogin = sessionStorage.getItem('token') || ''
             this.userName = sessionStorage.getItem('userInfo') && JSON.parse(sessionStorage.getItem('userInfo')).userName || {}
             this.isShow = !this.$route.fullPath.includes('/login')
@@ -115,13 +117,21 @@ export default {
                   margin-left:5px;
                   margin-right:5px;
                   &:hover{
-                      color:#888;
+                      color:#ddd;
                   }
               }
           }
       }
       &.languge,&.search {
         float: right;
+      }
+      &.languge{
+        span{
+            &:hover{
+                cursor: pointer;
+                color:#ddd;
+            }
+        }
       }
       &.search {
         margin-right:50px;

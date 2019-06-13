@@ -1,8 +1,8 @@
 <template>
     <div class="home">
         <div class="home-banner">
-            <el-carousel width='1200' :height="bannerHeight" arrow='hover'>
-                <el-carousel-item v-for="item in bannerList" :key="item.id">
+            <el-carousel arrow='hover'>
+                <el-carousel-item v-for="item in bannerList" :key="item.id" class="home-banner-item">
                     <img class="banner-img banner" :src="item.imgUrl" alt="正在加载中......">
                 </el-carousel-item>
             </el-carousel>
@@ -22,8 +22,11 @@
             <div class="home-main-one">
                 <div class="main-one-left">
                     <el-carousel height="380px" arrow='hover'>
-                        <el-carousel-item v-for="item in infoList" :key="item.id">
+                        <el-carousel-item v-for="item in infoList" :key="item.id" class="info-banner">
                             <img class="info-banner-img"  @click="toDetail(item,'info')" :src="$imgUrl+item.imgPath" alt="正在加载中......">
+                            <div class="top"></div>
+                            <p class="titleNotice">{{item.title}}</p>
+                            <div class="bottom"></div>
                         </el-carousel-item>
                     </el-carousel>
                 </div>
@@ -47,7 +50,7 @@
                 <div class="main-two-one">
                     <p class="news-title">
                         <span class="title">惠台政策</span>
-                        <span class="more" @click='$router.push("/bene")'>
+                        <span class="more" @click='$router.push("/benContaner")'>
                             更多
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
@@ -56,36 +59,6 @@
                         <li v-for="(item,index) in beneList" :key="index" @click="toDetail(item,'bene1')">
                             <span class="title">{{item.title}}</span>
                             <span class="time">{{item.createTime | timeFormat('YYYY-MM-DD')}}</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="main-two-two">
-                    <p class="news-title">
-                        <span class="title">个人办事</span>
-                        <span class="more">
-                            更多
-                            <i class="el-icon-circle-plus-outline"></i>
-                        </span>
-                    </p>
-                    <ul class="news-list">
-                        <li v-for="(item,index) in personThing" :key="index" @click="toDetail(item,'bene1')">
-                            <span class="title">{{item.lable}}</span>
-                        </li>
-                        <li class="more">更多</li>
-                    </ul>
-                </div>
-                <div class="main-two-three">
-                    <p class="news-title">
-                        <span class="title">通导航</span>
-                        <span class="more" @click='$router.push("/nav")'>
-                            更多
-                            <i class="el-icon-circle-plus-outline"></i>
-                        </span>
-                    </p>
-                    <ul class="news-list" v-if="navList.length>0">
-                        <li v-for="(item,index) in navList.slice(0,5)" :key="index"  @click="toDetail(item,'navigation')">
-                            <p class="nav-img" ><img :src="imgHttp + item.icon" alt="正在加载中......"></p>
-                            <p class="nav-name">{{item.name}}</p>
                         </li>
                     </ul>
                 </div>
@@ -102,6 +75,38 @@
                             <span class="title">{{item.title}}</span>
                             <span class="time">{{item.createTime | timeFormat('YYYY-MM-DD')}}</span>
                         </li>
+                    </ul>
+                </div>
+                <div class="main-two-three">
+                    <p class="news-title">
+                        <span class="title">通导航</span>
+                        <span class="more" @click='$router.push("/nav")'>
+                            更多
+                            <i class="el-icon-circle-plus-outline"></i>
+                        </span>
+                    </p>
+                    <ul class="news-list" v-if="navList.length>0">
+                        <li v-for="(item,index) in navList.slice(0,5)" :key="index"  @click="toDetail(item,'navigation')">
+                            <p class="nav-img" ><img :src="imgHttp + item.icon" alt="正在加载中......"></p>
+                            <div class="top"></div>
+                            <p class="nav-name">{{item.name}}</p>
+                            <div class="bottom"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="main-two-two">
+                    <p class="news-title">
+                        <span class="title">服务指南</span>
+                        <span class="more">
+                            更多
+                            <i class="el-icon-circle-plus-outline"></i>
+                        </span>
+                    </p>
+                    <ul class="news-list">
+                        <li v-for="(item,index) in personThing" :key="index">
+                            <span class="title">{{item.lable}}</span>
+                        </li>
+                        <li class="more">更多</li>
                     </ul>
                 </div>
             </div>
@@ -184,6 +189,14 @@ export default {
         }
     },
     mounted(){
+        this.$nextTick(()=>{
+            let h = (document.body.clientWidth/1920)*465
+            document.getElementsByClassName('banner-img')[0].style.height = h
+            document.getElementsByClassName('el-carousel__container')[0].style.height = h
+            
+            let w = (document.body.clientWidth/1920)*1400
+            document.getElementById('info-main').style.width = w
+        })
     },
     created(){
         this.getNoticeInfoPage()
@@ -203,7 +216,6 @@ export default {
             return this.$store.state && this.$store.state.navMap || []
         },
         beneList(){
-            console.log(this.$store.state.beneMap)
             return this.$store.state && this.$store.state.beneMap && this.$store.state.beneMap && this.$store.state.beneMap.list || []
         }
     },
@@ -280,14 +292,16 @@ export default {
                     break;
                 case 'bene1':
                     this.$router.push({
-                        path:'/informationDetail',
-                        query:{id:id}
+                        path:'/benContaner/beneDetail',
+                        query:{ 
+                            id:item.id
+                        }
                     })
                     break;
                 case 'bene2':
                     this.$router.push({
                         path:'/informationDetail',
-                        query:{id:id}
+                        query:{id:item.id}
                     })
                     break;
             
@@ -309,7 +323,7 @@ export default {
         }
         .banner-img{
             width:100%;
-            height:465px;
+            height:300px;
         }
     }
     .home-main{
@@ -349,10 +363,57 @@ export default {
             .main-one-left{
                 float: left;
                 width:683px;
-                .banner-img{
-                    width:100%;
-                    cursor: pointer;
+                .info-banner{
+                    overflow: hidden;
+                    .titleNotice{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        text-align: center;
+                        width: 85%;
+                        z-index: 104;
+                        margin: 178px auto 0;
+                        color:#fff;
+                        margin-left:-680px;
+                        transition: all ease-out .3s;
+                    }
+                    .top,.bottom{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        text-align: center;
+                        width: 100%;
+                        height:190px;
+                        z-index: 103;
+                        transition: all ease-out .5s;
+                        background: rgba(0, 0, 0,.3);
+                    }
+                    .top{
+                        margin-top:-190px;
+                    }
+                    .bottom{
+                        margin-top:380px;
+                    }
+                    &:hover{
+                        .top{
+                            margin-top:0px;
+                        }
+                        .bottom{
+                            margin-top:190px;
+                        }
+                        .titleNotice{
+                            margin-left:7.5%;
+                        }
+                    }
                 }
+                // .banner-img{
+                //     width:100%;
+                //     cursor: pointer;
+                // }
             }
             .main-one-right{
                 float: right;

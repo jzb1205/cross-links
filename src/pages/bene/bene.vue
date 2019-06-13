@@ -9,59 +9,37 @@
             <div class="listContion">
                 <div class="left">
                     <div class='adressSelect'>
-                        <span>厦门&nbsp;<i class="el-icon-arrow-down"></i></span>
-                        <com-dist-picker class="select" :address='address' @getAddress='getAddress'></com-dist-picker>
+                        <span>{{address.provinceName+address.cityName}}&nbsp;<i class="el-icon-arrow-down" @click="showPicker=!showPicker"></i></span>
+                        <transition name="el-zoom-in-top">
+                            <com-dist-picker v-show='showPicker' class="select" :address='address' @getAddress='getAddress'></com-dist-picker>
+                        </transition>
                     </div>
-                    <span>&nbsp;&nbsp;全部类型<i class="el-icon-arrow-down"></i> &nbsp;&nbsp;&nbsp;</span>
-                    <el-checkbox v-model="checked">可在线申办</el-checkbox>
+                    <div class="selectType">
+                        <span>&nbsp;&nbsp;全部类型<i class="el-icon-arrow-down"></i> &nbsp;&nbsp;&nbsp;</span>
+                        <el-checkbox v-model="checked">可在线申办</el-checkbox>
+                    </div>
                 </div>
                 <div class="right">
-                    共{{dataMap && dataMap.total}}个事项
+                    共<span>{{dataMap && dataMap.total}}</span>个事项
                 </div>
             </div>
-            <div class="table-list">
-                <el-table :data="dataMap && dataMap.list"
-                        row-class-name="changeCss"
-                      style="width: 100%">
-                    <el-table-column prop="title"
-                                    width="220"
-                                    label="标题">
-                    </el-table-column>
-                    <el-table-column prop="authorId"
-                                    label="	发布人ID"
-                                    width="120">
-                    </el-table-column>
-                    <el-table-column prop="type"
-                                    width="180"
-                                    label="类型">
-                    </el-table-column>
-                    <el-table-column width="180"
-                                    label="区域">
-                        <template slot-scope="scope">
-                            <span>{{scope.row.provinceName + scope.row.cityName }}</span>
-                        </template>
-                    </el-table-column>
-                    <el-table-column 
-                            prop="description"
-                            label="内容">
-                    </el-table-column>
-                    <el-table-column prop="policyStatus"
-                                    width="120"
-                                    label="状态">
-                    </el-table-column>
-                    <el-table-column width="120"
-                                    align="right"
-                                    label="操作">
-                        <template slot-scope="scope">
-                            <div class="option-btn">
-                                <el-button @click="handleClick(scope.row)" type="text" size="small">在线办理</el-button>
-                                <el-button @click="handleClick(scope.row)" type="text" size="small">申请材料</el-button>
-                            </div>
-                        </template>
-                    </el-table-column>
-                </el-table>
-                <com-pagination :rows='rows' :page='page' :total='dataMap && dataMap.total' @getList='getPolicyPage'></com-pagination>
-            </div>
+            <ul class="itemList">
+                <li class="overflow" v-if="dataMap.list.length>0" v-for="it in dataMap.list" :key="it.id">
+                    <div class="fl itemImg">
+                        <img @click="toDetail(it.id)" :src="imgHttp+it.imgPath" alt="">
+                    </div>
+                    <div class="fl itemDetail">
+                        <p class="title" @click="toDetail(it.id)" >{{it.title}}</p>
+                        <p class="type">类型：<span>{{it.type}}</span></p>
+                        <p class="tag" v-if="it.tag && it.tag.split(',').length>0">标签：<el-tag v-for="(is,index) in it.tag.split(',').slice(0,12)" :key="index">{{is}}</el-tag></p>
+                        <p class="address">所在区域：<span>{{it.provinceName+it.cityName}}</span></p>
+                    </div>
+                    <div class="fr detailBtn" @click="toDetail(it.id)">
+                            查看详情
+                    </div>
+                </li>
+            </ul>
+            <com-pagination :rows='rows' :page='page' :total='dataMap && dataMap.total' @getList='getPolicyPage'></com-pagination>
         </div>
     </div>
 </template>
@@ -89,7 +67,9 @@ export default {
                 cityName:'',
                 provinceCode:'',
                 provinceName:'',
-            }
+            },
+            imgHttp:this.$imgUrl,
+            showPicker:false
         }
     },
     created(){
@@ -103,8 +83,6 @@ export default {
             return this.$store.state.secSearchList;
         },
         dataMap(){
-            console.log('this.$store.state.beneMap')
-            console.log(this.$store.state.beneMap)
             return this.$store.state.beneMap || {};
         }
     },
@@ -132,11 +110,18 @@ export default {
         getChildTag(value){
             this.curTab = value;
         },
-        handleClick(row){
+        toDetail(id){
+            if (!id) {
+                this.$message({
+                    message:'惠政Id不能为空',
+                    type:'error'
+                })
+                return;
+            }
             this.$router.push({
                 path:'/benContaner/beneDetail',
                 query:{ 
-                    id:row.id
+                    id:id
                 }
             })
         },
@@ -171,6 +156,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import url('../../assets/css/comList');
 .bene{
     .bene-dis-img {
         position: relative;
@@ -188,33 +174,52 @@ export default {
             display: flex;
         }
     }
-    .info-main {
-        width: 1180px;
+    .info-main {    
+        width: 1120px;
         min-height: 700px;
         margin: 29px auto 30px;
-        padding: 20px 10px;
+        padding: 20px 40px;
         border: 1px solid #f2f2f2;
         background: #fff;
         .listContion{
             height: 50px;
-            line-height:70px;
-            overflow: hidden;
+            line-height:70px;    
+            margin-bottom: 20px;
             font-size:14px;
             .left{
                 float: left;
                 .adressSelect{
                     position: relative;
+                    display: inline;
+                    float: left;
                     &>span{
 
                     }
                     .select{
                         position: absolute;
                         z-index: 2;
+                        top:40px;
+                        min-width:410px;
+                    }
+                }
+                .selectType{
+                    display: inline;
+                    overflow: hidden;
+                    span{
+                        float: left;
+                    }
+                    .el-checkbox{
+                        float: left;
                     }
                 }
             }
             .right{
                 float: right;
+                span{
+                    color:rgba(187, 17, 26);
+                    padding:0 5px;
+
+                }
             }
         }
     }

@@ -1,0 +1,83 @@
+
+    .itemList{
+        li{
+            height: 100px;
+            padding: 15px;
+            overflow: hidden;
+            margin-top:10px;
+            cursor: pointer;
+            transition: all ease .8s;    
+            border: 1px solid #eee;
+            .itemImg{
+                width: 150px;
+                height: 100px;
+                transition: all ease-in .3s;
+                img{    
+                    width: 100%;
+                    height: 100%;
+                }
+                &:hover{
+                    width:160px;
+                    height:106px;
+                }
+            }
+            .itemDetail{
+                text-indent: 20px;
+                &>p{
+                    line-height:25px;
+                }
+                .title{
+                    font-size: 18px;
+                }
+                .type,.tag,.address{
+                    color:#444;
+                    font-size: 14px;
+                }
+                .tag{
+                    .el-tag{
+                        margin-left:10px;  
+                        height: 22px;
+                        line-height: 20px;
+                        border-radius: 10px;
+                        text-indent: 0;
+                    }
+                }
+            }
+            .detailBtn{
+                display: inline-block;
+                width:100px;
+                height:35px;
+                line-height:35px;
+                font-size: 14px;
+                color:#fff;
+                background: rgba(187, 17, 26);
+                border-radius:25px;
+                text-align: center;
+                margin-top: 30px;
+                margin-right:35px;
+                cursor: pointer;
+            }
+            &:hover{
+                background: rgba(187, 17, 26);
+                color:#fff!important;
+                .type,.tag,.address{
+                    color:#fff;
+                    font-size: 14px;
+                }
+                .el-tag{
+                    margin-left:10px;  
+                    height: 22px;
+                    line-height: 20px;
+                    border-radius: 10px;
+                    text-indent: 0;
+                    color:rgba(187, 17, 26);
+                    border-color:#fff;
+                    background: #fff;
+                }
+                .detailBtn{
+                    background:#fff;
+                    color: rgba(187, 17, 26);
+                }
+            }
+        }
+    }

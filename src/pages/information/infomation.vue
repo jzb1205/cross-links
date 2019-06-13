@@ -5,7 +5,7 @@
                  alt="">
         </div>
         <div class="info-main" id="info-main">
-            <div class="tag">
+            <div class="tagL">
                 <ul class="tag-list">
                     <li v-for="item in typeMap"
                         :key="item.id"
@@ -13,36 +13,23 @@
                         @click="getTagId(item.code)">{{item.value}}</li>
                 </ul>
             </div>
-            <div class="table-list">
-                <el-table :data="tableData"
-                      style="width: 100%">
-                    <el-table-column prop="title"
-                                    label="标题">
-                    </el-table-column>
-                    <el-table-column prop="createTime"
-                                    label="发布时间"
-                                    width="220">
-                        <template slot-scope="scope">
-                            <span>{{scope.row.content | timeFormat}}</span>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="description"
-                                    width="220"
-                                    label="简介">
-                    </el-table-column>
-                    <el-table-column prop="type"
-                                    width="220"
-                                    label="类型">
-                    </el-table-column>
-                    <el-table-column width="120"
-                                    label="操作">
-                        <template slot-scope="scope">
-                            <el-button @click="handleClick(scope.row.id)" type="text" size="small">详情</el-button>
-                        </template>
-                    </el-table-column>
-                </el-table>
-                <com-pagination :rows='rows' :page='page' :total='total' @getList='getInfoListPage'></com-pagination>
-            </div>
+            <ul class="itemList">
+                <li class="overflow" v-if="tableData.length>0" v-for="it in tableData" :key="it.id">
+                    <div class="fl itemImg">
+                        <img @click="toDetail(it.id)" :src="imgHttp+it.imgPath" alt="">
+                    </div>
+                    <div class="fl itemDetail">
+                        <p class="title" @click="toDetail(it.id)" >{{it.title}}</p>
+                        <p class="type">类型：<span>{{it.type}}</span></p>
+                        <p class="tag" v-if="it.tag && it.tag.split(',').length>0">标签：<el-tag v-for="(is,index) in it.tag.split(',').slice(0,12)" :key="index">{{is}}</el-tag></p>
+                        <p class="address">来源：<span>{{it.source}}</span></p>
+                    </div>
+                    <div class="fr detailBtn" @click="toDetail(it.id)">
+                            查看详情
+                    </div>
+                </li>
+            </ul>
+            <com-pagination :rows='rows' :page='page' :total='total' @getList='getInfoListPage'></com-pagination>
         </div>
     </div>
 </template>
@@ -55,7 +42,8 @@ export default {
             rows:10,
             total:0,
             curCode: '',
-            tableData: []
+            tableData: [],
+            imgHttp:this.$imgUrl
         }
     },
     mounted(){
@@ -82,7 +70,8 @@ export default {
             this.curCode = code;
             this.getInfoListPage()
         },
-        handleClick(id){
+        
+        toDetail(id){
             if (!id) {
                 this.$message({
                     message:'资讯Id不能为空',
@@ -121,6 +110,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
+@import url('../../assets/css/comList');
 .information {
   .dis-img {
     img {
@@ -129,20 +119,20 @@ export default {
     }
   }
   .info-main {
-    width: 1180px;
+    width: 1120px;
     min-height: 700px;
     margin: 29px auto 30px;
-    padding: 25px 10px;
+    padding: 20px 40px;
     border: 1px solid #f2f2f2;
     background: #fff;
-    .tag {
+    .tagL {
       margin-top: 12px;
       .tag-list {
         height: 40px;
         display: flex;
         li {
           flex: 1;
-          width: 180px;
+          width: 170px;
           height: 40px;
           text-align: center;
           line-height: 40px;
@@ -161,9 +151,6 @@ export default {
           }
         }
       }
-    }
-    .table-list{
-        margin-top:30px;
     }
   }
 }

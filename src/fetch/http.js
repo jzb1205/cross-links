@@ -2,10 +2,20 @@ import axios from 'axios'
 
 axios.defaults.timeout = 20000;
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
-axios.defaults.headers.post['Authorization'] = sessionStorage.getItem('token') || '';
-axios.defaults.headers.get['Authorization'] = sessionStorage.getItem('token') || '';
 axios.defaults.baseURL = '/api'
 
+axios.interceptors.request.use(
+    config => {
+      let token = sessionStorage.getItem("token") || '';
+      if (token) {  
+        config.headers.Authorization = `${token}`;
+      }
+      return config;
+    },
+    err => {
+      return Promise.reject(err);
+    }
+)
 /**
  * 封装get方法
  * @param url

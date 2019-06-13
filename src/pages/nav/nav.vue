@@ -9,8 +9,10 @@
                 <p class="title">{{item.title}}</p>
                 <ul class="list-block">
                     <li class="list-item" v-for="it in item.children" :key="it.id" @click="toLink(it.url)">
-                        <p class="nav-img"><img :src="imgHttp+it.icon" alt="">
-                        <p class="nav-name">{{it.name}}</p>
+                        <div class="nav-img"><img :src="imgHttp+it.icon" alt=""></div>
+                        <div class="nav-name">
+                            <p>{{it.name}}</p>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -112,6 +114,7 @@ export default {
             margin-top:30px;
             overflow: hidden;
             .list-item{
+                position: relative;
                 width:214px;
                 height:144px;
                 border:1px solid #ddd;
@@ -119,6 +122,7 @@ export default {
                 margin-left:10px;
                 margin-right:5px;
                 margin-bottom:15px;
+                overflow: hidden;
                 cursor: pointer;
                 &:nth-of-type(5n){
                     margin-right: 0;
@@ -126,18 +130,40 @@ export default {
                 &:hover{
                     background: #f2f2f2;
                 }
-                .nav-img{
-                    width:80px;    
+                .nav-img{  
                     margin: 0 auto;
-                    margin-top:23px;
-                    img{
-                        width:80px;
-                        height:60px;
+                    img{    
+                        width: 216px;
+                        height: 146px;
                     }
                 }
                 .nav-name{
-                    text-align: center;    
-                    margin-top: 20px;
+                    width:100%;
+                    height:100%;
+                    text-align: center;  
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 50%;
+                    background: rgba(0,0,0,.4);
+                    margin-left:-240px;
+                    margin-top:-150px;
+                    transition: all ease-in-out .4s;
+                    &>p{
+                        margin-top: 26%;
+                        color:#fff;
+                        width:90%;
+                        margin-left: 5%;
+                    }
+                }
+                &:hover{
+                    box-shadow: 0 0 10px #666;
+                    .nav-name{
+                        margin-left:0;
+                        margin-top:0;
+                        transform: rotate(720deg)
+                    }
                 }
             }
         }

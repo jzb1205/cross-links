@@ -1,7 +1,8 @@
 <template>
     <div class="aboutMe">
         <div class="banner">
-            <img :src="$imgUrl+dataMap.banner" alt="正在加载......">
+            <span>承其所托，必全力以赴。</span>
+            <p>在线客服</p>
         </div>
         <div class="aboutMeMain">
             <div class="intrudtion">
@@ -9,21 +10,17 @@
                 <div class="intruContent" v-html="dataMap.content"></div>
             </div>
             <ul class="quick">
-                <li class="liImg">
-                    <img :src="$imgUrl+dataMap.telIcon" alt="正在加载......">
-                    <p>{{dataMap.tel}}</p>
+                <li class="ico_tel">
+                    {{dataMap.tel}}
                 </li>
-                <li class="liImg">
-                    <img :src="$imgUrl+dataMap.emailIcon" alt="正在加载......">
-                    <p>{{dataMap.email}}</p>
+                <li class="ico_mail">
+                    {{dataMap.email}}
                 </li>
-                <li class="liImg">
-                    <img :src="$imgUrl+dataMap.addressIcon" alt="正在加载......">
-                    <p>{{dataMap.address}}</p>
+                <li class="ico_add">
+                    {{dataMap.address}}
                 </li>
-                <li class="liQr">
-                    <img :src="$imgUrl+dataMap.qrCode" alt="正在加载......">
-                    <p>扫描二维码并关注微信公众号，了解更多活动资讯。</p>
+                <li class="ico_code">
+                    扫描二维码并关注微信公众号，了解更多活动资讯。
                 </li>
             </ul>
         </div>
@@ -62,14 +59,39 @@ export default {
 <style lang='less' scoped>
 .aboutMe{
     .banner{
-
+        width: 100%;
+        height: 350px;
+        background: url(../../assets/img/web_setting_banner.jpg) no-repeat center center;
+        span{
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 40px;
+            color: #fff;
+            display: block;
+            padding-top: 160px;
+            letter-spacing: 4px;
+        }
+        p{
+            width: 180px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 20px;
+            letter-spacing: 2px;
+            color: #fff;
+            border: 1px solid #fff;
+            border-radius: 20px;
+            margin: 20px auto;
+        }
     }
     .aboutMeMain{
         width:1200px;
         margin:35px auto 25px;
         background: #fff;
         .intrudtion{
-            width: 1000px;
+            width: 1100px;
             margin: 0 auto;
             .title{
                 padding-top: 30px;
@@ -91,50 +113,34 @@ export default {
         }
         .quick{
             overflow: hidden;
-            width: 1000px;
+            width: 100%;
             margin: 0 auto;
-            .liImg{    
-                position: relative;
-                background: rgba(187, 17, 26);
-                width: 230px;
-                height: 200px;
+            li{
+                width: 220px;
+                height: 100px;
                 margin: 60px 10px;
                 float: left;
+                padding: 160px 30px 0 30px;
                 text-align: center;
                 font-size: 16px;
-                color:#fff;
-                img{
-                    position: absolute;
-                    width: 230px;
-                    height: 200px;
-                    top:0;
-                    left:0;
-                }
-                p{
-                    margin-top:130px;
-                    padding:0 30px;    
-                    position: relative;
-                    z-index: 2;
-                }
             }
-            .liQr{
-                position: relative;
-                background: rgba(187, 17, 26);
-                width: 230px;
-                height: 200px;
-                margin: 60px 10px;
-                float: left;
-                text-align: center;
-                font-size: 14px;
-                color:#fff;
-                img{
-                    width:140px;
-                    height:140px;
-                    margin-top:15px;
-                }
-                p{
-                    padding:0 30px;
-                }
+            .ico_tel {
+                background: url(../../assets/img/lxwm_ico1.png) rgba(187, 17, 26) center 60px no-repeat;
+                color: #fff;
+                font-size: 22px;
+            }
+            .ico_mail {    
+                background: url(../../assets/img/lxwm_ico2.png) #eee center 50px no-repeat;
+                font-size: 20px;
+            }
+            .ico_add {
+                background: url(../../assets/img/lxwm_ico3.png) rgba(187, 17, 26) center 60px no-repeat;
+                color: #fff;
+            }
+            .ico_code {
+                background: url(../../assets/img/lxwm_ico4.jpg) #eee center 10px no-repeat;
+                padding-top: 200px;
+                height: 60px;
             }
         }
 

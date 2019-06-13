@@ -52,7 +52,9 @@ export default {
         height:116px;
         margin:0 auto;
         .top{
-            overflow: hidden;
+            overflow: hidden;    
+            width: 942px;
+            margin: 0 auto;
             .top-left{
                 float: left;
                 // margin-left:240px;

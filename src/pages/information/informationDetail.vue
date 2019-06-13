@@ -17,7 +17,7 @@ export default {
         return {
             breadList:[
                 {
-                    path:'/information',
+                    path:'//infoContaner',
                     name:'通资讯'
                 },
                 {

@@ -34,7 +34,7 @@ export default {
                 {
                     path:'/benContaner',
                     label:'通惠政',
-                    name:'HUI ZHENG'
+                    name:'POLICY'
                 },
                 {
                     path:'/serviceContaner',
@@ -45,11 +45,6 @@ export default {
                     path:'/nav',
                     label:'通导航',
                     name:'NAVIGATION'
-                },
-                {
-                    path:'/userContanter',
-                    label:'个人中心',
-                    name:'USER CENTER'
                 }
             ],
             curpath:'/home',

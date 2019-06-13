@@ -14,52 +14,23 @@
                     共{{dataMap.total}}个服务
                 </div>
             </div>
-            <div class="table-list">
-                <el-table :data="dataMap.list"
-                        row-class-name="changeCss"
-                      style="width: 100%">
-                    <el-table-column prop="title"
-                                    width="240"
-                                    label="服务标题">
-                    </el-table-column>
-                    <el-table-column prop="name"
-                                    label="服务名称"
-                                    width="120">
-                    </el-table-column>
-                    <el-table-column prop="type"
-                                    label="服务类型"
-                                    width="100">
-                    </el-table-column>
-                    <el-table-column prop="introduction"
-                                    label="服务简介">
-                    </el-table-column>
-                    <el-table-column prop="payType"
-                                    label="是否收费"
-                                    width="80">
-                            <template slot-scope="scope">
-                                <span>{{scope.row.payType==='0'?'否':"是"}}</span>
-                            </template>
-                    </el-table-column>
-                    <el-table-column prop="amount"
-                                    width="100"
-                                    label="服务收费">
-                    </el-table-column>
-                    <el-table-column prop="timeLimit"
-                                    label="服务期限"
-                                    width="140">
-                    </el-table-column>
-                    <el-table-column width="80"
-                                    align="right"
-                                    label="操作">
-                        <template slot-scope="scope">
-                            <div class="option-btn">
-                                <el-button @click="handleClick(scope.row)" type="text" size="small">查看详情</el-button>
-                             </div>
-                        </template>
-                    </el-table-column>
-                </el-table>
-                <com-pagination :rows='rows' :page='page' :total='dataMap.total' @getList='querySiListPage'></com-pagination>
-            </div>
+            <ul class="itemList">
+                <li class="overflow" v-if="dataMap.list.length>0" v-for="it in dataMap.list" :key="it.id">
+                    <div class="fl itemImg">
+                        <img @click="toDetail(it.id)" :src="imgHttp+it.process" alt="">
+                    </div>
+                    <div class="fl itemDetail">
+                        <p class="title" @click="toDetail(it.id)" >{{it.title}}</p>
+                        <p class="type">类型：{{it.name?it.name:it.type}}</p>
+                        <p class="tag">是否收费：{{it.payType==='0'?'免费':it.amount}}</p>
+                        <p class="address">服务期限：<span>{{it.timeLimit}}</span></p>
+                    </div>
+                    <div class="fr detailBtn" @click="toDetail(it.id)">
+                            查看详情
+                    </div>
+                </li>
+            </ul>
+            <com-pagination :rows='rows' :page='page' :total='dataMap.total' @getList='querySiListPage'></com-pagination>
         </div>
     </div>
 </template>
@@ -80,6 +51,7 @@ export default {
             curType:0,
             curTab:'',
             checked:false,
+            imgHttp:this.$imgUrl
         }
     },
     mounted(){
@@ -113,11 +85,18 @@ export default {
             this.curTab = value;
             this.querySiListPage()
         },
-        handleClick(row){
+        toDetail(id){
+            if (!id) {
+                this.$message({
+                    message:'资讯Id不能为空',
+                    type:'error'
+                })
+                return;
+            }
             this.$router.push({
                 path:'/serviceContaner/serviceDetail',
                 query:{ 
-                    id:row.id
+                    id:id
                 }
             })
         },
@@ -152,6 +131,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import url('../../assets/css/comList');
 .service{
     .server-dis-img {
         position: relative;
@@ -171,10 +151,10 @@ export default {
         }
     }
     .info-main {
-        width: 1180px;
+        width: 1120px;
         min-height: 700px;
         margin: 29px auto 30px;
-        padding: 20px 10px;
+        padding: 20px 40px;
         border: 1px solid #f2f2f2;
         background: #fff;
         .listContion{

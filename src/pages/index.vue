@@ -1,9 +1,9 @@
 <template>
     <div>
         <com-header></com-header>
-        <com-nav v-if="!(navNoShow.includes(interShow))"></com-nav>
+        <com-nav></com-nav>
         <router-view></router-view>
-        <com-inter v-if="interNoShow.includes(interShow)"></com-inter>
+        <!-- <com-inter v-if="interNoShow.includes(interShow)"></com-inter> -->
         <com-footer></com-footer>
     </div>
 </template>
@@ -23,8 +23,7 @@ export default {
     data(){
         return {
             interShow:'home',
-            interNoShow:["home","nav"],
-            navNoShow:['login']
+            interNoShow:["home","nav"]
         }
     },
     created(){

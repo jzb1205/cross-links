@@ -7,7 +7,7 @@
                     :class="{'active':curCode === item.code}"
                     @click="getTagId(item.code)">{{item.value}}</li>
             </ul>
-            <p class="switch" @click="openAll" v-if="tagList.length>0">
+            <p class="switch" @click="openAll" v-if="tagList.length>12">
                 {{btnTxt}}
                 <i v-if="!switchChange" class="el-icon-arrow-down"></i>
                 <i v-else class="el-icon-arrow-up"></i>
@@ -64,7 +64,7 @@ export default {
             overflow: hidden;
             li {
                 float: left;
-                width: 180px;
+                width: 170px;
                 height: 40px;
                 text-align: center;
                 line-height: 40px;

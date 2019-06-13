@@ -1,6 +1,7 @@
 <template>
     <div class="login-wrap" ref="loginBox">
         <div class="inner-wrap"  ref="innerBox">
+            <p class="title">{{title}}</p>
             <transition name="el-zoom-in-center">
                 <ul class="register" v-if="show">
                     <li v-for="it in curList" :key="it.label">
@@ -58,7 +59,8 @@ export default {
                     type:'password'
                 }
             ],
-            curList:[]
+            curList:[],
+            title:'登录'
         }
     },
     mouted(){
@@ -70,6 +72,7 @@ export default {
             this.show = true;
         },100)
         this.curList = this.login;
+        console.log(this.$route)
     },
     methods:{
         toHome(type){
@@ -132,6 +135,7 @@ export default {
     watch:{
         'type'(){
             this.curList = this.type !== 0?this.register:this.login
+            this.title = this.type !== 0?'注册':"登录"
         }
         
     }
@@ -148,6 +152,13 @@ export default {
         margin:50px auto;
         padding:40px;
         border-radius:10px;
+        .title{
+            color: #fff;
+            text-align: center;
+            padding: 15px 0 20px;
+            letter-spacing: 15px;
+            font-size: 18px;
+        }
         .register{
             li{
                 line-height: 40px;
