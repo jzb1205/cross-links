@@ -6,12 +6,7 @@
         </div>
         <div class="info-main" id="info-main">
             <div class="tagL">
-                <ul class="tag-list">
-                    <li v-for="item in typeMap"
-                        :key="item.id"
-                        :class="{'active':curCode === item.code}"
-                        @click="getTagId(item.code)">{{item.value}}</li>
-                </ul>
+                 <com-more-condition :tagList='typeMap' @getChildTag='getChildTag' :curTab='curTab'></com-more-condition>
             </div>
             <ul class="itemList">
                 <li class="overflow" v-if="tableData.length>0" v-for="it in tableData" :key="it.id">
@@ -35,15 +30,19 @@
 </template>
 
 <script>
+import ComMoreCondition from '@/components/ComMoreCondition/ComMoreCondition'
 export default {
+    components:{
+        ComMoreCondition
+    },
     data () {
         return {
             page:1,
             rows:10,
             total:0,
-            curCode: '',
             tableData: [],
-            imgHttp:this.$imgUrl
+            imgHttp:this.$imgUrl,
+            curTab:''
         }
     },
     mounted(){
@@ -56,9 +55,6 @@ export default {
     created(){
         this.getInfoListPage()
         this.$store.dispatch('getType',{ typeCode:'infoBigType',class:"1"})
-        if(this.typeMap.length>0){
-            this.curCode = this.typeMap[0].code
-        }
     },
     computed:{
         typeMap(){
@@ -66,11 +62,10 @@ export default {
         }
     },
     methods: {
-        getTagId (code) {
-            this.curCode = code;
+        getChildTag(value){
+            this.curTab = value;
             this.getInfoListPage()
         },
-        
         toDetail(id){
             if (!id) {
                 this.$message({
@@ -88,11 +83,10 @@ export default {
         },
         getInfoListPage(value){
             let params = {
-                type:this.curCode,
+                type:this.curTab,
                 page:value && value.page || 1,
                 rows:value && value.rows || 10
             }
-            params.type = params.type === '0'?'':params.type
             this.$post(this.$api.information.getInfoListPage,params).then(res=>{
                 if (res.code === '000') {
                     this.tableData = res.data && res.data.list || []

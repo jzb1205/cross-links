@@ -31,9 +31,9 @@ export default {
     data(){
         return {
             list:[],
-            curCode:'0',
+            curCode:'',
             btnTxt:'全部展开',
-            switchChange:false
+            switchChange:false,
         }
     },
     created(){

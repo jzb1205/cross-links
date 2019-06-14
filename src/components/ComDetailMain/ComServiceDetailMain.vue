@@ -37,8 +37,7 @@
             <div class="asideCom" v-if='attachmentList.length>0' >
                 <p class="item-title">附件下载：</p>
                 <p class="affixList" v-for="it in attachmentList" :key="it.id">
-                    <!-- <a :href="$imgUrl+it.urlPath+it.realName" :download="it.realName">{{it.realName}}</a> -->
-                    <a href="#" @click="downLoad(it.id)">{{it.realName}}</a>
+                    <a :href="'http://47.101.183.77:8089/file/downloadFile?id='+it.id.toString()">{{it.name}}</a>
                 </p>
             </div>
         </div>

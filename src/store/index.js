@@ -47,11 +47,30 @@ export default new Vuex.Store({
             post(api.common.getMtListByTc,param).then((res)=>{
                 if (res.code === '000') {
                     if (pload.class === '1') {
+                        if (pload.typeCode === 'infoBigType') {
+                            let json = {
+                                code: "",
+                                menuTypeId: pload.typeCode,
+                                sort: 11,
+                                status: "1",
+                                type: null,
+                                value: "全部类型",
+                            }
+                            res.data.unshift(json)
+                        }
                         context.commit('getTypeData',res.data)
                     }else{
+                        let json = {
+                            code: "",
+                            menuTypeId: pload.typeCode,
+                            sort: 11,
+                            status: "1",
+                            type: null,
+                            value: "全部类型",
+                        }
+                        res.data.unshift(json)
                         context.commit('getSecSearchList',res.data)
                     }
-                    console.log(res.data)
                 }
             })
         },

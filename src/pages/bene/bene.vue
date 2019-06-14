@@ -107,7 +107,7 @@ export default {
         getChildType(value){
             this.curType = value;
             //点击一级查询 默认全部
-            this.curTab = '0'
+            this.curTab = ''
             this.getPolicyPage()
         },
         getChildTag(value){
@@ -135,13 +135,12 @@ export default {
                 rows:value && value.rows || 10,
                 type:this.curTab
             }
-            params.type = params.type === '0'?'':params.type
             this.$store.dispatch('getPolicyPage',params)
         },
     },
     watch:{
         'curType'(){
-            this.curTab = '0' //一级类型改变时 二级类型默认 全部类型 项
+            this.curTab = '' //一级类型改变时 二级类型默认 全部类型 项
             let typeCode = 'huiTaipolicy'
             switch (this.curType) {
                 case '0':
