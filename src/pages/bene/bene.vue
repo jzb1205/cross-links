@@ -9,7 +9,7 @@
             <div class="listContion">
                 <div class="left">
                     <div class='adressSelect'>
-                        <span>{{address.provinceName+address.cityName}}&nbsp;<i class="el-icon-arrow-down" @click="showPicker=!showPicker"></i></span>
+                        <span class="showAddress" @click="showPicker=!showPicker">{{address.provinceName+address.cityName}}&nbsp;<i class="el-icon-arrow-down"></i></span>
                         <transition name="el-zoom-in-top">
                             <com-dist-picker v-show='showPicker' class="select" :address='address' @getAddress='getAddress'></com-dist-picker>
                         </transition>
@@ -63,10 +63,10 @@ export default {
             list: [],
             
             address: {
-                cityCode:'',
-                cityName:'',
-                provinceCode:'',
-                provinceName:'',
+                cityCode:'110000',
+                cityName:'北京市',
+                provinceCode:'110100',
+                provinceName:'北京城区',
             },
             imgHttp:this.$imgUrl,
             showPicker:false
@@ -197,8 +197,8 @@ export default {
                     display: inline;
                     float: left;
                     &>span{
-
-                    }
+                        cursor: pointer;
+                    }   
                     .select{
                         position: absolute;
                         z-index: 2;

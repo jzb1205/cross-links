@@ -22,12 +22,13 @@
                 <!-- <span>无障碍</span>
                 <span>繁体</span>
                 <span>English</span> -->
+                <span @click="$router.push('/aboutMe')">关于我们</span>
                 <span @click="$router.push('/userContanter')">个人中心</span>
             </div>
-            <div class="search">
+            <!-- <div class="search">
                 <input type="text" placeholder="全文搜索" v-model="searchText">
                 <span><i class="el-icon-search"></i></span>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -127,6 +128,7 @@ export default {
       }
       &.languge{
         span{
+            font-size: 12px;
             &:hover{
                 cursor: pointer;
                 color:#ddd;

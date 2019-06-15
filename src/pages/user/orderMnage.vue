@@ -3,30 +3,30 @@
         <el-table :data="list"
                 row-class-name="changeCss"
                 style="width: 100%">
-            <el-table-column prop="serviceInfoId"
-                            width="120"
+            <el-table-column prop="orderNo"
+                            width="150"
                             align="center"
                             label="服务订单编号">
             </el-table-column>
             <el-table-column prop="serviceType"
-                            width="150"
+                            width="130"
                             align="center"
                             label="服务类型">
             </el-table-column>
             <el-table-column prop="serviceName"
                             label="服务名称"
                             align="center"
-                            width="140">
+                            width="130">
             </el-table-column>
             <el-table-column label="服务状态"
                             align="center"
-                            width="120">
+                            width="100">
                 <template slot-scope="scope">
                     <span>{{scope.row.status==='0'?'未完成':'已完成'}}</span>
                 </template>
             </el-table-column>
             <el-table-column prop="serviceAmount"
-                            width="140"
+                            width="120"
                             align="center"
                             label="服务收费">
             </el-table-column>
@@ -41,7 +41,7 @@
                 <template slot-scope="scope">
                     <div class="option-btn">
                         <el-button @click="deleteUsoById(scope.row)" type="text" size="small">删除</el-button>
-                        <!-- <el-button @click="handleClick(scope.row)" type="text" size="small">查看详情</el-button> -->
+                        <el-button @click="handleClick(scope.row)" type="text" size="small">查看详情</el-button>
                         </div>
                 </template>
             </el-table-column>
@@ -109,8 +109,15 @@ export default {
             })
         },
         handleClick(row){
+            if (!row.id) {
+                this.$message({
+                    message: 'id不能为空',
+                    type: 'error'
+                });
+                return
+            }
             this.$router.push({
-                path:'/serviceContaner/serviceDetail',
+                path:'/userContanter/serviceOrderDetail',
                 query:{ 
                     id:row.id
                 }

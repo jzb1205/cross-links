@@ -86,11 +86,6 @@ export default {
                 },1500)
                 return;
             }
-            let flag = this.dataMap.formTemplate === '{}'
-            if (flag) {
-                this.saveUso()
-                return;
-            }
             this.$router.push({
                 path:'/serviceContaner/serviceOrder',
                 query:{

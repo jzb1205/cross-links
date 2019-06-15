@@ -19,6 +19,7 @@ import contaner from '../pages/contaner.vue'
 import service from '../pages/service/service.vue'
 import serviceDetail from '../pages/service/serviceDetail.vue'
 import serviceOrder from '../pages/order/serviceOrder.vue'
+import serviceOrderDetail from '../pages/order/serviceOrderDetail.vue'
 //用户中心
 import userContanter from '../pages/user/index.vue'
 import user from '../pages/user/user.vue'
@@ -117,6 +118,11 @@ export default new Router({
                             path: 'orderMnage',
                             name: 'orderMnage',
                             component: orderMnage
+                        },
+                        {
+                            path: 'serviceOrderDetail',
+                            name: 'serviceOrderDetail',
+                            component: serviceOrderDetail
                         }
                     ],
                     beforeEnter: (to, from, next) => {
