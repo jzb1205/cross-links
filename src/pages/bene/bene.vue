@@ -133,7 +133,7 @@ export default {
             let params = {
                 page:value && value.page || 1,
                 rows:value && value.rows || 10,
-                type:this.curTab
+                type:this.curTab,
             }
             this.$store.dispatch('getPolicyPage',params)
         },
