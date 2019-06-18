@@ -24,9 +24,9 @@
                     <el-carousel height="380px" arrow='hover'>
                         <el-carousel-item v-for="item in infoList" :key="item.id" class="info-banner">
                             <img class="info-banner-img"  @click="toDetail(item,'info')" :src="$imgUrl+item.imgPath" alt="正在加载中......">
-                            <div class="top"></div>
-                            <p class="titleNotice">{{item.title}}</p>
-                            <div class="bottom"></div>
+                            <div class="bottom">
+                                <p class="titleNotice">{{item.title}}</p>
+                            </div>
                         </el-carousel-item>
                     </el-carousel>
                 </div>
@@ -41,7 +41,7 @@
                     <ul class="news-list">
                         <li v-for="(item,index) in infoList" :key="index" @click="toDetail(item,'info')">
                             <span class="title">{{item.title}}</span>
-                            <span class="time">{{item.createTime | timeFormat('YYYY-MM-DD')}}</span>
+                            <span class="time">{{item.createTime | timeFormat}}</span>
                         </li>
                     </ul>
                 </div>
@@ -193,9 +193,6 @@ export default {
             let h = (document.body.clientWidth/1920)*465
             document.getElementsByClassName('banner-img')[0].style.height = h
             document.getElementsByClassName('el-carousel__container')[0].style.height = h
-            
-            let w = (document.body.clientWidth/1920)*1400
-            document.getElementById('info-main').style.width = w
         })
     },
     created(){
@@ -251,7 +248,7 @@ export default {
             let params = {
                 type:'',
                 page:1,
-                rows:6
+                rows:8
             }
             this.$store.dispatch('getInfoListPage',params)
         },
@@ -366,20 +363,16 @@ export default {
                 .info-banner{
                     overflow: hidden;
                     .titleNotice{
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
                         text-align: center;
                         width: 85%;
-                        z-index: 104;
-                        margin: 178px auto 0;
-                        color:#fff;
-                        margin-left:-680px;
-                        transition: all ease-out .3s;
+                        color: #fff;
+                        line-height:50px;
+                        margin: 0 auto;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
                     }
-                    .top,.bottom{
+                    .bottom{
                         position: absolute;
                         top: 0;
                         left: 0;
@@ -389,24 +382,15 @@ export default {
                         width: 100%;
                         height:190px;
                         z-index: 103;
-                        transition: all ease-out .5s;
+                        transition: all ease-out .2s;
                         background: rgba(0, 0, 0,.3);
-                    }
-                    .top{
-                        margin-top:-190px;
                     }
                     .bottom{
                         margin-top:380px;
                     }
                     &:hover{
-                        .top{
-                            margin-top:0px;
-                        }
                         .bottom{
-                            margin-top:190px;
-                        }
-                        .titleNotice{
-                            margin-left:7.5%;
+                            margin-top:330px;
                         }
                     }
                 }
@@ -436,9 +420,9 @@ export default {
                     }
                 }
                 .news-list{
-                    li{
-                        height:45px;
-                        line-height:45px;
+                    li{    
+                        height: 44px;
+                        line-height: 44px;
                         list-style-type: circle!important;
                         clear: both;
                         margin-left: 20px;

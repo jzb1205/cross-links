@@ -21,11 +21,20 @@ Vue.component('v-distpicker', VDistpicker);
 Vue.component('com-dist-picker',comDIstPicker)
 Vue.use(ElementUI)
 
-Vue.filter('timeFormat',function(value,type){
-    if(!value) return
-    let curType = type?type:'YYYY-MM-DD hh:mm:ss'
-    return Moment().format(curType);
+Vue.filter('timeFormat',function(value,type = 'YYYY-MM-DD'){
+    if (value) {
+        return Moment(value).format(type)
+    } else {
+        return value
+    }
 })
+Vue.filter('dateformat', function (dataStr, pattern) {
+    if (dataStr) {
+      return moment(dataStr).format(pattern)
+    } else {
+      return dataStr
+    }
+  })
 Vue.prototype.$post = post
 Vue.prototype.$get = get
 Vue.prototype.$api = api

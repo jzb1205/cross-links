@@ -185,7 +185,7 @@ export default {
                 }
             }
             .f14{
-                font-size: 14px;
+                font-size: 15px;
             }
             .affixList{
                 margin-top:15px;
