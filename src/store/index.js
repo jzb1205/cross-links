@@ -51,7 +51,7 @@ export default new Vuex.Store({
                             let json = {
                                 code: "",
                                 menuTypeId: pload.typeCode,
-                                sort: 11,
+                                sort: '',
                                 status: "1",
                                 type: null,
                                 value: "全部类型",
@@ -63,7 +63,7 @@ export default new Vuex.Store({
                         let json = {
                             code: "",
                             menuTypeId: pload.typeCode,
-                            sort: 11,
+                            sort: '',
                             status: "1",
                             type: null,
                             value: "全部类型",
