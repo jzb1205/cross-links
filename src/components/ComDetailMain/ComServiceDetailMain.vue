@@ -191,12 +191,8 @@ export default {
                 }
             }
             .f14{
-<<<<<<< HEAD
                 font-size: 18px;    
                 color: #444;
-=======
-                font-size: 15px;
->>>>>>> ad479cb7954bf27be7aad3760a694fe8c7f6ad4d
             }
             .affixList{
                 margin-top:15px;
