@@ -31,7 +31,7 @@
             <div class="asideCom" v-if="dataMap.process">
                 <p class="item-title">服务流程：</p>
                 <div class="item-content-wrap">
-                    <img class="processImg" :src="imgHttp+dataMap.process" alt="">
+                    <img class="processImg" @click='showPop=!showPop' :src="imgHttp+dataMap.process" alt="">
                 </div>
             </div>
             <div class="asideCom" v-if='attachmentList.length>0' >
@@ -41,11 +41,16 @@
                 </p>
             </div>
         </div>
+        <com-dialog-pop :imgUrl='dataMap.process' :showPop="showPop"></com-dialog-pop>
     </div>
 </template>
 
 <script>
+import ComDialogPop from "@/components/ComDialogPop/ComDialogPop";
 export default {
+    components:{
+        ComDialogPop
+    },
     props:{
         dataMap:{
             type:Object,
@@ -66,7 +71,8 @@ export default {
     },
     data(){
         return {
-            imgHttp:this.$imgUrl
+            imgHttp:this.$imgUrl,
+            showPop:false
         }
     },
     methods:{
@@ -169,13 +175,13 @@ export default {
         .asideCom{
             margin-top: 40px;
             .item-title{
-                font-size: 16px;
+                font-size: 20px;
             }
             .item-content-wrap{
                 margin-top: 28px;    
                 margin-left: 6%;
                 width: 85%;
-                font-size:14px;
+                font-size:18px;
                 .item-content{
                     width:1005px;
                     margin:0 auto;
@@ -185,7 +191,8 @@ export default {
                 }
             }
             .f14{
-                font-size: 14px;
+                font-size: 18px;    
+                color: #444;
             }
             .affixList{
                 margin-top:15px;

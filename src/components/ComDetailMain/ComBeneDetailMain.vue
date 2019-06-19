@@ -168,7 +168,7 @@ export default {
         .asideCom{
             margin-top: 40px;
             .item-title{
-                font-size: 16px;
+                font-size: 20px;
             }
             .item-content-wrap{   
                 margin-top: 20px;
@@ -181,7 +181,8 @@ export default {
                 }
             }
             .f14{
-                font-size: 14px;
+                font-size: 18px;    
+                color: #444;
             }
         }
 
