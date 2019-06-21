@@ -40,13 +40,23 @@ Vue.prototype.$get = get
 Vue.prototype.$api = api
 Vue.prototype.$imgUrl = imgUrl
 
+import VueI18n from 'vue-i18n'
+Vue.use(VueI18n)
+import messages from './i18n/langs/'
+const i18n = new VueI18n({
+  locale: localStorage.lang || 'cn',  // 语言标识
+  messages
+})
+
 Vue.config.productionTip = false
+
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   components: {
     App
   },

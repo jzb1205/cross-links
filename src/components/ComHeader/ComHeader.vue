@@ -13,9 +13,9 @@
                     <span @click="tologin(0)">注销</span>
                 </div>
                 <div  v-else class='token'>
-                    <span @click="tologin(0)">登陆</span>
+                    <span @click="tologin(0)">{{ $t("message.login") }}</span>
                     |
-                    <span @click="tologin(1)">注册</span>
+                    <span @click="tologin(1)">{{ $t("message.register") }} </span>
                 </div>
             </div>
             <div class="languge">
@@ -24,6 +24,10 @@
                 <span>English</span> -->
                 <span @click="$router.push('/aboutMe')">关于我们</span>
                 <span @click="$router.push('/userContanter')">个人中心</span>
+                <select v-model="lang" @change='selectLanguage'>
+                    <option value="cn">简体中文</option>
+                    <option value="tw">繁体</option>
+                </select>
             </div>
             <!-- <div class="search">
                 <input type="text" placeholder="全文搜索" v-model="searchText">
@@ -43,7 +47,10 @@ export default {
             locationCity:'加载中...',
             isLogin:sessionStorage.getItem('token') || '',
             userName:sessionStorage.getItem('userInfo') && JSON.parse(sessionStorage.getItem('userInfo')).userName || {},
-            isShow:'false'
+            isShow:'false',
+            lang:'cn',
+            langCN:'cn',
+            langTW:'tw'
         }
     },
     mounted() {
@@ -73,6 +80,17 @@ export default {
                     type:type
                 }
             })
+        },
+        selectLanguage(){
+            if (this.lang === 'cn') {
+                this.$i18n.locale = this.langCN
+                localStorage.lang = this.langCN
+                console.log(this.$i18n)
+            }else{
+                this.$i18n.locale = this.langTW
+                localStorage.lang = this.langTW
+                console.log(this.$i18n)
+            }
         }
     },
     watch:{
