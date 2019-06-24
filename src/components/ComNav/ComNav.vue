@@ -10,7 +10,7 @@
                     :key="item.path" :to="item.path">
                     <div class="wrap"></div>
                     <div class="content">
-                        <p class="label">{{item.label}}</p>
+                        <p class="label">{{$t(item.label)}}</p>
                         <p class="name">{{item.name}}</p>
                     </div>
                 </router-link>
@@ -23,30 +23,30 @@
 export default {
     data(){
         return {
-            navList:[
+            navData:[
                 {
                     path:'/home',
-                    label:'首页',
+                    label: 'message.firstPage',
                     name:'HOME',
                 },
                 {
                     path:'/infoContaner',
-                    label:'通资讯',
+                    label:'message.info',
                     name:'INFORMATION'
                 },
                 {
                     path:'/benContaner',
-                    label:'通惠政',
+                    label:'message.bene',
                     name:'POLICY'
                 },
                 {
                     path:'/serviceContaner',
-                    label:'通服务',
+                    label:'message.service',
                     name:'SERVICE'
                 },
                 {
                     path:'/nav',
-                    label:'通导航',
+                    label:'message.nav',
                     name:'NAVIGATION'
                 }
             ],
@@ -55,7 +55,13 @@ export default {
         }
     },
     created(){
+        console.log(this.$t)
         this.curPathSlice = '/'+ this.$route.path.split('/')[1]
+    },
+    computed: {
+        navList(){
+            return this.navData
+        }
     },
     methods:{
         getCurPath(item){
