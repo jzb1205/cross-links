@@ -3,8 +3,9 @@
         <com-header></com-header>
         <com-nav></com-nav>
         <router-view></router-view>
-        <!-- <com-inter v-if="interNoShow.includes(interShow)"></com-inter> -->
+        <com-inter v-if="interNoShow.includes(interShow)"></com-inter>
         <com-footer></com-footer>
+        <!-- <com-link></com-link> -->
     </div>
 </template>
 
@@ -13,12 +14,14 @@ import ComHeader from '@/components/ComHeader/ComHeader'
 import ComNav from '@/components/ComNav/ComNav'
 import ComInter from '@/components/ComInter/ComInter'
 import ComFooter from '@/components/ComFooter/ComFooter'
+import ComLink from '@/components/ComLink/ComLink'
 export default {
     components: {
         ComHeader,
         ComNav,
         ComInter,
-        ComFooter
+        ComFooter,
+        ComLink
     },
     data(){
         return {

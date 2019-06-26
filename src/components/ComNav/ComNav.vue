@@ -1,7 +1,7 @@
 <template>
     <div class="com-nav">
         <div class="com-nav-wrap">
-            <div class="logo" @click="$router.push('/home')"></div>
+            <div class="logo" @click="$router.push('/homeContaner')"></div>
             <ul class="nav">
                 <router-link class="nav-li" v-for="item in navList" @click="getCurPath" 
                     router-link-active='active' 
@@ -25,7 +25,7 @@ export default {
         return {
             navList:[
                 {
-                    path:'/home',
+                    path:'/homeContaner',
                     label:'首页',
                     name:'HOME',
                 },
@@ -50,7 +50,7 @@ export default {
                     name:'NAVIGATION'
                 }
             ],
-            curpath:'/home',
+            curpath:'/homeContaner',
             curPathSlice:''
         }
     },

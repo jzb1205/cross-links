@@ -8,6 +8,10 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 require('@/assets/css/reset.less')
 
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import '../node_modules/swiper/dist/css/swiper.css'
+Vue.use(VueAwesomeSwiper)
+
 import { post, get} from "./fetch/http";
 import api from './fetch/api/index'
 import comPagination from './components/comPagination/comPagination'

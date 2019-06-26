@@ -6,6 +6,7 @@ import index from '../pages/index.vue'
 import login from '../pages/login/login.vue'
 //首页
 import home from '../pages/home/home.vue'
+import serviceItem from '../pages/home/serviceItem.vue'
 //通惠政
 import bene from '../pages/bene/bene.vue'
 import beneDetail from '../pages/bene/beneDetail.vue'
@@ -36,12 +37,24 @@ export default new Router({
             path: '/',
             name: 'index',
             component: index,
-            redirect:'/home',
+            redirect:'/login',
             children: [
                 {
-                    path: '/home',
-                    name: 'home',
-                    component: home
+                    path: '/homeContaner',
+                    name: 'homeContaner',
+                    component: contaner,
+                    children:[
+                        {
+                            path: '',
+                            name: 'home',
+                            component: home
+                        },
+                        {
+                            path: 'serviceItem',
+                            name: 'serviceItem',
+                            component: serviceItem
+                        },
+                    ]
                 },
                 {
                     path: '/benContaner',

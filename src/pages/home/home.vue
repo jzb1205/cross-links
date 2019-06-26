@@ -46,10 +46,35 @@
                     </ul>
                 </div>
             </div>
+            <div class="toTw">
+                <div class="main-two-one">
+                    <p class="news-title">
+                        <span class="title">台湾专题专栏</span>
+                        <span class="more" @click='$router.push("/benContaner")'>
+                            更多
+                            <i class="el-icon-circle-plus-outline"></i>
+                        </span>
+                    </p>
+                    <div class="twScroll">
+                        <div class='left'>
+                            <img src="../../assets/img/home/22.png" alt="">
+                        </div>
+                        <ul class="outerLink">
+                            <li class="content" v-for="it in toTw" :key='it.id'>
+                                <div class="twIcon"></div>
+                                <p class="twName">{{it.name}}</p>
+                            </li>
+                        </ul>
+                        <div class='right'>
+                            <img src="../../assets/img/home/23.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="home-main-two">
                 <div class="main-two-one">
                     <p class="news-title">
-                        <span class="title">惠台政策</span>
+                        <span class="title">惠台政策解读</span>
                         <span class="more" @click='$router.push("/benContaner")'>
                             更多
                             <i class="el-icon-circle-plus-outline"></i>
@@ -64,49 +89,56 @@
                 </div>
                 <div class="main-two-four">
                     <p class="news-title">
-                        <span class="title">通服务</span>
+                        <span class="title">惠台服务信息</span>
                         <span class="more" @click='$router.push("/beneContaner")'>
                             更多
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
                     <ul class="news-list">
-                        <li v-for="(item,index) in serviceList.slice(0,4)" :key="index"  @click="toDetail(item,'service')">
+                        <li v-for="(item,index) in benesServiceList" :key="index"  @click="toDetail(item,'service')">
                             <span class="title">{{item.title}}</span>
                             <span class="time">{{item.createTime | timeFormat('YYYY-MM-DD')}}</span>
                         </li>
                     </ul>
                 </div>
-                <div class="main-two-three">
-                    <p class="news-title">
-                        <span class="title">通导航</span>
-                        <span class="more" @click='$router.push("/nav")'>
-                            更多
-                            <i class="el-icon-circle-plus-outline"></i>
+                <div class="main-two-three info">
+                    <p class="news-title infoTitle">
+                        <span class="title">互动栏</span>
+                        <span class="resultCheck">
+                            <span class="icon"></span>
+                            <span class="text">结果查询</span>
+                        </span>
+                        <span class="toInfo">
+                            <span class="icon"></span>
+                            <span class="text">我要咨询</span>
                         </span>
                     </p>
-                    <ul class="news-list" v-if="navList.length>0">
-                        <li v-for="(item,index) in navList.slice(0,5)" :key="index"  @click="toDetail(item,'navigation')">
-                            <p class="nav-img" ><img :src="imgHttp + item.icon" alt="正在加载中......"></p>
-                            <div class="top"></div>
-                            <p class="nav-name">{{item.name}}</p>
-                            <div class="bottom"></div>
+                    <ul class="infoWrap">
+                        <li class="onlineOnfo" v-for="(item,index) in navList" :key="index">
+                            <span class="icon">
+                                <img :src="item.img" alt="">
+                            </span>
+                            <span class='title'>{{item.title}}</span>
+                            <span class="name">{{item.name}}</span>
                         </li>
                     </ul>
                 </div>
-                <div class="main-two-two">
+                <div class="service">
                     <p class="news-title">
-                        <span class="title">服务指南</span>
+                        <span class="title">通服务</span>
                         <span class="more">
                             更多
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
                     <ul class="news-list">
-                        <li v-for="(item,index) in personThing" :key="index">
-                            <span class="title">{{item.lable}}</span>
+                        <li class='service-list' v-for="(item,index) in serviceList" :key="index" @click='$router.push("/homeContaner/serviceItem")'>
+                            <span class="icon">
+                                <img :src="item.imgUrl" alt="">
+                            </span>
+                            <span class="name">{{item.name}}</span>
                         </li>
-                        <li class="more">更多</li>
                     </ul>
                 </div>
             </div>
@@ -138,54 +170,124 @@ export default {
             ],
             infoBannerList:[],
             noticeList:[],
-            personThing:[
+            serviceList:[
                 {
-                    lable:'设立变更'
+                    id:0,
+                    imgUrl:require(`../../assets/img/home/9.png`),
+                    path:'',
+                    name:'工商注册'
                 },
                 {
-                    lable:'准营准办'
+                    id:1,
+                    imgUrl:require(`../../assets/img/home/10.png`),
+                    path:'',
+                    name:'工商变更'
                 },
                 {
-                    lable:'资质认证'
+                    id:2,
+                    imgUrl:require(`../../assets/img/home/11.png`),
+                    path:'',
+                    name:'资质办理'
                 },
                 {
-                    lable:'年检年审'
+                    id:3,
+                    imgUrl:require(`../../assets/img/home/12.png`),
+                    path:'',
+                    name:'创业辅导'
                 },
                 {
-                    lable:'税收财务'
+                    id:4,
+                    imgUrl:require(`../../assets/img/home/13.png`),
+                    path:'',
+                    name:'财税服务'
                 },
                 {
-                    lable:'人力资源'
+                    id:5,
+                    imgUrl:require(`../../assets/img/home/14.png`),
+                    path:'',
+                    name:'法务咨询'
                 },
                 {
-                    lable:'社会保障'
+                    id:6,
+                    imgUrl:require(`../../assets/img/home/15.png`),
+                    path:'',
+                    name:'运营支持'
                 },
                 {
-                    lable:'投资审批'
+                    id:7,
+                    imgUrl:require(`../../assets/img/home/16.png`),
+                    path:'',
+                    name:'投资推荐'
                 },
                 {
-                    lable:'融贷信贷'
+                    id:8,
+                    imgUrl:require(`../../assets/img/home/17.png`),
+                    path:'',
+                    name:'融资撮合'
                 },
                 {
-                    lable:'抵押质押'
-                },
-                {
-                    lable:'商务贸易'
-                },
-                {
-                    lable:'招标拍卖'
-                },
-                {
-                    lable:'海关口岸'
-                },
-                {
-                    lable:'涉外服务'
-                },
-                {
-                    lable:'农林牧渔'
+                    id:9,
+                    imgUrl:require(`../../assets/img/home/18.png`),
+                    path:'',
+                    name:'上市规划'
                 },
             ],
-            imgHttp:this.$imgUrl
+            imgHttp:this.$imgUrl,
+            toTw:[
+                {
+                    id:'0',
+                    name:'产融云',
+                    img:require('../../assets/img/home/1.png'),
+                    linkUrl:'http://cr.xmsme.com/'
+                },
+                {
+                    id:'1',
+                    name:'台资板',
+                    img:require('../../assets/img/home/2.png'),
+                    linkUrl:'https://mp.weixin.qq.com/s/Jwe9JKr7y5rex1JK8aa-JQ'
+                },
+                {
+                    id:'2',
+                    name:'海峡论坛',
+                    img:require('../../assets/img/home/3.png'),
+                    linkUrl:'http://www.taiwan.cn/hxlt/'
+                },
+                {
+                    id:'3',
+                    name:'厦门银行台商信用卡',
+                    img:require('../../assets/img/home/4.png'),
+                    linkUrl:'http://www.xmccb.com/'
+                }
+            ],
+            navList:[
+                {
+                    id:'0',
+                    name:'人才申报',
+                    title:'在线咨询',
+                    img:require('../../assets/img/home/5.png'),
+                    linkUrl:'http://cr.xmsme.com/'
+                },
+                {
+                    id:'1',
+                    title:'在线咨询',
+                    name:'专利申报',
+                    img:require('../../assets/img/home/6.png'),
+                    linkUrl:'https://mp.weixin.qq.com/s/Jwe9JKr7y5rex1JK8aa-JQ'
+                },
+                {
+                    id:'2',
+                    title:'在线咨询',
+                    name:'政策咨询',
+                    img:require('../../assets/img/home/7.png'),
+                    linkUrl:'http://www.taiwan.cn/hxlt/'
+                },
+                {
+                    id:'3',
+                    name:'',
+                    img:require('../../assets/img/home/8.png'),
+                    linkUrl:'http://www.xmccb.com/'
+                }
+            ]
         }
     },
     mounted(){
@@ -203,14 +305,11 @@ export default {
         this.getPolicyPage()
     },
     computed:{
-        serviceList(){
+        benesServiceList(){
             return this.$store.state && this.$store.state.serviceMap && this.$store.state.serviceMap.data && this.$store.state.serviceMap.data.list || []
         },
         infoList(){
             return this.$store.state && this.$store.state.infoMap && this.$store.state.infoMap.data && this.$store.state.infoMap.data.list || []
-        },
-        navList(){
-            return this.$store.state && this.$store.state.navMap || []
         },
         beneList(){
             return this.$store.state && this.$store.state.beneMap && this.$store.state.beneMap && this.$store.state.beneMap.list || []
@@ -238,7 +337,7 @@ export default {
         querySiListPage(){
             let params = {
                 page:1,
-                rows:4,
+                rows:5,
                 type:''
             }
             this.$store.dispatch('querySiListPage',params)
@@ -256,13 +355,13 @@ export default {
         getNavigationList(){
             this.$store.dispatch('getNavigationList',{})
         },
-        //获取导航
+        //获取惠政
         getPolicyPage(){
             let params = {
                 // type:'huiTaipolicy',
                 type:'',
                 page:1,
-                rows:6
+                rows:5
             }
             this.$store.dispatch('getPolicyPage',params)
         },
@@ -408,7 +507,7 @@ export default {
                     .title{
                         float: left;
                         color:  rgba(187, 17, 26);
-                        padding:6px 0;
+                        /* padding:6px; */
                         border-bottom:2px solid rgba(187, 17, 26);
                     }
                     .more{
@@ -464,13 +563,12 @@ export default {
                     overflow: hidden;
                     .title{
                         height:38px;
-                        width:112px;
                         text-align: center;
                         float: left;
                         line-height: 38px;
                         color:  #fff;
                         font-size:20px;
-                        padding:6px 0;
+                        padding:0 15px;
                         background: rgba(187, 17, 26);
                         border-bottom:2px solid rgba(187, 17, 26);
                     }
@@ -594,9 +692,42 @@ export default {
                     
                 }
             }
+            .info{
+                .infoTitle{
+                    overflow: hidden;
+                    .toInfo,.resultCheck{
+                        float:right;
+                        cursor: pointer;
+                        .icon{
+                            position: relative;
+                            top: 0;
+                            display:inline-block;
+                            width: 38px;
+                            height: 32px;
+                        }
+                        .text{
+                            position: relative;
+                            top: -8px;  
+                            font-size: 12px;
+                        }
+                    }
+                    .toInfo{
+                        float:right;
+                        .icon{
+                            background: url('../../assets//img/home/20.png')no-repeat -120px -121px;
+                        }
+                    }
+                    .resultCheck{
+                        margin-left:15px;
+                        .icon{
+                            background: url('../../assets//img/home/21.png')no-repeat -105px -121px;
+                        }
+                    }
+                }
+            }
             .main-two-four{
-                .news-list{
-                    margin-top:20px;
+                .news-list{    
+                    margin: 30px 0 40px;
                     li{
                         height:35px;
                         line-height:35px;
@@ -627,6 +758,271 @@ export default {
                     } 
                 }
             }
+        }
+        .toTw{
+            padding:40px 0 20px 20px;
+            overflow: hidden;
+            &>div{
+                width:1144px;
+                float: left;
+                .news-title{
+                    border-bottom:2px solid rgba(187, 17, 26);
+                    overflow: hidden;
+                    .title{
+                        height:38px;
+                        text-align: center;
+                        float: left;
+                        line-height: 38px;
+                        color:  #fff;
+                        font-size:20px;
+                        padding:0 15px;
+                        background: rgba(187, 17, 26);
+                        border-bottom:2px solid rgba(187, 17, 26);
+                    }
+                    .more{
+                        cursor: pointer;
+                        float: right;    
+                        position: relative;
+                        top: 23px;
+                        font-size:12px;
+                        i{
+                            color:rgba(187, 17, 26);
+                        }
+                    }
+                }
+                .twScroll{
+                    overflow: hidden;
+                    .left,.right{
+                        display: inline-block;
+                        width: 50px;
+                        position: relative;
+                    }
+                    .left{
+                        float:left;
+                        left: -69px;
+                        img{
+                            position: absolute;
+                            left: -34px;
+                            top: -26px;
+                            cursor: pointer;
+                        }
+                    }
+                    .right{
+                        float:left;
+                        left: -69px;
+                        img{
+                            position: absolute;    
+                            left: -17px;
+                            top: -19px;
+                            cursor: pointer;
+                        }
+                    }
+                    .outerLink{
+                        float:left;
+                        width:85%;
+                        margin:50px 0 50px 8%;
+                        background: rgba(187, 17, 26);
+                        overflow: hidden;
+                        li{
+                            width: 23.75%;
+                            margin: 1% 0 1% 1%;
+                            float:left;
+                            text-align: center;
+                            cursor: pointer;
+                            background: #fff;
+                            overflow: hidden;
+                            .twIcon{            
+                                width: 229px;
+                                height: 95px;
+                            }
+                            &:nth-of-type(1){
+                                .twIcon{ 
+                                    background: url('../../assets//img/home/1.png')no-repeat -20px -95px;
+                                }
+                            }
+                            &:nth-of-type(2){
+                                .twIcon{ 
+                                    background: url('../../assets//img/home/2.png')no-repeat -16px -95px;
+                                }
+                            }
+                            &:nth-of-type(3){
+                                .twIcon{ 
+                                    background: url('../../assets//img/home/3.png')no-repeat -23px -95px;
+                                }
+                            }
+                            &:nth-of-type(4){
+                                .twIcon{ 
+                                    background: url('../../assets//img/home/4.png')no-repeat -33px -95px;
+                                }
+                            }
+                            .twName{
+                                background: #ddd;
+                                color:#333;
+                                padding:4px 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .service{
+            ul{
+                overflow: hidden;    
+                padding-top: 35px;
+                padding-bottom: 25px;
+                .service-list{
+                    list-style: none!important;
+                    width:64px;
+                    float: left;
+                    margin-top:15px;    
+                    margin-left: 55px;
+                    cursor: pointer;
+                    .icon{    
+                        display: inline-block;    
+                        width: 64px;
+                        height: 63px;
+                        overflow: hidden;
+                        img{
+                            position: relative;
+                            top: -112px;
+                            left: -107px;
+                        }
+                    }
+                    .name{
+                        display: inline-block;
+                        width: 64px;
+                        font-size: 16px;
+                        padding:4px 0 10px;
+                        text-align: center;
+                    }
+                    &:nth-of-type(2),&:nth-of-type(6){
+                        .icon{    
+                            img{
+                                top: -92px;
+                            }
+                        }
+                    }
+                    &:nth-of-type(8){
+                        .icon{    
+                            img{
+                                top: -119px;
+                            }
+                        }
+                    }
+                    &:nth-of-type(9){
+                        .icon{    
+                            img{
+                                top: -102px;
+                                left:-114px;
+                            }
+                        }
+                    }
+                    &:nth-of-type(4){
+                        .icon{    
+                            img{
+                                left:-111px;
+                            }
+                        }
+                    }
+                    &:nth-of-type(5){
+                        .icon{    
+                            img{
+                                top:-106px;
+                            }
+                        }
+                    }
+                    &:nth-of-type(7){
+                        .icon{    
+                            img{
+                                left:-98px;
+                            }
+                        }
+                    }
+                    &:nth-of-type(1),&:nth-of-type(6){
+                        margin-left:0;
+                    }
+                    &:hover{
+                        .name{
+                            color:rgba(187, 17, 26);
+                        }
+                    }
+                }
+            }
+        }
+        .info{
+            .infoWrap{
+                overflow: hidden;
+                margin-top: 30px;
+                .onlineOnfo{
+                    cursor: pointer;
+                    width:50%;
+                    height:80px;
+                    margin-top:40px;
+                    overflow: hidden;
+                    float:left;
+                    position:relative;
+                    .icon{
+                        width:100%;
+                        height:80px;
+                        img{
+                            position:relative;
+                            top:-110px;
+                            left:0;
+                        }
+                    }
+                    .title{
+                        position: absolute;
+                        top: 39px;
+                        left: 68px;
+                        color: #fff;
+                        font-size: 13px;
+                    }
+                    .name{    
+                        position: absolute;
+                        top: 32px;
+                        left: 163px;
+                        font-size: 18px; 
+                    }
+                    &:nth-of-type(1){
+                        margin-left:-12px;
+                        .title{
+                            top: 36px;
+                            left: 65px;
+                        }
+                        .name{    
+                            top: 29px;
+                            left: 159px;
+                        }
+                    }
+                    &:nth-of-type(2){        
+                        right: -10px;
+                    }
+                    &:nth-of-type(3){   
+                        margin-left:-5px; 
+                        margin-top: 25px;
+                        .title{    
+                            top: 43px;
+                            left: 57px;
+                        }
+                        .name{        
+                            top: 39px;
+                            left: 154px;
+                        }
+                    }
+                    &:nth-of-type(4){        
+                        margin-left: 3px;
+                        margin-top: 43px;
+                        .title{
+                            top: 39px;
+                            left: 68px;
+                        }
+                        .name{    
+                            top: 32px;
+                            left: 163px;
+                        }
+                    }
+                }
+            } 
         }
     }
 }

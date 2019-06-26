@@ -109,7 +109,7 @@ export default {
                         }
                         this.toHome(type = 0)
                         setTimeout(()=>{
-                            this.$router.push('/home')
+                            this.$router.push('/homeContaner')
                         },1000)
                     }else{
                         sessionStorage.setItem('token',res.data && res.data.token)
@@ -119,7 +119,7 @@ export default {
                             type: 'success'
                         });
                         setTimeout(()=>{
-                            this.$router.push('/home')
+                            this.$router.push('/homeContaner')
                         },1000)
                     }
                 }else{
