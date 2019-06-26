@@ -32,6 +32,15 @@ import aboutMe from '../pages/aboutMe/aboutMe.vue'
 Vue.use(Router)
 
 export default new Router({
+    mode: 'hash',
+    // 这方法会在动画动作前触发，想个办法解决!
+    scrollBehavior(to, from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition;
+      } else {
+        return { x: 0, y: 0 };
+      }
+    },
     routes: [
         {
             path: '/',

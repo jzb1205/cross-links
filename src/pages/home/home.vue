@@ -90,7 +90,7 @@
                 <div class="main-two-four">
                     <p class="news-title">
                         <span class="title">惠台服务信息</span>
-                        <span class="more" @click='$router.push("/beneContaner")'>
+                        <span class="more" @click='$router.push("/serviceContaner")'>
                             更多
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
