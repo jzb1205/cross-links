@@ -57,7 +57,7 @@
                     </p>
                     <div class="twScroll">
                         <div class='left'>
-                            <img src="../../assets/img/home/22.png" alt="">
+                            <img src="../../assets/img/home/22.png" alt="" @click="prev">
                         </div>
                         <ul class="outerLink">
                             <li class="content" v-for="it in toTw" :key='it.id'>
@@ -66,7 +66,7 @@
                             </li>
                         </ul>
                         <div class='right'>
-                            <img src="../../assets/img/home/23.png" alt="">
+                            <img src="../../assets/img/home/23.png" alt="" @click="next">
                         </div>
                     </div>
                 </div>
@@ -287,7 +287,8 @@ export default {
                     img:require('../../assets/img/home/8.png'),
                     linkUrl:'http://www.xmccb.com/'
                 }
-            ]
+            ],
+            timer:null
         }
     },
     mounted(){
@@ -303,6 +304,11 @@ export default {
         this.getInfoListPage()
         this.getNavigationList()
         this.getPolicyPage()
+        let _this = this
+        setInterval(function(){
+            let arr = _this.toTw.unshift()
+            _this.toTw.push(arr)
+        },1000)
     },
     computed:{
         benesServiceList(){
@@ -404,6 +410,12 @@ export default {
                 default:
                     break;
             }
+        },
+        prev(){
+            this.toTw.shift()
+        },
+        next(){
+            this.toTw.pop()
         }
     }
 }
