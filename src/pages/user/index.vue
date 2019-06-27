@@ -8,7 +8,7 @@
                     v-for="it in userAside" 
                     :key="it.id">
                     <span class="wrap"></span>
-                    <span>{{it.name}}</span>
+                    <span>{{$t(it.name)}}</span>
                     
                 </li>
             </ul>
@@ -23,19 +23,24 @@
 export default {
     data(){
         return {
-            userAside:[
+            userAsideList:[
                 {
                     id:'0',
                     path:'/userContanter',
-                    name:'基本信息'
+                    name:'message.userCenter.jbxx'
                 },
                 {
                     id:'1',
                     path:'/userContanter/orderMnage',
-                    name:'订单管理'
+                    name:'message.userCenter.ddgl'
                 }
             ],
             curId:'0'
+        }
+    },
+    computed: {
+        userAside(){
+            return this.userAsideList
         }
     },
     methods:{

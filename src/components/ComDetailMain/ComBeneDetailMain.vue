@@ -3,12 +3,12 @@
         <h3>{{dataMap.title}}</h3>
         <div class="detail">
             <div class="detailLeft">
-                <div class="timeL time">创建时间：<span>{{dataMap.createTime | timeFormat}}</span></div>
+                <div class="timeL time">{{$t("message.bene.cjsj")}}：<span>{{dataMap.createTime | timeFormat}}</span></div>
                 <div class="timeR time">
                     <div class="baseInfoT">
-                        <span v-if="dataMap.source">惠政来源：{{dataMap.source}}</span>
-                        <span v-if="dataMap.type">惠政类型：{{dataMap.type}}</span>
-                        <span v-if="dataMap.provinceName">所在区域：{{dataMap.provinceName+dataMap.cityName}}</span>
+                        <span v-if="dataMap.source">{{$t("message.bene.hzly")}}：{{dataMap.source}}</span>
+                        <span v-if="dataMap.type">{{$t("message.bene.hzlx")}}：{{dataMap.type}}</span>
+                        <span v-if="dataMap.provinceName">{{$t("message.bene.szqy")}}：{{dataMap.provinceName+dataMap.cityName}}</span>
                     </div>
                     <div class="tag" v-if="tagList.length>0">
                         <el-tag v-for="(it,index) in tagList" :key="index">{{it}}</el-tag>
@@ -18,11 +18,11 @@
         </div>
         <div class="main">
             <div class="asideCom" v-if="dataMap.content">
-                <p class="item-title">惠政内容：</p>
+                <p class="item-title">{{$t("message.bene.hzlr")}}：</p>
                 <div class="item-content-wrap" v-html='dataMap.content'></div>
             </div>
             <div class="asideCom" v-if='attachmentList.length>0' >
-                <p class="item-title">附件下载：</p>
+                <p class="item-title">{{$t("message.bene.fjxz")}}：</p>
                 <p class="item-content-wrap" v-for="it in attachmentList" :key="it.id">
                     <a :href="'http://47.101.183.77:8089/file/downloadFile?id='+it.id.toString()">{{it.name}}</a>
                 </p>

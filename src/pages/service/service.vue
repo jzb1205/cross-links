@@ -8,10 +8,11 @@
             <com-more-condition :tagList='secTypeMap' @getChildTag='getChildTag' :curTab='curTab'></com-more-condition>
             <div class="listContion">
                 <div class="left">
-                    全部服务清单
+                    {{$t("message.service.qbfwqd")}}
                 </div>
                 <div class="right">
-                    共{{dataMap.total}}个服务
+                    共{{dataMap.total}}
+                    {{$t("message.service.gfw")}}
                 </div>
             </div>
             <ul class="itemList">
@@ -21,12 +22,15 @@
                     </div>
                     <div class="fl itemDetail">
                         <p class="title" @click="toDetail(it.id)" >{{it.title}}</p>
-                        <p class="type">类型：{{it.name?it.name:it.type}}</p>
-                        <p class="tag">是否收费：{{it.payType==='0'?'免费':it.amount}}</p>
-                        <p class="address">服务期限：<span>{{it.timeLimit}}</span></p>
+                        <p class="type">
+                                {{$t("message.service.lx")}}：{{it.name?it.name:it.type}}</p>
+                        <p class="tag">
+                                {{$t("message.service.sfsf")}}：{{it.payType==='0'?'免费':it.amount}}</p>
+                        <p class="address">
+                                {{$t("message.service.fwqx")}}：<span>{{it.timeLimit}}</span></p>
                     </div>
                     <div class="fr detailBtn" @click="toDetail(it.id)">
-                            查看详情
+                        {{$t("message.service.ckxq")}}
                     </div>
                 </li>
             </ul>

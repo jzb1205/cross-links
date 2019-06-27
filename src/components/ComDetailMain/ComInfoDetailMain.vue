@@ -2,8 +2,8 @@
     <div class="com-detail-main">
         <h3>{{dataMap.title}}</h3>
         <div class="detail">
-            <div class="time">时间：<span>{{dataMap.createTime | timeFormat}}</span></div>
-            <div class="source">来源：<span>{{dataMap.source}}</span></div>
+            <div class="time">{{$t("message.info.sj")}}：<span>{{dataMap.createTime | timeFormat}}</span></div>
+            <div class="source">{{$t("message.info.ly")}}：<span>{{dataMap.source}}</span></div>
             <div class="tag">
                 <el-tag v-for="(it,index) in tagList" :key="index">{{it}}</el-tag>
             </div>

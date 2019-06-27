@@ -10,20 +10,20 @@
                 <div class="token" v-if="isLogin">
                     <span @click="$router.push('/userContanter')">{{userName}}</span>
                     |
-                    <span @click="tologin(0)">注销</span>
+                    <span @click="tologin(0)">{{ $t("message.header.loginOut") }}</span>
                 </div>
                 <div  v-else class='token'>
-                    <span @click="tologin(0)">{{ $t("message.login") }}</span>
+                    <span @click="tologin(0)">{{ $t("message.header.login") }}</span>
                     |
-                    <span @click="tologin(1)">{{ $t("message.register") }} </span>
+                    <span @click="tologin(1)">{{ $t("message.header.register") }} </span>
                 </div>
             </div>
             <div class="languge">
                 <!-- <span>无障碍</span>
                 <span>繁体</span>
                 <span>English</span> -->
-                <span @click="$router.push('/aboutMe')">关于我们</span>
-                <span @click="$router.push('/userContanter')">个人中心</span>
+                <span @click="$router.push('/aboutMe')">{{$t("message.header.aboutMe")}}</span>
+                <span @click="$router.push('/userContanter')">{{$t("message.header.personalCenter")}}</span>
                 <select v-model="lang" @change='selectLanguage'>
                     <option value="cn">简体中文</option>
                     <option value="tw">繁体</option>
@@ -82,14 +82,13 @@ export default {
             })
         },
         selectLanguage(){
+            debugger
             if (this.lang === 'cn') {
                 this.$i18n.locale = this.langCN
                 localStorage.lang = this.langCN
-                console.log(this.$i18n)
             }else{
                 this.$i18n.locale = this.langTW
                 localStorage.lang = this.langTW
-                console.log(this.$i18n)
             }
         }
     },

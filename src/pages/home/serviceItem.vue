@@ -3,18 +3,18 @@
         <div class="banner"></div>
          <div class="list_pro">
              <div class="l_title">
-                <h1>服务项目</h1>
+                <h1>{{$t('message.moreService.fwxm')}}</h1>
                 <ul>
                     <li v-for="it in navTitle" :key="it.id">
-                        <a href="#">{{it.name}}</a>
+                        <a href="#">{{$t(it.name)}}</a>
                     </li>
                 </ul>
             </div>
             <div class="l_box gszc">
                 <div class="select_btn fl">
-                    <h2>{{dataList[0].title}}</h2>
+                    <h2>{{$t(dataList[0].title)}}</h2>
                     <ul>
-                        <li v-for="is in dataList[0].navList" :key="is.id" :class="{'cur':curgszcId === is.id}" @click='getgszcId(is.id)'>{{is.name}}</li>
+                        <li v-for="is in dataList[0].navList" :key="is.id" :class="{'cur':curgszcId === is.id}" @click='getgszcId(is.id)'>{{$t(is.name)}}</li>
                     </ul>
                     <p>
                         <img :src=dataList[0].img alt="">
@@ -23,24 +23,31 @@
                 <div class="select_txt fl"  v-for="is in dataList[0].navList" :key="is.id"  v-if="curgszcId === is.id">
                     <ul>
                         <li>
-                            <h3>{{is.detail.subTitle}}</h3>
+                            <h3>{{$t(is.detail.subTitle)}}</h3>
                             <dt>
-                                {{is.detail.info1}}
+                                {{$t(is.detail.info1)}}
                                 <br>
-                                {{is.detail.info2}}
+                                {{$t(is.detail.info2)}}
                                 <br>
-                                {{is.detail.info3}}
+                                {{$t(is.detail.info3)}}
                             </dt>
-                            <span>服务费：<i>{{is.detail.payAmount}}</i></span>
+                            
+                            <span>服务费：
+                                <i v-for="(ik,i) in is.detail.payAmount" :key="i">
+                                    {{$t(ik)}}{{$t('message.moreService.item2.y')}}
+                                    <em v-if="is.detail.payAmount.length<i">/</em>
+                                </i>
+                                {{is.detail.subNotice}}
+                            </span>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="l_box gsbg">
                 <div class="select_btn fl">
-                    <h2>{{dataList[1].title}}</h2>
+                    <h2>{{$t(dataList[1].title)}}</h2>
                     <ul>
-                        <li v-for="is in dataList[1].navList" :key="is.id" :class="{'cur':curgsbgId === is.id}" @click='getgsbgId(is.id)'>{{is.name}}</li>
+                        <li v-for="is in dataList[1].navList" :key="is.id" :class="{'cur':curgsbgId === is.id}" @click='getgsbgId(is.id)'>{{$t(is.name)}}</li>
                     </ul>
                     <p>
                         <img :src=dataList[1].img alt="">
@@ -49,22 +56,28 @@
                 <div class="select_txt fl"  v-for="is in dataList[1].navList" :key="is.id"  v-if="curgsbgId === is.id">
                     <ul>
                         <li>
-                            <h3>{{is.detail.subTitle}}</h3>
+                            <h3>{{$t(is.detail.subTitle)}}</h3>
                             <dt>
-                                {{is.detail.info1}}
+                                {{$t(is.detail.info1)}}
                                 <br>
-                                {{is.detail.info2}}
+                                {{$t(is.detail.info2)}}
                                 <br>
-                                {{is.detail.info3}}
+                                {{$t(is.detail.info3)}}
                             </dt>
-                            <span>服务费：<i>{{is.detail.payAmount}}</i></span>
+                            <span>服务费：
+                                <i v-for="(ik,i) in is.detail.payAmount" :key="i">
+                                    {{$t(ik)}}{{$t('message.moreService.item2.y')}}
+                                    <em v-if="i<is.detail.payAmount.length-1">/</em>
+                                </i>
+                                {{is.detail.subNotice}}
+                            </span>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="l_box zzbl">
                 <div class="select_btn fl">
-                    <h2>{{dataList[2].title}}</h2>
+                    <h2>{{$t(dataList[2].title)}}</h2>
                     <p>
                         <img :src=dataList[2].img alt="">
                     </p>
@@ -72,22 +85,28 @@
                 <div class="select_txt fl"  v-for="is in dataList[2].navList" :key="is.id">
                     <ul>
                         <li>
-                            <h3>{{is.detail.subTitle}}</h3>
+                            <h3>{{$t(is.detail.subTitle)}}</h3>
                             <dt>
-                                {{is.detail.info1}}
+                                {{$t(is.detail.info1)}}
                                 <br>
-                                {{is.detail.info2}}
+                                {{$t(is.detail.info2)}}
                                 <br>
-                                {{is.detail.info3}}
+                                {{$t(is.detail.info3)}}
                             </dt>
-                            <span>服务费：<i>{{is.detail.payAmount}}</i></span>
+                            <span>服务费：
+                                <i v-for="(ik,i) in is.detail.payAmount" :key="i">
+                                    {{$t(ik)}}{{$t('message.moreService.item2.y')}}
+                                    <em v-if="is.detail.payAmount.length<i">/</em>
+                                </i>
+                                {{is.detail.subNotice}}
+                            </span>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="l_box cyfd">
                 <div class="select_btn fl">
-                    <h2>{{dataList[3].title}}</h2>
+                    <h2>{{$t(dataList[3].title)}}</h2>
                     <p>
                         <img :src=dataList[3].img alt="">
                     </p>
@@ -95,15 +114,21 @@
                 <div class="select_txt fl"  v-for="is in dataList[3].navList" :key="is.id">
                     <ul>
                         <li>
-                            <h3>{{is.detail.subTitle}}</h3>
+                            <h3>{{$t(is.detail.subTitle)}}</h3>
                             <dt>
-                                {{is.detail.info1}}
+                                {{$t(is.detail.info1)}}
                                 <br>
-                                {{is.detail.info2}}
+                                {{$t(is.detail.info2)}}
                                 <br>
-                                {{is.detail.info3}}
+                                {{$t(is.detail.info3)}}
                             </dt>
-                            <span>服务费：<i>{{is.detail.payAmount}}</i></span>
+                            <span>服务费：
+                                <i v-for="(ik,i) in is.detail.payAmount" :key="i">
+                                    {{$t(ik)}}{{$t('message.moreService.item2.y')}}
+                                    <em v-if="is.detail.payAmount.length<i">/</em>
+                                </i>
+                                {{is.detail.subNotice}}
+                            </span>
                         </li>
                     </ul>
                 </div>
@@ -118,63 +143,59 @@ export default {
         return {
             curgszcId:'0',
             curgsbgId:'0',
-            navTitle:[
+            navTitleList:[
                 {
                     id:0,
-                    name:'工商服务'
+                    name:'message.moreService.gsfw'
                 },
                 {
                     id:1,
-                    name:'运营服务'
+                    name:'message.moreService.yyfw'
                 },
                 {
                     id:2,
-                    name:'上市规划'
+                    name:'message.moreService.ssgh'
                 },
                 {
                     id:3,
-                    name:'投融资服务'
+                    name:'message.moreService.trzfw'
                 }
             ],
-            dataList:[
+            data:[
                 {
                     type:'gszc',
                     id:'0',
-                    title:'工商注册',
+                    title:'message.moreService.item1.gszc',
                     img:require('../../assets//img/inter/list_ico_1.png'),
                     navList:[
                         {
                             id:'0',
-                            name:'内资公司注册',
+                            name:'message.moreService.item1.nzgszc',
                             detail:{
-                                subTitle:'内资公司注册',
-                                info1:'时间：20个工作日',
-                                info2:`网上工商名核→网下取名核通知→网上设
-                                立申请→网下提交设立资料→领取营业执照→刻章
-                                等事项→开立银行基本账户`,
-                                payAmount:'1040元'
+                                subTitle:'message.moreService.item1.nzgszc',
+                                info1:'message.moreService.item1.info10',
+                                info2:`message.moreService.item1.info11`,
+                                payAmount:['1040']
                             }
                         },
                         {   
                             id:'1',
-                            name:'外资公司注册',
+                            name:'message.moreService.item1.wzgszc',
                             detail:{
-                                subTitle:'外资公司注册',
-                                info1:'时间：30个工作日',
-                                info2:`网上工商名核→网下取名核通知→网上商务局备案
-                                或审批→网下取备案通知书→网上设立申请→网下提交设
-                                资料→领取营业执照→刻章等事项→开立银行基本账户及外币`,
-                                payAmount:'1950元'
+                                subTitle:'message.moreService.item1.wzgszc',
+                                info1:'message.moreService.item1.info20',
+                                info2:`message.moreService.item1.info21`,
+                                payAmount:['1950']
                             }
                         },
                         {
                             id:'2',
-                            name:'个体工商户',
+                            name:'message.moreService.item1.gtgsh',
                             detail:{
-                                subTitle:'个体工商户',
-                                info1:'时间：20个工作日',
-                                info2:'名称预核准→领取营业执照→刻章等事项→开立银行基本账户→国税、地税的报到',
-                                payAmount:'390元'
+                                subTitle:'message.moreService.item1.gtgsh',
+                                info1:'message.moreService.item1.info30',
+                                info2:'message.moreService.item1.info31',
+                                payAmount:['390']
                             }
                         }
                     ]
@@ -182,62 +203,62 @@ export default {
                 {
                     type:'gsbg',
                     id:'0',
-                    title:'工商变更',
+                    title:'message.moreService.item2.gszc',
                     img:require('../../assets//img/inter/list_ico_2.png'),
                     navList:[
                         {
                             id:'0',
-                            name:'基本信息变更',
+                            name:'message.moreService.item2.jbxxbg',
                             detail:{
-                                subTitle:'基本信息变更',
-                                info1:'名称变更：营业执照更新→重新刻章→银行基本账户更新→国税/地税的名称更新（时间：20个工作日）',
-                                info2:`法定代表人变更：营业执照更新→重新刻章→银行基本账户更新→国税/地税的名称更新（时间：10个工作日）`,
-                                info3:`股权变更：营业执照更新→银行基本账户更新→国税/地税的名称更新（时间：20个工作日）`,
-                                payAmount:'1040元/650元/650元'
+                                subTitle:'message.moreService.item2.jbxxbg',
+                                info1:'message.moreService.item2.info10',
+                                info2:`message.moreService.item2.info11`,
+                                info3:`message.moreService.item2.info12`,
+                                payAmount:['1040','650','650']
                             }
                         },
                         {   
                             id:'1',
-                            name:'经营变更',
+                            name:'message.moreService.item2.jybg',
                             detail:{
-                                subTitle:'经营期限变更/经营范围变更',
-                                info1:'时间：10个工作日',
-                                info2:`经营期限变更：营业执照更新→银行基本账户更新→国税/地税的名称更新`,
-                                info3:`经营范围变更：营业执照更新→银行基本账户更新→国税/地税的名称更新`,
-                                payAmount:'650元'
+                                subTitle:'message.moreService.item2.fwf',
+                                info1:'message.moreService.item2.info20',
+                                info2:`message.moreService.item2.info21`,
+                                info3:`message.moreService.item2.info22`,
+                                payAmount:['650']
                             }
                         },
                         {
                             id:'2',
-                            name:'资产变更',
+                            name:'message.moreService.item2.zcbg',
                             detail:{
-                                subTitle:'资产变更',
-                                info1:'时间：10个工作日',
-                                info2:`增资：营业执照更新→银行基本账户更新→国税/地税的名称更新`,
-                                info3:`减资：报纸公示→营业执照更新→银行基本账户更新→国税/地税的名称更新`,
-                                payAmount:'650元'
+                                subTitle:'message.moreService.item2.zcbg',
+                                info1:'message.moreService.item2.info20',
+                                info2:`message.moreService.item2.info30`,
+                                info3:`message.moreService.item2.info31`,
+                                payAmount:['650']
                             }
                         },
                         {
                             id:'3',
-                            name:'注册地址变更',
+                            name:'message.moreService.item2.zcdzbg',
                             detail:{
-                                subTitle:'注册地址变更',
-                                info1:'时间：10个工作日',
-                                info2:`同区：营业执照更新→银行基本账户更新→国税/地税的名称更新`,
-                                info3:`不同区：完成地址迁入、迁出的工作→营业执照更新→银行基本账户更新→完成税务的迁入、迁出→国税/地税的名称更新`,
-                                payAmount:'650元/1040元'
+                                subTitle:'message.moreService.item2.zcdzbg',
+                                info1:'message.moreService.item2.info20',
+                                info2:`message.moreService.item2.info40`,
+                                info3:`message.moreService.item2.info41`,
+                                payAmount:['650','1040']
                             }
                         },
                         {
                             id:'4',
-                            name:'银行基本变更',
+                            name:'message.moreService.item2.yhjbbg',
                             detail:{
-                                subTitle:'银行基本变更',
-                                info1:'时间：10个工作日',
-                                info2:`开设一般户→注销基本户→注册新的基本户→国税/地税的银行关联变更`,
+                                subTitle:'message.moreService.item2.yhjbbg',
+                                info1:'message.moreService.item2.info20',
+                                info2:`message.moreService.item2.info50`,
                                 info3:``,
-                                payAmount:'650元'
+                                payAmount:['650']
                             }
                         }
                     ]
@@ -245,18 +266,19 @@ export default {
                 {
                     type:'zzbl',
                     id:'0',
-                    title:'资质办理',
-                    img:require('../../assets//img/inter/list_ico_3.png'),
+                    title:'message.moreService.item3.zzbl',
+                    img:require('../../assets/img/inter/list_ico_3.png'),
                     navList:[
                         {
                             id:'0',
                             name:'',
                             detail:{
-                                subTitle:'内资公司注册',
-                                info1:`食品经营许可证 1040元 / 卫生许可 1300元 / 酒类许可 1300元`,
-                                info2:`环评审批 1300元起 / 劳务派遣许可 3900元`,
-                                info3:`道路运输许可 10400元/项（增加一项加1300元）/ 进出口权 2000元`,
-                                payAmount:'1040元起'
+                                subTitle:'message.moreService.item3.zzbl',
+                                info1:`message.moreService.item3.info1`,
+                                info2:`message.moreService.item3.info2`,
+                                info3:`message.moreService.item3.info3`,
+                                payAmount:['1040'],
+                                subNotice:'起'
                             }
                         }
                     ]
@@ -264,18 +286,18 @@ export default {
                 {
                     type:'cyfd',
                     id:'0',
-                    title:'创业辅导',
+                    title:'message.moreService.item4.cyfd',
                     img:require('../../assets//img/inter/list_ico_3.png'),
                     navList:[
                         {
                             id:'0',
                             name:'',
                             detail:{
-                                subTitle:'创业辅导',
-                                info1:`1.行业调查：行业数据、行业政策等；`,
-                                info2:`2.可行性分析：竞争对手分析、财务数据分析、风险分析等；`,
-                                info3:`3.管理体系指导：人力资源、行政管理、财务管理等。`,
-                                payAmount:'19500元'
+                                subTitle:'message.moreService.item4.cyfd',
+                                info1:`message.moreService.item4.info1`,
+                                info2:`message.moreService.item4.info2`,
+                                info3:`message.moreService.item4.info3`,
+                                payAmount:['19500']
                             }
                         }
                     ]
@@ -284,6 +306,14 @@ export default {
         }
     },
     created(){
+    },
+    computed: {
+        navTitle(){
+            return this.navTitleList
+        },
+        dataList(){
+            return this.data
+        }
     },
     methods:{
         getgszcId(id){

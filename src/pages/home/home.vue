@@ -11,7 +11,7 @@
             <div class="home-notice">
                 <div class="home-notice-left">
                     <img src="../../assets/img/icon-notice.png" alt="">
-                    通知公告：
+                    {{$t("message.notice.notice")}}：
                 </div>
                 <div class="home-notice-right">
                     <marquee width=98% onmouseover=this.stop() onmouseout=this.start()>
@@ -32,9 +32,9 @@
                 </div>
                 <div class="main-one-right">
                     <p class="news-title">
-                        <span class="title">两岸要闻</span>
+                        <span class="title">{{$t("message.notice.layw")}}</span>
                         <span class="more" @click='$router.push("/infoContaner")'>
-                            更多
+                            {{$t("message.notice.more")}}
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
@@ -49,24 +49,23 @@
             <div class="toTw">
                 <div class="main-two-one">
                     <p class="news-title">
-                        <span class="title">台湾专题专栏</span>
+                        <span class="title">{{$t("message.twztzl.twztzl")}}</span>
                         <span class="more" @click='$router.push("/benContaner")'>
-                            更多
+                            {{$t("message.notice.more")}}
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
-                    {{preId}}
                     <div class="twScroll" @mouseover="clearTimer" @mouseout="startTimer">
                         <div class='left'>
                             <img src="../../assets/img/home/22.png" alt="" @click='pre'>
                         </div>
                         <div class='outerLinkWrap'> 
                             <ul class="outerLink" ref='outerLink'>
-                                <li class="content" v-for="it in toTw" :key='it.id'>
+                                <li class="content" v-for="it in toTw" :class="{'active':it.id==='3'}" :key='it.id' @click="toOuter(it.linkUrl)">
                                     <div class="twIcon">
                                         <img :src="it.img" alt="">
                                     </div>
-                                    <p class="twName">{{it.name}}</p>
+                                    <p class="twName">{{$t(it.name)}}</p>
                                 </li>
                             </ul>
                         </div>
@@ -79,9 +78,9 @@
             <div class="home-main-two">
                 <div class="main-two-one">
                     <p class="news-title">
-                        <span class="title">惠台政策解读</span>
+                        <span class="title">{{$t("message.htzc.htzcjd")}}</span>
                         <span class="more" @click='$router.push("/benContaner")'>
-                            更多
+                            {{$t("message.notice.more")}}
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
@@ -94,9 +93,9 @@
                 </div>
                 <div class="main-two-four">
                     <p class="news-title">
-                        <span class="title">惠台服务信息</span>
+                        <span class="title">{{$t("message.htzc.htfwxx")}}</span>
                         <span class="more" @click='$router.push("/serviceContaner")'>
-                            更多
+                            {{$t("message.notice.more")}}
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
@@ -109,14 +108,14 @@
                 </div>
                 <div class="main-two-three info">
                     <p class="news-title infoTitle">
-                        <span class="title">互动栏</span>
+                        <span class="title">{{$t("message.hdl.hdl")}}</span>
                         <span class="resultCheck">
                             <span class="icon"></span>
-                            <span class="text">结果查询</span>
+                            <span class="text">{{$t("message.hdl.jgcx")}}</span>
                         </span>
                         <span class="toInfo">
                             <span class="icon"></span>
-                            <span class="text">我要咨询</span>
+                            <span class="text">{{$t("message.hdl.wyzx")}}</span>
                         </span>
                     </p>
                     <ul class="infoWrap">
@@ -124,16 +123,16 @@
                             <span class="icon">
                                 <img :src="item.img" alt="">
                             </span>
-                            <span class='title'>{{item.title}}</span>
-                            <span class="name">{{item.name}}</span>
+                            <span class='title'>{{$t(item.title)}}</span>
+                            <span class="name">{{$t(item.name)}}</span>
                         </li>
                     </ul>
                 </div>
                 <div class="service">
                     <p class="news-title">
-                        <span class="title">通服务</span>
+                        <span class="title">{{$t("message.navList.service")}}</span>
                         <span class="more">
-                            更多
+                            {{$t("message.notice.more")}}
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
@@ -142,7 +141,7 @@
                             <span class="icon">
                                 <img :src="item.imgUrl" alt="">
                             </span>
-                            <span class="name">{{item.name}}</span>
+                            <span class="name">{{$t(item.name)}}</span>
                         </li>
                     </ul>
                 </div>
@@ -175,114 +174,114 @@ export default {
             ],
             infoBannerList:[],
             noticeList:[],
-            serviceList:[
+            service:[
                 {
                     id:0,
                     imgUrl:require(`../../assets/img/home/9.png`),
                     path:'',
-                    name:'工商注册'
+                    name:'message.tfw.gszc'
                 },
                 {
                     id:1,
                     imgUrl:require(`../../assets/img/home/10.png`),
                     path:'',
-                    name:'工商变更'
+                    name:'message.tfw.gsbg'
                 },
                 {
                     id:2,
                     imgUrl:require(`../../assets/img/home/11.png`),
                     path:'',
-                    name:'资质办理'
+                    name:'message.tfw.zzbl'
                 },
                 {
                     id:3,
                     imgUrl:require(`../../assets/img/home/12.png`),
                     path:'',
-                    name:'创业辅导'
+                    name:'message.tfw.cyfd'
                 },
                 {
                     id:4,
                     imgUrl:require(`../../assets/img/home/13.png`),
                     path:'',
-                    name:'财税服务'
+                    name:'message.tfw.csfw'
                 },
                 {
                     id:5,
                     imgUrl:require(`../../assets/img/home/14.png`),
                     path:'',
-                    name:'法务咨询'
+                    name:'message.tfw.fwzx'
                 },
                 {
                     id:6,
                     imgUrl:require(`../../assets/img/home/15.png`),
                     path:'',
-                    name:'运营支持'
+                    name:'message.tfw.yyzc'
                 },
                 {
                     id:7,
                     imgUrl:require(`../../assets/img/home/16.png`),
                     path:'',
-                    name:'投资推荐'
+                    name:'message.tfw.tztj'
                 },
                 {
                     id:8,
                     imgUrl:require(`../../assets/img/home/17.png`),
                     path:'',
-                    name:'融资撮合'
+                    name:'message.tfw.rzch'
                 },
                 {
                     id:9,
                     imgUrl:require(`../../assets/img/home/18.png`),
                     path:'',
-                    name:'上市规划'
+                    name:'message.tfw.ssgh'
                 },
             ],
             imgHttp:this.$imgUrl,
-            toTw:[
+            toTwList:[
                 {
                     id:'0',
-                    name:'产融云',
+                    name:'message.twztzl.cry',
                     img:require('../../assets/img/home/1.png'),
                     linkUrl:'http://cr.xmsme.com/'
                 },
                 {
                     id:'1',
-                    name:'台资板',
+                    name:'message.twztzl.tzb',
                     img:require('../../assets/img/home/2.png'),
                     linkUrl:'https://mp.weixin.qq.com/s/Jwe9JKr7y5rex1JK8aa-JQ'
                 },
                 {
                     id:'2',
-                    name:'海峡论坛',
+                    name:'message.twztzl.hxlt',
                     img:require('../../assets/img/home/3.png'),
                     linkUrl:'http://www.taiwan.cn/hxlt/'
                 },
                 {
                     id:'3',
-                    name:'厦门银行台商信用卡',
+                    name:'message.twztzl.xmyhtsxyk',
                     img:require('../../assets/img/home/4.png'),
                     linkUrl:'http://www.xmccb.com/'
                 }
             ],
-            navList:[
+            nav:[
                 {
                     id:'0',
-                    name:'人才申报',
-                    title:'在线咨询',
+                    name:'message.hdl.rcsb',
+                    title:'message.hdl.zxzx',
                     img:require('../../assets/img/home/5.png'),
                     linkUrl:'http://cr.xmsme.com/'
                 },
                 {
                     id:'1',
-                    title:'在线咨询',
-                    name:'专利申报',
+                    title:'message.hdl.zxzx',
+                    name:'message.hdl.zlsb',
                     img:require('../../assets/img/home/6.png'),
                     linkUrl:'https://mp.weixin.qq.com/s/Jwe9JKr7y5rex1JK8aa-JQ'
                 },
                 {
                     id:'2',
-                    title:'在线咨询',
-                    name:'政策咨询',
+                    title:'message.hdl.zxzx',
+                    name:'message.hdl.zczx',
                     img:require('../../assets/img/home/7.png'),
                     linkUrl:'http://www.taiwan.cn/hxlt/'
                 },
@@ -313,6 +312,15 @@ export default {
         this.getPolicyPage()
     },
     computed:{
+        toTw(){
+            return this.toTwList
+        },
+        navList(){
+            return this.nav
+        },
+        serviceList(){
+            return this.service
+        },
         benesServiceList(){
             return this.$store.state && this.$store.state.serviceMap && this.$store.state.serviceMap.data && this.$store.state.serviceMap.data.list || []
         },
@@ -414,25 +422,26 @@ export default {
             }
         },
         pre(){
-            if (this.preId === 0) {
-                this.preId ++
-            }else{
-                this.preId = 0 
-            }
+            // if (this.preId < this.toTw.length) {
+            //     this.preId ++
+            
+            // }else{
+            //     this.preId = 0 
+            // }
             let arr = this.toTw.shift()
             this.toTw.push(arr)
-            this.$refs.outerLink.style.marginLeft= -(this.preId*235) + 'px'
-            this.$refs.outerLink.style.transition= 'all ease .5s'
+            // this.$refs.outerLink.style.marginLeft= -(this.preId*235) + 'px'
+            // this.$refs.outerLink.style.transition= 'all ease .5s'
         },
         next(){
-            if (this.preId >= this.toTw.length) {
-                return
-            }else{
-                this.preId++
-            }
+            // if (this.preId >= this.toTw.length) {
+            //     return
+            // }else{
+            //     this.preId++
+            // }
             let arr = this.toTw.pop()
-            this.$refs.outerLink.style.marginLeft=  (this.nextId*235) + 'px'
-            this.$refs.outerLink.style.transition= 'all ease .5s'
+            // this.$refs.outerLink.style.marginLeft=  (this.nextId*235) + 'px'
+            // this.$refs.outerLink.style.transition= 'all ease .5s'
             this.toTw.unshift(arr)
         },
         clearTimer(){
@@ -444,6 +453,9 @@ export default {
                 let arr = this.toTw.shift()
                 this.toTw.push(arr)
             }, 2000)
+        },
+        toOuter(url){
+            location.href = url
         }
     }
 }
@@ -886,7 +898,7 @@ export default {
                                 img{
                                     position: absolute;
                                     top: -96px;
-                                    left: -19px;
+                                    left: -26px;
                                 }
                             }
                             /* &:nth-of-type(1){
@@ -913,6 +925,13 @@ export default {
                                 background: #ddd;
                                 color:#333;
                                 padding:4px 0;
+                            }
+                            &.active{
+                                .twIcon{            
+                                    img{
+                                        left: -38px;
+                                    }
+                                }
                             }
                         }
                     }

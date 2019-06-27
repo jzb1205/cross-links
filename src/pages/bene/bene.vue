@@ -15,12 +15,12 @@
                         </transition>
                     </div>
                     <div class="selectType">
-                        <span>&nbsp;&nbsp;全部类型<i class="el-icon-arrow-down"></i> &nbsp;&nbsp;&nbsp;</span>
-                        <el-checkbox v-model="checked">可在线申办</el-checkbox>
+                        <span>&nbsp;&nbsp;全部{{$t("message.bene.lx")}}<i class="el-icon-arrow-down"></i> &nbsp;&nbsp;&nbsp;</span>
+                        <el-checkbox v-model="checked">{{$t("message.bene.kzxsb")}}</el-checkbox>
                     </div>
                 </div>
                 <div class="right">
-                    共<span>{{dataMap && dataMap.total}}</span>个事项
+                    共<span>{{dataMap && dataMap.total}}</span>{{$t("message.bene.gsx")}}
                 </div>
             </div>
             <ul class="itemList">
@@ -30,12 +30,12 @@
                     </div>
                     <div class="fl itemDetail">
                         <p class="title" @click="toDetail(it.id)" >{{it.title}}</p>
-                        <p class="type">类型：<span>{{it.type}}</span></p>
-                        <p class="tag" v-if="it.tag && it.tag.split(',').length>0">标签：<el-tag v-for="(is,index) in it.tag.split(',').slice(0,12)" :key="index">{{is}}</el-tag></p>
-                        <p class="address">所在区域：<span>{{it.provinceName+it.cityName}}</span></p>
+                        <p class="type">{{$t("message.bene.lx")}}：<span>{{it.type}}</span></p>
+                        <p class="tag" v-if="it.tag && it.tag.split(',').length>0">{{$t("message.bene.bq")}}：<el-tag v-for="(is,index) in it.tag.split(',').slice(0,12)" :key="index">{{is}}</el-tag></p>
+                        <p class="address">{{$t("message.bene.szqy")}}：<span>{{it.provinceName+it.cityName}}</span></p>
                     </div>
                     <div class="fr detailBtn" @click="toDetail(it.id)">
-                            查看详情
+                            {{$t("message.bene.ckxq")}}
                     </div>
                 </li>
             </ul>

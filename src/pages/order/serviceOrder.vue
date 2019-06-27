@@ -1,10 +1,10 @@
 <template>
     <div class="service-order-main">
-        <h4 class="t_header">服务订单信息填写</h4>
+        <h4 class="t_header">{{$t("message.service.fwddxxtx")}}</h4>
         <div id="serve_aside_6" class="asideCom">
             <div class="item-content-wrap formTemplate f14" v-if="list.length>0" >
                 <ul class="fromHead" :class="{'borderB':list.length==0}">
-                    <li>名称</li>
+                    <li>{{$t("message.service.mc")}}</li>
                     <li>信息</li>
                 </ul>
                 <ul class="fromItem"
@@ -18,7 +18,7 @@
                 </ul>
             </div>
             <p class="btn">
-                <el-button type="primary" @click="saveUso">确认订单</el-button>
+                <el-button type="primary" @click="saveUso">{{$t("message.service.qrdd")}}</el-button>
             </p>
         </div>
     </div>

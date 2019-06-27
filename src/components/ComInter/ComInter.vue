@@ -1,8 +1,8 @@
 <template>
     <div class="com-inter">
         <ul>
-            <li>常用网站</li>
-            <li v-for="(item,index) in interList" :key="index" @click="toLink(item.path)">{{item.name}}</li>
+            <li>{{$t('message.cywz.cywz')}}</li>
+            <li v-for="(item,index) in interList" :key="index" @click="toLink(item.path)">{{$t(item.name)}}</li>
         </ul>
     </div>
 </template>
@@ -11,28 +11,33 @@
 export default {
     data(){
         return {
-            interList:[
+            inter:[
                 {
-                    name:'台海网',
+                    name:'message.cywz.thw',
                     path:'http://www.taihainet.com/'
                 },
                 {
-                    name:'台胞之家',
+                    name:'message.cywz.tbzj',
                     path:'http://tailian.taiwan.cn/'
                 },
                 {
-                    name:'国台办',
+                    name:'message.cywz.gtb',
                     path:'http://www.gwytb.gov.cn/'
                 },
                 {
-                    name:'京东',
+                    name:'message.cywz.jd',
                     path:'https://www.jd.com/?cu=true&utm_source=baidu-search&utm_medium=cpc&utm_campaign=t_262767352_baidusearch&utm_term=27669656391_0_ef7f0194c66d45c6b072824a6a4fb622'
                 },
                 {
-                    name:'12306购买网',
+                    name:'message.cywz.gpw12306',
                     path:'https://kyfw.12306.cn/otn/leftTicket/init'
                 }
             ]
+        }
+    },
+    computed: {
+        interList(){
+            return this.inter
         }
     },
     methods:{

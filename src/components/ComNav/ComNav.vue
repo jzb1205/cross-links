@@ -26,27 +26,27 @@ export default {
             navData:[
                 {
                     path:'/homeContaner',
-                    label:'首页',
+                    label:'message.navList.firstPage',
                     name:'HOME',
                 },
                 {
                     path:'/infoContaner',
-                    label:'message.info',
+                    label:'message.navList.info',
                     name:'INFORMATION'
                 },
                 {
                     path:'/benContaner',
-                    label:'message.bene',
+                    label:'message.navList.bene',
                     name:'POLICY'
                 },
                 {
                     path:'/serviceContaner',
-                    label:'message.service',
+                    label:'message.navList.service',
                     name:'SERVICE'
                 },
                 {
                     path:'/nav',
-                    label:'message.nav',
+                    label:'message.navList.nav',
                     name:'NAVIGATION'
                 }
             ],

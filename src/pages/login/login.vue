@@ -1,21 +1,21 @@
 <template>
     <div class="login-wrap" ref="loginBox">
         <div class="inner-wrap"  ref="innerBox">
-            <p class="title">{{title}}</p>
+            <p class="title">{{$t(title)}}</p>
             <transition name="el-zoom-in-center">
                 <ul class="register" v-if="show">
                     <li v-for="it in curList" :key="it.label">
-                        <span>{{it.label}}：</span>
+                        <span>{{$t(it.label)}}：</span>
                         <el-input :type="it.type" v-model="it.value"></el-input>
                     </li>
                     <p class="btn" v-show="type===0">
-                        <el-button type="danger" @click="toHome(0)">登陆</el-button>
+                        <el-button type="danger" @click="toHome(0)">{{$t('message.login.dl')}}</el-button>
                     </p>
-                    <p class="toOption" v-show="type===0">没有账号<span @click="type=1">去注册</span></p>
+                    <p class="toOption" v-show="type===0">沒有{{$t('message.login.zh')}}<span @click="type=1">去{{$t('message.login.zc')}}</span></p>
                     <p class="btn" v-show="type===1">
-                        <el-button type="danger" @click="toHome(1)">注册</el-button>
+                        <el-button type="danger" @click="toHome(1)">{{$t('message.login.zc')}}</el-button>
                     </p>
-                    <p class="toOption" v-show="type===1">已有账号<span @click="type=0">去登陆</span></p>
+                    <p class="toOption" v-show="type===1">已有{{$t('message.login.zh')}}<span @click="type=0">去{{$t('message.login.dl')}}</span></p>
                 </ul>
             </transition>
         </div>
@@ -29,39 +29,47 @@ export default {
         return{
             type:0,
             show:false,
-            register:[
+            registerData:[
                 {
-                    label:'用户名',
+                    label:'message.login.yhm',
                     value:'',
                     type:'text'
                 },
                 {
-                    label:'密码',
+                    label:'message.login.mm',
                     value:'',
                     type:'password'
                 },
                 {
-                    label:'联系电话',
+                    label:'message.login.lxdh',
                     value:'',
                     type:'text'
                 }
             ],
-            login:[
+            loginData:[
                 
                 {
-                    label:'用户名',
+                    label:'message.login.yhm',
                     value:'',
                     type:'text'
                 },
                 {
-                    label:'密码',
+                    label:'message.login.mm',
                     value:'',
                     type:'password'
                 }
             ],
             curList:[],
-            title:'登录'
+            title:'message.login.dl'
         }
+    },
+    computed: {
+        register(){
+            return this.registerData
+        },
+        login(){
+            return this.loginData
+        },
     },
     mouted(){
     },
@@ -135,7 +143,7 @@ export default {
     watch:{
         'type'(){
             this.curList = this.type !== 0?this.register:this.login
-            this.title = this.type !== 0?'注册':"登录"
+            this.title = this.type !== 0?'message.login.zc':"message.login.dl"
         }
         
     }

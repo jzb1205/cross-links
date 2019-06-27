@@ -15,12 +15,12 @@
                     </div>
                     <div class="fl itemDetail">
                         <p class="title" @click="toDetail(it.id)" >{{it.title}}</p>
-                        <p class="type">类型：<span>{{it.type}}</span></p>
-                        <p class="tag" v-if="it.tag && it.tag.split(',').length>0">标签：<el-tag v-for="(is,index) in it.tag.split(',').slice(0,12)" :key="index">{{is}}</el-tag></p>
-                        <p class="address">来源：<span>{{it.source}}</span></p>
+                        <p class="type">{{$t("message.info.lx")}}：<span>{{it.type}}</span></p>
+                        <p class="tag" v-if="it.tag && it.tag.split(',').length>0">{{$t("message.info.bq")}}：<el-tag v-for="(is,index) in it.tag.split(',').slice(0,12)" :key="index">{{is}}</el-tag></p>
+                        <p class="address">{{$t("message.info.ly")}}：<span>{{it.source}}</span></p>
                     </div>
                     <div class="fr detailBtn" @click="toDetail(it.id)">
-                            查看详情
+                            {{$t("message.info.ckxq")}}
                     </div>
                 </li>
             </ul>

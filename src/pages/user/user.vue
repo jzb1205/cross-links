@@ -2,7 +2,7 @@
     <div class="user-wrap">
         <h3>用户基本信息设置</h3>
         <p v-for="it in userInfo" :key="it.label" class="item">
-            <span>{{it.label}}</span>
+            <span>{{$t(it.label)}}：</span>
             <el-input v-if="it.inputType === 'password'" type="password" v-model="it.value" :disabled="it.isOption === 0" :placeholder="it.placeholder"></el-input>
             <el-input v-if="it.inputType === 'input'" v-model="it.value" :disabled="it.isOption === 0" :placeholder="it.placeholder"></el-input>
             <el-select v-if="it.inputType === 'select'" v-model="it.value">
@@ -10,7 +10,7 @@
             </el-select >
         </p>
         <p class="btn">
-            <el-button @click='updateUiById'>保存</el-button>
+            <el-button @click='updateUiById'>{{$t('message.userCenter.bc')}}</el-button>
         </p>
     </div>
 </template>
@@ -19,24 +19,24 @@
 export default {
     data(){
         return {
-            userInfo:[
+            userInfoData:[
                 {
-                    label:'用户名：',
+                    label:'message.userCenter.yhm',
                     value:'',
                     type:'text',
                     isOption:1,
                     inputType:'input',
-                    placeholder:"请输入用户名"
+                    placeholder:"请输入用戶名"
                 },
                 {
-                    label:'密码：',
+                    label:'message.userCenter.mm',
                     value:'******',
                     type:'text',
                     isOption:0,
                     inputType:'password'
                 },
                 {
-                    label:'邮箱：',
+                    label:'message.userCenter.yx',
                     value:'',
                     type:'text',
                     isOption:1,
@@ -44,7 +44,7 @@ export default {
                     placeholder:"请输入邮箱"
                 },
                 {
-                    label:'昵称：',
+                    label:'message.userCenter.nc',
                     value:'',
                     type:'text',
                     isOption:1,
@@ -52,12 +52,12 @@ export default {
                     placeholder:"请输入昵称"
                 },
                 {
-                    label:'性别：',
+                    label:'message.userCenter.xb',
                     value:'',
                     type:'text',
                     isOption:1,
                     inputType:'select',
-                    placeholder:"请选择性别",
+                    placeholder:"请选择",
                     children:[
                         {
                             id:'',
@@ -74,7 +74,7 @@ export default {
                     ]
                 },
                 {
-                    label:'真实姓名：',
+                    label:'message.userCenter.zsxm',
                     value:'',
                     type:'text',
                     isOption:1,
@@ -82,7 +82,7 @@ export default {
                     placeholder:"请输入真实姓名"
                 },
                 {
-                    label:'手机号码：',
+                    label:'message.userCenter.sjhm',
                     value:'',
                     type:'text',
                     isOption:1,
@@ -92,6 +92,11 @@ export default {
                 
             ],
             userInfoSession:sessionStorage.getItem('userInfo') && JSON.parse(sessionStorage.getItem('userInfo'))
+        }
+    },
+    computed: {
+        userInfo(){
+            return this.userInfoData
         }
     },
     created(){

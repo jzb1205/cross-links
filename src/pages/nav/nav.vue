@@ -6,7 +6,7 @@
         </div>
         <div class="nav-main">
             <div class="com-nav-list-wrap" v-for="(item,index) in dataList" :key="index">
-                <p class="title">{{item.title}}</p>
+                <p class="title">{{$t(item.title)}}</p>
                 <ul class="list-block">
                     <li class="list-item" v-for="it in item.children.slice(0,10)" :key="it.id" @click="toLink(it.url)">
                         <div class="nav-img"><img :src="imgHttp+it.icon" alt=""></div>
@@ -24,17 +24,17 @@
 export default {
     data(){
         return {
-            serviceList:{
+            service:{
                 goverList:{
-                    title:'政务服务',
+                    title:'message.nav.zwfw',
                     children:[]
                 },
                 convenientList:{
-                    title:'便民服务',
+                    title:'message.nav.bmfw',
                     children:[]
                 },
                 enterpriseList:{
-                    title:'利企服务',
+                    title:'message.nav.lqfw',
                     children:[]
                 }
             },
@@ -48,6 +48,9 @@ export default {
         this.getNavigationList()
     },
     computed:{
+        serviceList(){
+            return this.service
+        },
         dataList(){
             let list = this.$store.state.navMap || []
             this.serviceList.goverList.children = []

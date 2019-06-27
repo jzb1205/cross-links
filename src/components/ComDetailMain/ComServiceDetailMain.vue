@@ -3,39 +3,48 @@
         <h3>{{dataMap.title}}</h3>
         <div class="detail">
             <div class="detailLeft">
-                <div class="time">创建时间：<span>{{dataMap.createTime | timeFormat}}</span></div>
-                <div class="time">服务费用：
+                <div class="time">
+                        {{$t("message.service.cjsj")}}：<span>{{dataMap.createTime | timeFormat}}</span></div>
+                <div class="time">
+                        {{$t("message.service.fwfy")}}：
                     <span v-if="dataMap.payType==='0'">免费</span>
                     <span v-else>{{dataMap.amount}}元</span>
                 </div>
                 <div class="time">
-                    <span v-if="dataMap.name || dataMap.type">类型：{{dataMap.name?dataMap.name:dataMap.type}}</span>
-                    <span v-if="dataMap.timeLimit">服务期限：{{dataMap.timeLimit}}</span>
+                    <span v-if="dataMap.name || dataMap.type">
+                            {{$t("message.service.lx")}}：{{dataMap.name?dataMap.name:dataMap.type}}</span>
+                    <span v-if="dataMap.timeLimit">
+                            {{$t("message.service.fwqx")}}：{{dataMap.timeLimit}}</span>
                 </div>
             </div>
             <div class="title-box-r">
-                <button @click="toOption">立即办理</button>
+                <button @click="toOption">
+                        {{$t("message.service.ljbl")}}</button>
             </div>
         </div>
         <div class="main">
             <div class="asideCom" v-if="dataMap.introduction">
-                <p class="item-title">服务简介：</p>
+                <p class="item-title">
+                        {{$t("message.service.fwjj")}}：</p>
                 <div class="item-content-wrap f14">
                     {{dataMap.introduction}}
                 </div>
             </div>
             <div class="asideCom" v-if="dataMap.content">
-                <p class="item-title">服务内容：</p>
+                <p class="item-title">
+                        {{$t("message.service.fwlr")}}：</p>
                 <div class="item-content-wrap" v-html='dataMap.content'></div>
             </div>
             <div class="asideCom" v-if="dataMap.process">
-                <p class="item-title">服务流程：</p>
+                <p class="item-title">
+                        {{$t("message.service.fwlc")}}：</p>
                 <div class="item-content-wrap">
                     <img class="processImg" @click='showPop=!showPop' :src="imgHttp+dataMap.process" alt="">
                 </div>
             </div>
             <div class="asideCom" v-if='attachmentList.length>0' >
-                <p class="item-title">附件下载：</p>
+                <p class="item-title">
+                        {{$t("message.service.fjxz")}}：</p>
                 <p class="affixList" v-for="it in attachmentList" :key="it.id">
                     <a :href="'http://47.101.183.77:8089/file/downloadFile?id='+it.id.toString()">{{it.name}}</a>
                 </p>
