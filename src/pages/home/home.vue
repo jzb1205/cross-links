@@ -310,6 +310,11 @@ export default {
         this.getInfoListPage()
         this.getNavigationList()
         this.getPolicyPage()
+        let _this = this
+        setInterval(function(){
+            let arr = _this.toTw.unshift()
+            _this.toTw.push(arr)
+        },1000)
     },
     computed:{
         toTw(){
