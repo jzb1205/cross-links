@@ -55,18 +55,23 @@
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
-                    <div class="twScroll">
+                    {{preId}}
+                    <div class="twScroll" @mouseover="clearTimer" @mouseout="startTimer">
                         <div class='left'>
-                            <img src="../../assets/img/home/22.png" alt="">
+                            <img src="../../assets/img/home/22.png" alt="" @click='pre'>
                         </div>
-                        <ul class="outerLink">
-                            <li class="content" v-for="it in toTw" :key='it.id'>
-                                <div class="twIcon"></div>
-                                <p class="twName">{{it.name}}</p>
-                            </li>
-                        </ul>
+                        <div class='outerLinkWrap'> 
+                            <ul class="outerLink" ref='outerLink'>
+                                <li class="content" v-for="it in toTw" :key='it.id'>
+                                    <div class="twIcon">
+                                        <img :src="it.img" alt="">
+                                    </div>
+                                    <p class="twName">{{it.name}}</p>
+                                </li>
+                            </ul>
+                        </div>
                         <div class='right'>
-                            <img src="../../assets/img/home/23.png" alt="">
+                            <img src="../../assets/img/home/23.png" alt=""  @click='next'>
                         </div>
                     </div>
                 </div>
@@ -287,7 +292,9 @@ export default {
                     img:require('../../assets/img/home/8.png'),
                     linkUrl:'http://www.xmccb.com/'
                 }
-            ]
+            ],
+            timer:null,
+            preId:0,
         }
     },
     mounted(){
@@ -298,6 +305,7 @@ export default {
         })
     },
     created(){
+        this.startTimer()
         this.getNoticeInfoPage()
         this.querySiListPage()
         this.getInfoListPage()
@@ -404,6 +412,38 @@ export default {
                 default:
                     break;
             }
+        },
+        pre(){
+            if (this.preId === 0) {
+                this.preId ++
+            }else{
+                this.preId = 0 
+            }
+            let arr = this.toTw.shift()
+            this.toTw.push(arr)
+            this.$refs.outerLink.style.marginLeft= -(this.preId*235) + 'px'
+            this.$refs.outerLink.style.transition= 'all ease .5s'
+        },
+        next(){
+            if (this.preId >= this.toTw.length) {
+                return
+            }else{
+                this.preId++
+            }
+            let arr = this.toTw.pop()
+            this.$refs.outerLink.style.marginLeft=  (this.nextId*235) + 'px'
+            this.$refs.outerLink.style.transition= 'all ease .5s'
+            this.toTw.unshift(arr)
+        },
+        clearTimer(){
+            clearInterval(this.timer)
+        },
+        startTimer(){
+            let _this = this
+            this.timer = setInterval(() => {
+                let arr = this.toTw.shift()
+                this.toTw.push(arr)
+            }, 2000)
         }
     }
 }
@@ -791,36 +831,43 @@ export default {
                     }
                 }
                 .twScroll{
-                    overflow: hidden;
+                    overflow: hidden;    
+                    height: 264px;    
+                    position: relative;
                     .left,.right{
-                        display: inline-block;
-                        width: 50px;
-                        position: relative;
-                    }
-                    .left{
-                        float:left;
-                        left: -69px;
+                        position: absolute;
+                        width: 100px;
+                        height: 80px;
                         img{
                             position: absolute;
-                            left: -34px;
-                            top: -26px;
                             cursor: pointer;
                         }
                     }
-                    .right{
-                        float:left;
-                        left: -69px;
+                    .left{    
+                        top: 50px;
+                        overflow: hidden;
                         img{
-                            position: absolute;    
+                            left: -83px;
+                            top: -99px;
+                        }
+                    }
+                    .right{    
+                        top: -28px;
+                        right: 86px;
+                        img{
                             left: -17px;
                             top: -19px;
-                            cursor: pointer;
                         }
                     }
-                    .outerLink{
-                        float:left;
-                        width:85%;
-                        margin:50px 0 50px 8%;
+                    .outerLinkWrap{
+                        width:935px;  
+                        overflow: hidden;   
+                         position: absolute;
+                        left: 100px;
+                        top: 25px;
+                    }
+                    .outerLink{ 
+                        width:935px;  
                         background: rgba(187, 17, 26);
                         overflow: hidden;
                         li{
@@ -834,8 +881,15 @@ export default {
                             .twIcon{            
                                 width: 229px;
                                 height: 95px;
+                                overflow: hidden;
+                                position: relative;
+                                img{
+                                    position: absolute;
+                                    top: -96px;
+                                    left: -19px;
+                                }
                             }
-                            &:nth-of-type(1){
+                            /* &:nth-of-type(1){
                                 .twIcon{ 
                                     background: url('../../assets//img/home/1.png')no-repeat -20px -95px;
                                 }
@@ -854,7 +908,7 @@ export default {
                                 .twIcon{ 
                                     background: url('../../assets//img/home/4.png')no-repeat -33px -95px;
                                 }
-                            }
+                            } */
                             .twName{
                                 background: #ddd;
                                 color:#333;
