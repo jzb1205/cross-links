@@ -58,9 +58,6 @@
                     {{preId}}
                     <div class="twScroll" @mouseover="clearTimer" @mouseout="startTimer">
                         <div class='left'>
-<<<<<<< HEAD
-                            <img src="../../assets/img/home/22.png" alt="" @click="prev">
-=======
                             <img src="../../assets/img/home/22.png" alt="" @click='pre'>
                         </div>
                         <div class='outerLinkWrap'> 
@@ -72,14 +69,9 @@
                                     <p class="twName">{{it.name}}</p>
                                 </li>
                             </ul>
->>>>>>> 5a4b8ffc3648fe20259502e95f5ddf8f30758017
                         </div>
                         <div class='right'>
-<<<<<<< HEAD
-                            <img src="../../assets/img/home/23.png" alt="" @click="next">
-=======
                             <img src="../../assets/img/home/23.png" alt=""  @click='next'>
->>>>>>> 5a4b8ffc3648fe20259502e95f5ddf8f30758017
                         </div>
                     </div>
                 </div>
@@ -301,12 +293,8 @@ export default {
                     linkUrl:'http://www.xmccb.com/'
                 }
             ],
-<<<<<<< HEAD
-            timer:null
-=======
             timer:null,
             preId:0,
->>>>>>> 5a4b8ffc3648fe20259502e95f5ddf8f30758017
         }
     },
     mounted(){
@@ -430,13 +418,6 @@ export default {
                     break;
             }
         },
-<<<<<<< HEAD
-        prev(){
-            this.toTw.shift()
-        },
-        next(){
-            this.toTw.pop()
-=======
         pre(){
             if (this.preId === 0) {
                 this.preId ++
@@ -468,7 +449,6 @@ export default {
                 let arr = this.toTw.shift()
                 this.toTw.push(arr)
             }, 2000)
->>>>>>> 5a4b8ffc3648fe20259502e95f5ddf8f30758017
         }
     }
 }
