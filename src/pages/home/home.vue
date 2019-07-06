@@ -219,7 +219,7 @@ export default {
             　　},
             　　autoplay: {
             　　　　delay: 3000,
-            　　　　disableOnInteraction: false // 手动切换之后继续自动轮播
+            　　　　disableOnInteraction: true // 手动切换之后继续自动轮播
             　　},
             　　loop: true,
             　　navigation: {
