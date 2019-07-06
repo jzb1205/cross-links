@@ -205,6 +205,7 @@ export default {
             timer:null,
             preId:0,
             swiperOption: {
+                loop:true,
                 grabCursor : true,
                 setWrapperSize :false,
                 initialSlide :1,
