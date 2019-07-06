@@ -67,8 +67,10 @@ export default {
                             this.serviceList.convenientList.children.push(item)
                             break;
                     
-                        default:
+                        case '2':
                             this.serviceList.enterpriseList.children.push(item)
+                            break;
+                        default:
                             break;
                     }
                 })

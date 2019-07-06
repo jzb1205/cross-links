@@ -44,7 +44,7 @@ const cn = {
             'info':'通资讯',
             'bene' : '通惠政',
             'service':'通服务',
-            'nav':'通导航',
+            'nav':'通台湾',
         },
         notice:{
             'notice':"通知公告",
@@ -53,10 +53,6 @@ const cn = {
         },
         twztzl:{
             'twztzl':"台湾专题专栏",
-            'cry':"产融云",
-            'tzb':"台资办",
-            'hxlt':"海峡论坛",
-            'xmyhtsxyk':"厦门银行台商信用卡",
         },
         htzc:{
             'htzcjd':"惠台政策解读",
@@ -71,18 +67,6 @@ const cn = {
             'zlsb':"专利申報",
             'zczx':"政策咨询",
             'tzdl':"台资登陆",
-        },
-        tfw:{
-            'gszc':"工商注册",
-            'gsbg':"工商变更",
-            'zzbl':"资质办理",
-            'cyfd':"创业辅导",
-            'csfw':"财税服务",
-            'fwzx':"法务咨询",
-            'yyzc':"运营支持",
-            'tztj':"投资推荐",
-            'rzch':"融资撮合",
-            'ssgh':"上市规划"
         },
         cywz:{
             'cywz':"常用网站",
@@ -128,7 +112,8 @@ const cn = {
             'fwlc':"服务流程",
             'fwddxxtx':"服务订单信息填写",
             'mc':"名称",
-            'qrdd':"确认订单"
+            'qrdd':"确认订单",
+            'fjxz':"附件下载"
 
         },
         nav:{

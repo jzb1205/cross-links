@@ -61,7 +61,6 @@ export default {
             curTab:'',
             checked:false,
             list: [],
-            
             address: {
                 cityCode:'110000',
                 cityName:'北京市',
@@ -98,11 +97,12 @@ export default {
         //获取区域信息
         getAddress(value){
             this.address = {
-                cityCode:value.city.code,
-                cityName:value.city.value,
-                provinceCode:value.province.code,
-                provinceName:value.province.value,
+                cityCode:value.city.code || '',
+                cityName:value.city.value || '',
+                provinceCode:value.province.code || '',
+                provinceName:value.province.value || '',
             }
+            this.getPolicyPage()
         },
         getChildType(value){
             this.curType = value;
@@ -154,6 +154,16 @@ export default {
                     break;
             }
             this.$store.dispatch('getType',{ typeCode:typeCode,class:'2'})
+        },
+        'address.cityCode'(){
+            setTimeout(()=>{
+                this.showPicker = false
+            },2000)
+        },
+        'address.provinceCode'(){
+            setTimeout(()=>{
+                this.showPicker = false
+            },10000)
         }
     }
 }

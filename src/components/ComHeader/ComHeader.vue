@@ -82,7 +82,6 @@ export default {
             })
         },
         selectLanguage(){
-            debugger
             if (this.lang === 'cn') {
                 this.$i18n.locale = this.langCN
                 localStorage.lang = this.langCN

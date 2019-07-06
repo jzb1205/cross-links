@@ -8,8 +8,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 require('@/assets/css/reset.less')
 
+import 'swiper/dist/css/swiper.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-import '../node_modules/swiper/dist/css/swiper.css'
 Vue.use(VueAwesomeSwiper)
 
 import { post, get} from "./fetch/http";
@@ -48,7 +48,7 @@ import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 import messages from './i18n/langs/'
 const i18n = new VueI18n({
-  locale: localStorage.lang || 'cn',  // 语言标识
+  locale: localStorage.lang?localStorage.lang:'cn',
   messages
 })
 

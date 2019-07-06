@@ -55,23 +55,19 @@
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
-                    <div class="twScroll" @mouseover="clearTimer" @mouseout="startTimer">
-                        <div class='left'>
-                            <img src="../../assets/img/home/22.png" alt="" @click='pre'>
-                        </div>
-                        <div class='outerLinkWrap'> 
-                            <ul class="outerLink" ref='outerLink'>
-                                <li class="content" v-for="it in toTw" :class="{'active':it.id==='3'}" :key='it.id' @click="toOuter(it.linkUrl)">
-                                    <div class="twIcon">
-                                        <img :src="it.img" alt="">
-                                    </div>
-                                    <p class="twName">{{$t(it.name)}}</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class='right'>
-                            <img src="../../assets/img/home/23.png" alt=""  @click='next'>
-                        </div>
+                    <div class="scrollWrap">
+                        <swiper :options="swiperOption">
+                            <swiper-slide v-for="it in toTw" :class="{'active':it.id==='3'}" :key='it.id'>
+                                <div class="twIcon"  @click="toOuter(it.url)">
+                                    <img :src="imgHttp+it.icon" alt="">
+                                </div>
+                                <p class="twName" @click="toOuter(it.url)">{{it.name}}</p>
+                            </swiper-slide>
+                        </swiper> 
+                        
+                        <div class="swiper-pagination" style="display:none;" slot="pagination"></div>
+                        <div class="swiper-button-prev" slot="button-prev"></div>
+                        <div class="swiper-button-next" slot="button-next"></div>
                     </div>
                 </div>
             </div>
@@ -107,7 +103,7 @@
                     </ul>
                 </div>
                 <div class="main-two-three info">
-                    <p class="news-title infoTitle">
+                    <p class="news-title infoTitle"  @click='$router.push("/aboutMe")'>
                         <span class="title">{{$t("message.hdl.hdl")}}</span>
                         <span class="resultCheck">
                             <span class="icon"></span>
@@ -119,7 +115,7 @@
                         </span>
                     </p>
                     <ul class="infoWrap">
-                        <li class="onlineOnfo" v-for="(item,index) in navList" :key="index">
+                        <li class="onlineOnfo" v-for="(item,index) in navList" :key="index"  @click='$router.push("/aboutMe")'>
                             <span class="icon">
                                 <img :src="item.img" alt="">
                             </span>
@@ -131,17 +127,17 @@
                 <div class="service">
                     <p class="news-title">
                         <span class="title">{{$t("message.navList.service")}}</span>
-                        <span class="more">
+                        <span class="more"  @click='$router.push("/homeContaner/serviceItem")'>
                             {{$t("message.notice.more")}}
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
                     <ul class="news-list">
-                        <li class='service-list' v-for="(item,index) in serviceList" :key="index" @click='$router.push("/homeContaner/serviceItem")'>
+                        <li class='service-list' v-for="(item,index) in serviceList" :key="index" @click='$router.push(item.url)'>
                             <span class="icon">
-                                <img :src="item.imgUrl" alt="">
+                                <img :src="imgHttp+item.icon" alt="">
                             </span>
-                            <span class="name">{{$t(item.name)}}</span>
+                            <span class="name">{{item.name}}</span>
                         </li>
                     </ul>
                 </div>
@@ -174,95 +170,9 @@ export default {
             ],
             infoBannerList:[],
             noticeList:[],
-            service:[
-                {
-                    id:0,
-                    imgUrl:require(`../../assets/img/home/9.png`),
-                    path:'',
-                    name:'message.tfw.gszc'
-                },
-                {
-                    id:1,
-                    imgUrl:require(`../../assets/img/home/10.png`),
-                    path:'',
-                    name:'message.tfw.gsbg'
-                },
-                {
-                    id:2,
-                    imgUrl:require(`../../assets/img/home/11.png`),
-                    path:'',
-                    name:'message.tfw.zzbl'
-                },
-                {
-                    id:3,
-                    imgUrl:require(`../../assets/img/home/12.png`),
-                    path:'',
-                    name:'message.tfw.cyfd'
-                },
-                {
-                    id:4,
-                    imgUrl:require(`../../assets/img/home/13.png`),
-                    path:'',
-                    name:'message.tfw.csfw'
-                },
-                {
-                    id:5,
-                    imgUrl:require(`../../assets/img/home/14.png`),
-                    path:'',
-                    name:'message.tfw.fwzx'
-                },
-                {
-                    id:6,
-                    imgUrl:require(`../../assets/img/home/15.png`),
-                    path:'',
-                    name:'message.tfw.yyzc'
-                },
-                {
-                    id:7,
-                    imgUrl:require(`../../assets/img/home/16.png`),
-                    path:'',
-                    name:'message.tfw.tztj'
-                },
-                {
-                    id:8,
-                    imgUrl:require(`../../assets/img/home/17.png`),
-                    path:'',
-                    name:'message.tfw.rzch'
-                },
-                {
-                    id:9,
-                    imgUrl:require(`../../assets/img/home/18.png`),
-                    path:'',
-                    name:'message.tfw.ssgh'
-                },
-            ],
+            service:[],
             imgHttp:this.$imgUrl,
-            toTwList:[
-                {
-                    id:'0',
-                    name:'message.twztzl.cry',
-                    img:require('../../assets/img/home/1.png'),
-                    linkUrl:'http://cr.xmsme.com/'
-                },
-                {
-                    id:'1',
-                    name:'message.twztzl.tzb',
-                    img:require('../../assets/img/home/2.png'),
-                    linkUrl:'https://mp.weixin.qq.com/s/Jwe9JKr7y5rex1JK8aa-JQ'
-                },
-                {
-                    id:'2',
-                    name:'message.twztzl.hxlt',
-                    img:require('../../assets/img/home/3.png'),
-                    linkUrl:'http://www.taiwan.cn/hxlt/'
-                },
-                {
-                    id:'3',
-                    name:'message.twztzl.xmyhtsxyk',
-                    img:require('../../assets/img/home/4.png'),
-                    linkUrl:'http://www.xmccb.com/'
-                }
-            ],
+            toTwList:[],
             nav:[
                 {
                     id:'0',
@@ -294,6 +204,28 @@ export default {
             ],
             timer:null,
             preId:0,
+            swiperOption: {
+                grabCursor : true,
+                setWrapperSize :false,
+                initialSlide :1,
+                width: 935,
+                slidesPerView : 4,
+                spaceBetween : 20,
+                centeredSlides : true,
+            　　pagination: {
+            　　　　el: '.swiper-pagination',
+            　　　　clickable: true // 允许点击小圆点跳转
+            　　},
+            　　autoplay: {
+            　　　　delay: 3000,
+            　　　　disableOnInteraction: false // 手动切换之后继续自动轮播
+            　　},
+            　　loop: true,
+            　　navigation: {
+            　　　　nextEl: '.swiper-button-next',
+            　　　　prevEl: '.swiper-button-prev'
+            　　}
+            },
         }
     },
     mounted(){
@@ -310,20 +242,65 @@ export default {
         this.getInfoListPage()
         this.getNavigationList()
         this.getPolicyPage()
-        let _this = this
-        setInterval(function(){
-            let arr = _this.toTw.unshift()
-            _this.toTw.push(arr)
-        },1000)
+        this.startTimer()
+        this.getNavigationList()
+    },
+    destroyed () {
+      this.clearTimer() 
     },
     computed:{
+        dataList(){
+            let list = this.$store.state.navMap || []
+            this.serviceList.goverList.children = []
+            this.serviceList.convenientList.children = []
+            this.serviceList.enterpriseList.children = []
+            if (list && list.length>0) {
+                list.map((item)=>{
+                    switch (item.type) {
+                        case '0':
+                            this.serviceList.goverList.children.push(item)
+                            break;
+                    
+                        case '1':
+                            this.serviceList.convenientList.children.push(item)
+                            break;
+                    
+                        case '2':
+                            this.serviceList.enterpriseList.children.push(item)
+                            break;
+                        default:
+                            break;
+                    }
+                })
+            }
+            return this.serviceList
+        },
         toTw(){
+            let list = this.$store.state.navMap || []
+            this.toTwList = []
+            if (list && list.length>0) {
+                list.map((item)=>{
+                    if (item.type === '4') {
+                        this.toTwList.push(item)
+                    }
+                })
+            }
+            // alert(JSON.stringify(this.toTwList))
             return this.toTwList
         },
         navList(){
             return this.nav
         },
         serviceList(){
+            let list = this.$store.state.navMap || []
+            this.service = []
+            if (list && list.length>0) {
+                list.map((item)=>{
+                    if (item.type === '5') {
+                        this.service.push(item)
+                    }
+                })
+            }
             return this.service
         },
         benesServiceList(){
@@ -343,7 +320,7 @@ export default {
                 page:1,
                 rows:4
             }
-            this.$post(this.$api.home.getNoticeInfoPage,params).then(res=>{
+            this.$get(this.$api.home.getNoticeInfoPage,params).then(res=>{
                 if (res.code === '000') {
                     this.noticeList = res.data && res.data.list || []
                 }else{
@@ -427,26 +404,11 @@ export default {
             }
         },
         pre(){
-            // if (this.preId < this.toTw.length) {
-            //     this.preId ++
-            
-            // }else{
-            //     this.preId = 0 
-            // }
             let arr = this.toTw.shift()
             this.toTw.push(arr)
-            // this.$refs.outerLink.style.marginLeft= -(this.preId*235) + 'px'
-            // this.$refs.outerLink.style.transition= 'all ease .5s'
         },
         next(){
-            // if (this.preId >= this.toTw.length) {
-            //     return
-            // }else{
-            //     this.preId++
-            // }
             let arr = this.toTw.pop()
-            // this.$refs.outerLink.style.marginLeft=  (this.nextId*235) + 'px'
-            // this.$refs.outerLink.style.transition= 'all ease .5s'
             this.toTw.unshift(arr)
         },
         clearTimer(){
@@ -455,13 +417,15 @@ export default {
         startTimer(){
             let _this = this
             this.timer = setInterval(() => {
-                let arr = this.toTw.shift()
-                this.toTw.push(arr)
+                this.pre()
             }, 2000)
         },
         toOuter(url){
             location.href = url
-        }
+        },
+        async getNavigationList(){
+            await this.$store.dispatch('getNavigationList',{})
+        },
     }
 }
 </script>
@@ -847,100 +811,6 @@ export default {
                         }
                     }
                 }
-                .twScroll{
-                    overflow: hidden;    
-                    height: 264px;    
-                    position: relative;
-                    .left,.right{
-                        position: absolute;
-                        width: 100px;
-                        height: 80px;
-                        img{
-                            position: absolute;
-                            cursor: pointer;
-                        }
-                    }
-                    .left{    
-                        top: 50px;
-                        overflow: hidden;
-                        img{
-                            left: -83px;
-                            top: -99px;
-                        }
-                    }
-                    .right{    
-                        top: -28px;
-                        right: 86px;
-                        img{
-                            left: -17px;
-                            top: -19px;
-                        }
-                    }
-                    .outerLinkWrap{
-                        width:935px;  
-                        overflow: hidden;   
-                         position: absolute;
-                        left: 100px;
-                        top: 25px;
-                    }
-                    .outerLink{ 
-                        width:935px;  
-                        background: rgba(187, 17, 26);
-                        overflow: hidden;
-                        li{
-                            width: 23.75%;
-                            margin: 1% 0 1% 1%;
-                            float:left;
-                            text-align: center;
-                            cursor: pointer;
-                            background: #fff;
-                            overflow: hidden;
-                            .twIcon{            
-                                width: 229px;
-                                height: 95px;
-                                overflow: hidden;
-                                position: relative;
-                                img{
-                                    position: absolute;
-                                    top: -96px;
-                                    left: -26px;
-                                }
-                            }
-                            /* &:nth-of-type(1){
-                                .twIcon{ 
-                                    background: url('../../assets//img/home/1.png')no-repeat -20px -95px;
-                                }
-                            }
-                            &:nth-of-type(2){
-                                .twIcon{ 
-                                    background: url('../../assets//img/home/2.png')no-repeat -16px -95px;
-                                }
-                            }
-                            &:nth-of-type(3){
-                                .twIcon{ 
-                                    background: url('../../assets//img/home/3.png')no-repeat -23px -95px;
-                                }
-                            }
-                            &:nth-of-type(4){
-                                .twIcon{ 
-                                    background: url('../../assets//img/home/4.png')no-repeat -33px -95px;
-                                }
-                            } */
-                            .twName{
-                                background: #ddd;
-                                color:#333;
-                                padding:4px 0;
-                            }
-                            &.active{
-                                .twIcon{            
-                                    img{
-                                        left: -38px;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
         .service{
@@ -960,10 +830,9 @@ export default {
                         width: 64px;
                         height: 63px;
                         overflow: hidden;
-                        img{
-                            position: relative;
-                            top: -112px;
-                            left: -107px;
+                        img{ 
+                            width: 64px;
+                            height: 63px;
                         }
                     }
                     .name{
@@ -972,49 +841,6 @@ export default {
                         font-size: 16px;
                         padding:4px 0 10px;
                         text-align: center;
-                    }
-                    &:nth-of-type(2),&:nth-of-type(6){
-                        .icon{    
-                            img{
-                                top: -92px;
-                            }
-                        }
-                    }
-                    &:nth-of-type(8){
-                        .icon{    
-                            img{
-                                top: -119px;
-                            }
-                        }
-                    }
-                    &:nth-of-type(9){
-                        .icon{    
-                            img{
-                                top: -102px;
-                                left:-114px;
-                            }
-                        }
-                    }
-                    &:nth-of-type(4){
-                        .icon{    
-                            img{
-                                left:-111px;
-                            }
-                        }
-                    }
-                    &:nth-of-type(5){
-                        .icon{    
-                            img{
-                                top:-106px;
-                            }
-                        }
-                    }
-                    &:nth-of-type(7){
-                        .icon{    
-                            img{
-                                left:-98px;
-                            }
-                        }
                     }
                     &:nth-of-type(1),&:nth-of-type(6){
                         margin-left:0;
@@ -1104,4 +930,44 @@ export default {
         }
     }
 }
+.scrollWrap{
+    position: relative;   
+    width: 92%;
+    margin: 0 auto;
+}
+.swiper-container{
+    height:190px;
+    width:895px;     
+    background: rgba(187, 17, 26);
+    margin:20px auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left:60px;
+    .swiper-wrapper{
+        float:left;
+        width:935px; 
+        margin-left:114px!important; 
+        .swiper-slide{
+            display:inline-block;
+            text-align:center;
+            margin-top:25px;
+            overflow: hidden;
+            .twIcon{
+                overflow: hidden;    
+                background: #fff;
+                padding-bottom:10px;
+                img{
+                    width:85px;
+                    height:85px;
+                    margin-top:8px;
+                }
+            }
+            .twName{
+                background: #ddd;
+                color:#333;
+                padding:4px 0;
+            }
+        }    
+    }
+} 
 </style>

@@ -18,7 +18,7 @@
             <ul class="itemList">
                 <li class="overflow" v-if="dataMap.list.length>0" v-for="it in dataMap.list" :key="it.id">
                     <div class="fl itemImg">
-                        <img @click="toDetail(it.id)" :src="imgHttp+it.process" alt="">
+                        <img @click="toDetail(it.id)" :src="imgHttp+it.imgPath" alt="">
                     </div>
                     <div class="fl itemDetail">
                         <p class="title" @click="toDetail(it.id)" >{{it.title}}</p>

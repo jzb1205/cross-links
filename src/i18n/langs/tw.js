@@ -44,7 +44,7 @@ const tw = {
             'info':'通資訊',
             'bene' : '通惠政',
             'service':'通服務',
-            'nav':'通導航',
+            'nav':'通台灣',
         },
         notice:{
             'notice':"通知公告",
@@ -52,11 +52,7 @@ const tw = {
             'more':"更多",
         },
         twztzl:{
-            'twztzl':"台灣專題專欄",
-            'cry':"產融雲",
-            'tzb':"台資辦",
-            'hxlt':"海峽論壇",
-            'xmyhtsxyk':"廈門銀行台商信用卡",
+            'twztzl':"台灣專題專欄"
         },
         htzc:{
             'htzcjd':"惠台政策解讀",
@@ -71,18 +67,6 @@ const tw = {
             'zlsb':"專利申報",
             'zczx':"政策咨詢",
             'tzdl':"台資登陸",
-        },
-        tfw:{
-            'gszc':"工商註冊",
-            'gsbg':"工商變更",
-            'zzbl':"資質辦理",
-            'cyfd':"創業輔導",
-            'csfw':"財稅服務",
-            'fwzx':"法務咨詢",
-            'yyzc':"運營支持",
-            'tztj':"投資推薦",
-            'rzch':"融資撮合",
-            'ssgh':"上市規劃"
         },
         cywz:{
             'cywz':"常用網站",
