@@ -46,7 +46,7 @@ export default new Router({
             path: '/',
             name: 'index',
             component: index,
-            redirect:'/login',
+            redirect:'/homeContaner',
             children: [
                 {
                     path: '/homeContaner',

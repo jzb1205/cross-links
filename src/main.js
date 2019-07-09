@@ -52,6 +52,20 @@ const i18n = new VueI18n({
   messages
 })
 
+import VueQuillEditor from 'vue-quill-editor'
+import * as Quill from 'quill' //引入编辑器    
+import resizeImage from 'quill-image-resize-module' // 调整大小组件。
+import { ImageDrop } from 'quill-image-drop-module'; // 拖动加载图片组件。
+Quill.register('modules/imageDrop', ImageDrop);
+Quill.register('modules/resizeImage ', resizeImage )
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
+import VueCropper from 'vue-cropper'
+Vue.use(VueCropper)
+  
+Vue.use(VueQuillEditor)
 Vue.config.productionTip = false
 
 

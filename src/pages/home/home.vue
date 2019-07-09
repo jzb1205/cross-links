@@ -46,7 +46,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="toTw">
+            <div class="toTw" v-if='toTw.length>0'>
                 <div class="main-two-one">
                     <p class="news-title">
                         <span class="title">{{$t("message.twztzl.twztzl")}}</span>
@@ -285,8 +285,11 @@ export default {
                         this.toTwList.push(item)
                     }
                 })
+                //项目小于4个不轮播
+                if (this.toTwList.length<5) {
+                    this.swiperOption.autoplay.delay = 3000000;
+                }
             }
-            // alert(JSON.stringify(this.toTwList))
             return this.toTwList
         },
         navList(){
@@ -321,7 +324,7 @@ export default {
                 page:1,
                 rows:4
             }
-            this.$get(this.$api.home.getNoticeInfoPage,params).then(res=>{
+            this.$post(this.$api.home.getNoticeInfoPage,params).then(res=>{
                 if (res.code === '000') {
                     this.noticeList = res.data && res.data.list || []
                 }else{

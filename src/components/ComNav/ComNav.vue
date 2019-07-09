@@ -55,7 +55,6 @@ export default {
         }
     },
     created(){
-        console.log(this.$t)
         this.curPathSlice = '/'+ this.$route.path.split('/')[1]
     },
     computed: {

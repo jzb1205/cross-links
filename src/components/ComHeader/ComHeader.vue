@@ -63,7 +63,6 @@ export default {
             geolocation.getCurrentPosition(function getinfo(position) {
             	let city = position.address.city; //获取城市信息       
             	let province = position.address.province;
-                console.log(city)
             	that.locationCity=city		//将城市名称保存到locationCity中
             	that.$store.commit('hqwz',city)
             }, function(e) {        

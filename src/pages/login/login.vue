@@ -80,7 +80,6 @@ export default {
             this.show = true;
         },100)
         this.curList = this.login;
-        console.log(this.$route)
     },
     methods:{
         toHome(type){
