@@ -12,25 +12,17 @@
                         <span @click="$router.push('/aboutMe')">联系我们</span>
                     </p>
                     <p class="bf">
-                        技术支持：厦门回拨网络科技有限公司 || 闵ICP备123156号-1
+                        技术支持：厦门慧博网络科技 | | 闽ICP备16012684号-1
                     </p>
                 </div>
                 <div class="top-right">
-                    <ul>
-                        <li>
-                            <p class="qr-img"><img src="../../assets/img/qr.png" alt=""></p>
-                            <p class="qr-txt">官方微博</p>
-                        </li>
-                        <li>
-                            <p class="qr-img"><img src="../../assets/img/qr.png" alt=""></p>
-                            <p class="qr-txt">官方微信</p>
-                        </li>
-                    </ul>
+                    <p class="qr-img"><img src="../../assets/img/qr.png" alt=""></p>
+                    <p class="qr-txt">官方微信</p>
                 </div>
             </div>
         </div>
         <div class="bottom">
-            所有权&nbsp;©&nbsp;两岸通（WWW.LATONG.COM.CN）
+            版权所有 © 两岸通(www.latong.com.cn)
         </div>
     </div>
 </template>
@@ -55,12 +47,13 @@ export default {
             overflow: hidden;    
             width: 942px;
             margin: 0 auto;
-            .top-left{
-                float: left;
-                // margin-left:240px;
+            position: relative;
+            .top-left{  
+                margin: 0 auto;
                 font-size: 14px;
                 .link{
                     margin-top:44px;
+                    text-align: center;
                     span{
                         padding:0 20px;
                         color:#ddd;
@@ -80,24 +73,21 @@ export default {
                 }
             }
             .top-right{
-                float: left;
-                margin-left:130px;
-                ul{
-                    overflow: hidden;
-                    li{
-                        float: left;
-                        margin-top:17px;
-                        margin-right:25px;
-                        .qr-img{
-                            width:66px;
-                            height:66px;
-                        }
-                        .qr-txt{
-                            text-align: center;
-                            margin-top:7px;
-                        }
-
+                position: absolute;
+                z-index: 200;
+                top: 11px;
+                right: 0;
+                .qr-img{
+                    width:66px;
+                    height:66px;
+                    img{
+                        width:66px;
+                        height:66px
                     }
+                }
+                .qr-txt{
+                    text-align: center;
+                    margin-top:7px;
                 }
             }
         }
