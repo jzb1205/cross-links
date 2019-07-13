@@ -55,8 +55,8 @@
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
-                    <div class="scrollWrap">
-                        <swiper :options="swiperOption">
+                    <div class="scrollWrap" @mouseenter="on_top_enter" @mouseleave="on_top_leave">
+                        <swiper :options="swiperOption" ref="mySwiper">
                             <swiper-slide v-for="it in toTw" :class="{'active':it.id==='3'}" :key='it.id'>
                                 <div class="twIcon"  @click="toOuter(it.url)">
                                     <img :src="imgHttp+it.icon" alt="">
@@ -64,10 +64,9 @@
                                 <p class="twName" @click="toOuter(it.url)">{{it.name}}</p>
                             </swiper-slide>
                         </swiper> 
-                        
                         <div class="swiper-pagination" style="display:none;" slot="pagination"></div>
-                        <div class="swiper-button-prev" slot="button-prev"></div>
-                        <div class="swiper-button-next" slot="button-next"></div>
+                        <div class="swiper-button-prev" slot="button-prev" v-if="!showBtn"></div>
+                        <div class="swiper-button-next" slot="button-next" v-if="!showBtn"></div>
                     </div>
                 </div>
             </div>
@@ -202,12 +201,8 @@ export default {
                     linkUrl:'http://www.xmccb.com/'
                 }
             ],
-            timer:null,
-            preId:0,
             swiperOption: {
                 loop:true,
-                grabCursor : true,
-                setWrapperSize :false,
                 initialSlide :1,
                 width: 935,
                 slidesPerView : 4,
@@ -218,15 +213,15 @@ export default {
             　　　　clickable: true // 允许点击小圆点跳转
             　　},
             　　autoplay: {
-            　　　　delay: 3000,
-            　　　　disableOnInteraction: true // 手动切换之后继续自动轮播
+            　　　　delay: 2000,
+            　　　　disableOnInteraction: false // 手动切换之后继续自动轮播
             　　},
-            　　loop: true,
             　　navigation: {
             　　　　nextEl: '.swiper-button-next',
             　　　　prevEl: '.swiper-button-prev'
             　　}
             },
+            showBtn:false
         }
     },
     mounted(){
@@ -237,17 +232,12 @@ export default {
         })
     },
     created(){
-        this.startTimer()
         this.getNoticeInfoPage()
         this.querySiListPage()
         this.getInfoListPage()
         this.getNavigationList()
         this.getPolicyPage()
-        this.startTimer()
         this.getNavigationList()
-    },
-    destroyed () {
-      this.clearTimer() 
     },
     computed:{
         dataList(){
@@ -288,6 +278,7 @@ export default {
                 //项目小于4个不轮播
                 if (this.toTwList.length<5) {
                     this.swiperOption.autoplay.delay = 3000000;
+                    this.showBtn = true
                 }
             }
             return this.toTwList
@@ -315,7 +306,11 @@ export default {
         },
         beneList(){
             return this.$store.state && this.$store.state.beneMap && this.$store.state.beneMap && this.$store.state.beneMap.list || []
-        }
+        },
+        mySwiper() {
+            // mySwiper 是要绑定到标签中的ref属性
+            return this.$refs.mySwiper.swiper
+        },
     },
     methods:{
         //获取通知公告
@@ -407,29 +402,18 @@ export default {
                     break;
             }
         },
-        pre(){
-            let arr = this.toTw.shift()
-            this.toTw.push(arr)
-        },
-        next(){
-            let arr = this.toTw.pop()
-            this.toTw.unshift(arr)
-        },
-        clearTimer(){
-            clearInterval(this.timer)
-        },
-        startTimer(){
-            let _this = this
-            this.timer = setInterval(() => {
-                this.pre()
-            }, 2000)
-        },
         toOuter(url){
             location.href = url
         },
         async getNavigationList(){
             await this.$store.dispatch('getNavigationList',{})
         },
+        on_top_enter() {
+            this.mySwiper.autoplay.stop()
+        },
+        on_top_leave() {
+            this.mySwiper.autoplay.start()
+        }
     }
 }
 </script>
@@ -518,10 +502,10 @@ export default {
                         }
                     }
                 }
-                // .banner-img{
-                //     width:100%;
-                //     cursor: pointer;
-                // }
+                .info-banner-img{
+                    width:683px;
+                    height:380px;
+                }
             }
             .main-one-right{
                 float: right;

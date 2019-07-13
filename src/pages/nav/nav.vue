@@ -7,13 +7,16 @@
         <div class="nav-main">
             <div class="com-nav-list-wrap" v-for="(item,index) in dataList" :key="index">
                 <p class="title">{{$t(item.title)}}</p>
-                <ul class="list-block">
+                <ul class="list-block" v-if="item.children.length>0">
                     <li class="list-item" v-for="it in item.children.slice(0,10)" :key="it.id" @click="toLink(it.url)">
                         <div class="nav-img"><img :src="imgHttp+it.icon" alt=""></div>
                         <div class="nav-name">
                             <p>{{it.name}}</p>
                         </div>
                     </li>
+                </ul>
+                <ul v-else class="noData">
+                    <li>~~暂无导航信息~~</li>
                 </ul>
             </div>
         </div>
@@ -114,6 +117,14 @@ export default {
         .title{
             border-left:4px solid rgba(187, 17, 26);
             padding-left:12px;
+        }
+        .noData{
+            line-height:80px;
+            li{
+                text-indent:100px;
+                font-size: 14px;
+                color:#666;
+            }
         }
         .list-block{
             margin-top:30px;
