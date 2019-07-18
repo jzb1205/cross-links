@@ -50,7 +50,7 @@
                 <div class="main-two-one">
                     <p class="news-title">
                         <span class="title">{{$t("message.twztzl.twztzl")}}</span>
-                        <span class="more" @click='$router.push("/benContaner")'>
+                        <span class="more" @click='$router.push("/nav")'>
                             {{$t("message.notice.more")}}
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
@@ -89,13 +89,13 @@
                 <div class="main-two-four">
                     <p class="news-title">
                         <span class="title">{{$t("message.htzc.htfwxx")}}</span>
-                        <span class="more" @click='$router.push("/serviceContaner")'>
+                        <span class="more" @click="$router.push({path:'/serviceContaner',query:{type:'0'}})">
                             {{$t("message.notice.more")}}
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
                     <ul class="news-list">
-                        <li v-for="(item,index) in benesServiceList" :key="index"  @click="toDetail(item,'service0')">
+                        <li v-for="(item,index) in benesServiceList" :key="index"  @click="toDetail(item,'service1')">
                             <span class="title">{{item.title}}</span>
                             <span class="time">{{item.createTime | timeFormat('YYYY-MM-DD')}}</span>
                         </li>
@@ -126,7 +126,7 @@
                 <div class="service">
                     <p class="news-title">
                         <span class="title">{{$t("message.navList.service")}}</span>
-                        <span class="more" @click="$router.push({path:'/serviceContaner',query:{type:'1'}})">
+                        <span class="more" @click="$router.push({path:'/serviceContaner',query:{type:'2'}})">
                             {{$t("message.notice.more")}}
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
@@ -332,11 +332,11 @@ export default {
         },
         //获取服务
         querySiListPage(){
-                // type:'0', 金融商事服务  type:'1', 惠台服务信息
+                // type:'1', 金融商事服务  type:'2', 惠台服务信息
             let params = {
                 page:1,
                 rows:5,
-                type:'0'
+                type:'1'
             }
             this.$store.dispatch('querySiListPage',params)
         },
@@ -377,21 +377,21 @@ export default {
                         query:{id:item.id}
                     })
                     break;
-                case 'service0':
-                    this.$router.push({
-                        path:'/serviceContaner',
-                        query:{
-                            id:item.id,
-                            type:'0'   //0 惠台服务信息 //1 金融商事服务
-                        }
-                    })
-                    break;
                 case 'service1':
                     this.$router.push({
-                        path:'/serviceContaner',
+                        path:'/serviceContaner/serviceDetail',
                         query:{
                             id:item.id,
                             type:'1'   //0 惠台服务信息 //1 金融商事服务
+                        }
+                    })
+                    break;
+                case 'service2':
+                    this.$router.push({
+                        path:'/serviceContaner',
+                        query:{
+                            id:item.id,
+                            type:'2'   //0 惠台服务信息 //1 金融商事服务
                         }
                     })
                     break;

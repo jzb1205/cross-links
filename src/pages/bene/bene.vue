@@ -62,10 +62,10 @@ export default {
             checked:false,
             list: [],
             address: {
-                cityCode:'110000',
-                cityName:'北京市',
-                provinceCode:'110100',
-                provinceName:'北京城区',
+                cityCode:'',
+                cityName:'',
+                provinceCode:'',
+                provinceName:'请选择省份',
             },
             imgHttp:this.$imgUrl,
             showPicker:false
