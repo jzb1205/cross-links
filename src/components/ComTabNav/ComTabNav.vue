@@ -17,7 +17,7 @@ export default {
         },
         curCode:{
             type:String,
-            default:'0'
+            default:'1'
         }
     },
     data(){

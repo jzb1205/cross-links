@@ -51,6 +51,17 @@
             </div>
         </div>
         <com-dialog-pop :imgUrl='dataMap.process' :showPop="showPop"></com-dialog-pop>
+        <el-dialog
+            title="提示"
+            :visible.sync="dialogVisible"
+            width="30%"
+            :before-close="handleClose">
+            <span>是否确认办理本业务？</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="saveUso">确 定</el-button>
+            </span>
+            </el-dialog>
     </div>
 </template>
 
@@ -81,7 +92,8 @@ export default {
     data(){
         return {
             imgHttp:this.$imgUrl,
-            showPop:false
+            showPop:false,
+            dialogVisible:false
         }
     },
     methods:{
@@ -101,12 +113,16 @@ export default {
                 },1500)
                 return;
             }
-            this.$router.push({
-                path:'/serviceContaner/serviceOrder',
-                query:{
-                    id:this.id
-                }
-            })
+            if (this.dataMap.formTemplate === '{}') {
+                this.dialogVisible = true
+            }else{
+                this.$router.push({
+                    path:'/serviceContaner/serviceOrder',
+                    query:{
+                        id:this.id
+                    }
+                })
+            }
         },
         saveUso(){
             this.$post(this.$api.order.saveUso,{
@@ -127,10 +143,14 @@ export default {
                         type: 'error'
                     });
                 }
+                this.dialogVisible = false
             })
         },
         downLoad(id){
             window.location.href = 'http://47.101.183.77:8089/file/downloadFile?id='+id.toString()
+        },
+        handleClose(){
+            this.dialogVisible = false
         }
     }
 }

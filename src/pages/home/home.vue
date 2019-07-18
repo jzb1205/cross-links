@@ -89,7 +89,7 @@
                 <div class="main-two-four">
                     <p class="news-title">
                         <span class="title">{{$t("message.htzc.htfwxx")}}</span>
-                        <span class="more" @click="$router.push({path:'/serviceContaner',query:{type:'0'}})">
+                        <span class="more" @click="$router.push({path:'/serviceContaner',query:{type:'1'}})">
                             {{$t("message.notice.more")}}
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
