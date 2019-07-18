@@ -2,7 +2,7 @@
     <div class="service">
         <div class="server-dis-img">
             <img class="se-img" src="../../assets/img/service-banner.jpg" alt="">
-            <com-tab-nav :tablist='typeMap' @getChildType='getChildType'></com-tab-nav>
+            <com-tab-nav :tablist='typeMap' :curCode='curType' @getChildType='getChildType'></com-tab-nav>
         </div>
         <div class="info-main">
             <com-more-condition :tagList='secTypeMap' @getChildTag='getChildTag' :curTab='curTab'></com-more-condition>
@@ -52,7 +52,7 @@ export default {
             page:1,
             rows:10,
             total:0,
-            curType:0,
+            curType:'1',
             curTab:'',
             checked:false,
             imgHttp:this.$imgUrl
@@ -62,9 +62,15 @@ export default {
         document.getElementsByClassName('server-dis-img')[0].style.height = (document.body.clientWidth/1920)*329;
     },
     created () {
-        this.querySiListPage()
         this.$store.dispatch('getType',{ typeCode:'serviceBigType',class:'1'})
         this.$store.dispatch('getType',{ typeCode:'businessService',class:'2'})
+        debugger
+        if (this.$route.query.type && this.$route.query.type==='1') {
+            this.curType = '2'
+        }else{
+            this.curType = '1'
+        }
+        this.querySiListPage()
     },
     computed:{
         typeMap(){

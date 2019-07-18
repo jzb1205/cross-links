@@ -95,7 +95,7 @@
                         </span>
                     </p>
                     <ul class="news-list">
-                        <li v-for="(item,index) in benesServiceList" :key="index"  @click="toDetail(item,'service')">
+                        <li v-for="(item,index) in benesServiceList" :key="index"  @click="toDetail(item,'service0')">
                             <span class="title">{{item.title}}</span>
                             <span class="time">{{item.createTime | timeFormat('YYYY-MM-DD')}}</span>
                         </li>
@@ -126,13 +126,13 @@
                 <div class="service">
                     <p class="news-title">
                         <span class="title">{{$t("message.navList.service")}}</span>
-                        <span class="more"  @click='$router.push("/homeContaner/serviceItem")'>
+                        <span class="more" @click="$router.push({path:'/serviceContaner',query:{type:'1'}})">
                             {{$t("message.notice.more")}}
                             <i class="el-icon-circle-plus-outline"></i>
                         </span>
                     </p>
                     <ul class="news-list">
-                        <li class='service-list' v-for="(item,index) in serviceList" :key="index" @click='$router.push(item.url)'>
+                        <li class='service-list' v-for="(item,index) in serviceList" :key="index" @click="toDetail(item.url,'service3')">
                             <span class="icon">
                                 <img :src="imgHttp+item.icon" alt="">
                             </span>
@@ -332,10 +332,11 @@ export default {
         },
         //获取服务
         querySiListPage(){
+                // type:'0', 金融商事服务  type:'1', 惠台服务信息
             let params = {
                 page:1,
                 rows:5,
-                type:''
+                type:'0'
             }
             this.$store.dispatch('querySiListPage',params)
         },
@@ -355,15 +356,14 @@ export default {
         //获取惠政
         getPolicyPage(){
             let params = {
-                // type:'huiTaipolicy',
-                type:'',
+                type:'',  
                 page:1,
                 rows:5
             }
             this.$store.dispatch('getPolicyPage',params)
         },
         toDetail(item,type){
-            if (!item.id) {
+            if (!item.id && !type.includes('service')) {
                 this.$message({
                     message:'id不能为空',
                     type:'error'
@@ -377,11 +377,26 @@ export default {
                         query:{id:item.id}
                     })
                     break;
-                case 'service':
+                case 'service0':
                     this.$router.push({
-                        path:'/serviceContaner/serviceDetail',
-                        query:{id:item.id}
+                        path:'/serviceContaner',
+                        query:{
+                            id:item.id,
+                            type:'0'   //0 惠台服务信息 //1 金融商事服务
+                        }
                     })
+                    break;
+                case 'service1':
+                    this.$router.push({
+                        path:'/serviceContaner',
+                        query:{
+                            id:item.id,
+                            type:'1'   //0 惠台服务信息 //1 金融商事服务
+                        }
+                    })
+                    break;
+                case 'service3':
+                    this.$router.push(item)
                     break;
                 case 'bene1':
                     this.$router.push({

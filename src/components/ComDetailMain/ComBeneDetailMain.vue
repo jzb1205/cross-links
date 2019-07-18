@@ -8,7 +8,7 @@
                     <div class="baseInfoT">
                         <span v-if="dataMap.source">{{$t("message.bene.hzly")}}：{{dataMap.source}}</span>
                         <span v-if="dataMap.type">{{$t("message.bene.hzlx")}}：{{dataMap.type}}</span>
-                        <span v-if="dataMap.provinceName">{{$t("message.bene.szqy")}}：{{dataMap.provinceName+dataMap.cityName}}</span>
+                        <span v-if="dataMap.provinceName">{{$t("message.bene.szqy")}}：{{dataMap.provinceName}}</span>
                     </div>
                     <div class="tag" v-if="tagList.length>0">
                         <el-tag v-for="(it,index) in tagList" :key="index">{{it}}</el-tag>

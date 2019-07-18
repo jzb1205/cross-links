@@ -14,16 +14,20 @@ export default {
         tablist:{
             type:Array,
             default:[]
+        },
+        curCode:{
+            type:String,
+            default:'0'
         }
     },
     data(){
         return {
-            curCode:'0'
+            curType:'1'
         }
     },
     methods:{
         getCurId(item){
-            this.curCode = item.code;
+            this.curType = item.code;
             this.$emit('getChildType',item.code)
         }
     }

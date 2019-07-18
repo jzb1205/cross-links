@@ -9,13 +9,13 @@
             <div class="listContion">
                 <div class="left">
                     <div class='adressSelect'>
-                        <span class="showAddress" @click="showPicker=!showPicker">{{address.provinceName+address.cityName}}&nbsp;<i class="el-icon-arrow-down"></i></span>
+                        <span class="showAddress" @click="showPicker=!showPicker">{{address.provinceName}}&nbsp;<i class="el-icon-arrow-down"></i></span>
                         <transition name="el-zoom-in-top">
                             <com-dist-picker v-show='showPicker' class="select" :address='address' @getAddress='getAddress'></com-dist-picker>
                         </transition>
                     </div>
                     <div class="selectType">
-                        <span>&nbsp;&nbsp;全部{{$t("message.bene.lx")}}<i class="el-icon-arrow-down"></i> &nbsp;&nbsp;&nbsp;</span>
+                        <!-- <span>&nbsp;&nbsp;全部{{$t("message.bene.lx")}}<i class="el-icon-arrow-down"></i> &nbsp;&nbsp;&nbsp;</span> -->
                         <el-checkbox v-model="checked">{{$t("message.bene.kzxsb")}}</el-checkbox>
                     </div>
                 </div>
@@ -97,8 +97,8 @@ export default {
         //获取区域信息
         getAddress(value){
             this.address = {
-                cityCode:value.city.code || '',
-                cityName:value.city.value || '',
+                // cityCode:value.city.code || '',
+                // cityName:value.city.value || '',
                 provinceCode:value.province.code || '',
                 provinceName:value.province.value || '',
             }
@@ -134,6 +134,8 @@ export default {
                 page:value && value.page || 1,
                 rows:value && value.rows || 10,
                 type:this.curTab,
+                cityCode:'',
+                provinceCode:this.address.provinceCode,
             }
             this.$store.dispatch('getPolicyPage',params)
         },
@@ -155,15 +157,8 @@ export default {
             }
             this.$store.dispatch('getType',{ typeCode:typeCode,class:'2'})
         },
-        'address.cityCode'(){
-            setTimeout(()=>{
-                this.showPicker = false
-            },2000)
-        },
         'address.provinceCode'(){
-            setTimeout(()=>{
-                this.showPicker = false
-            },10000)
+            this.showPicker = false
         }
     }
 }
@@ -224,6 +219,7 @@ export default {
                     }
                     .el-checkbox{
                         float: left;
+                        margin-left:10px;
                     }
                 }
             }
