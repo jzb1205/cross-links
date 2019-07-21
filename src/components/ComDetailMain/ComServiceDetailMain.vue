@@ -56,10 +56,10 @@
             :visible.sync="dialogVisible"
             width="30%"
             :before-close="handleClose">
-            <span>是否确认办理本业务？</span>
+            <span>{{$t("message.order.yw")}}？</span>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveUso">确 定</el-button>
+                <el-button type="primary" @click="saveUso">{{$t("message.order.qr")}}</el-button>
             </span>
             </el-dialog>
     </div>

@@ -7,141 +7,143 @@
                 </el-carousel-item>
             </el-carousel>
         </div>
-        <div class="home-main">
-            <div class="home-notice">
-                <div class="home-notice-left">
-                    <img src="../../assets/img/icon-notice.png" alt="">
-                    {{$t("message.notice.notice")}}：
+        <transition name="el-fade-in-linear">
+            <div class="home-main" v-if='loading'>
+                <div class="home-notice">
+                    <div class="home-notice-left">
+                        <img src="../../assets/img/icon-notice.png" alt="">
+                        {{$t("message.notice.notice")}}：
+                    </div>
+                    <div class="home-notice-right">
+                        <marquee width=98% onmouseover=this.stop() onmouseout=this.start()>
+                            <li class="marqueeItem" v-for="item in noticeList" :key="item.id" v-html="item.content"></li>
+                        </marquee>
+                    </div>
                 </div>
-                <div class="home-notice-right">
-                    <marquee width=98% onmouseover=this.stop() onmouseout=this.start()>
-                        <li class="marqueeItem" v-for="item in noticeList" :key="item.id" v-html="item.content"></li>
-                    </marquee>
-                </div>
-            </div>
-            <div class="home-main-one">
-                <div class="main-one-left">
-                    <el-carousel height="380px" arrow='hover'>
-                        <el-carousel-item v-for="item in infoList" :key="item.id" class="info-banner">
-                            <img class="info-banner-img"  @click="toDetail(item,'info')" :src="$imgUrl+item.imgPath" alt="正在加载中......">
-                            <div class="bottom">
-                                <p class="titleNotice">{{item.title}}</p>
-                            </div>
-                        </el-carousel-item>
-                    </el-carousel>
-                </div>
-                <div class="main-one-right">
-                    <p class="news-title">
-                        <span class="title">{{$t("message.notice.layw")}}</span>
-                        <span class="more" @click='$router.push("/infoContaner")'>
-                            {{$t("message.notice.more")}}
-                            <i class="el-icon-circle-plus-outline"></i>
-                        </span>
-                    </p>
-                    <ul class="news-list">
-                        <li v-for="(item,index) in infoList" :key="index" @click="toDetail(item,'info')">
-                            <span class="title">{{item.title}}</span>
-                            <span class="time">{{item.createTime | timeFormat}}</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="toTw" v-if='toTw.length>0'>
-                <div class="main-two-one">
-                    <p class="news-title">
-                        <span class="title">{{$t("message.twztzl.twztzl")}}</span>
-                        <span class="more" @click='$router.push("/nav")'>
-                            {{$t("message.notice.more")}}
-                            <i class="el-icon-circle-plus-outline"></i>
-                        </span>
-                    </p>
-                    <div class="scrollWrap" @mouseenter="on_top_enter" @mouseleave="on_top_leave">
-                        <swiper :options="swiperOption" ref="mySwiper">
-                            <swiper-slide v-for="it in toTw" :class="{'active':it.id==='3'}" :key='it.id'>
-                                <div class="twIcon"  @click="toOuter(it.url)">
-                                    <img :src="imgHttp+it.icon" alt="">
+                <div class="home-main-one">
+                    <div class="main-one-left">
+                        <el-carousel height="380px" arrow='hover'>
+                            <el-carousel-item v-for="item in infoList" :key="item.id" class="info-banner">
+                                <img class="info-banner-img"  @click="toDetail(item,'info')" :src="$imgUrl+item.imgPath" alt="正在加载中......">
+                                <div class="bottom">
+                                    <p class="titleNotice">{{item.title}}</p>
                                 </div>
-                                <p class="twName" @click="toOuter(it.url)">{{it.name}}</p>
-                            </swiper-slide>
-                        </swiper> 
-                        <div class="swiper-pagination" style="display:none;" slot="pagination"></div>
-                        <div class="swiper-button-prev" slot="button-prev" v-if="!showBtn"></div>
-                        <div class="swiper-button-next" slot="button-next" v-if="!showBtn"></div>
+                            </el-carousel-item>
+                        </el-carousel>
+                    </div>
+                    <div class="main-one-right">
+                        <p class="news-title">
+                            <span class="title">{{$t("message.notice.layw")}}</span>
+                            <span class="more" @click='$router.push("/infoContaner")'>
+                                {{$t("message.notice.more")}}
+                                <i class="el-icon-circle-plus-outline"></i>
+                            </span>
+                        </p>
+                        <ul class="news-list">
+                            <li v-for="(item,index) in infoList" :key="index" @click="toDetail(item,'info')">
+                                <span class="title">{{item.title}}</span>
+                                <span class="time">{{item.createTime | timeFormat}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="toTw" v-if='toTw.length>0'>
+                    <div class="main-two-one">
+                        <p class="news-title">
+                            <span class="title">{{$t("message.twztzl.twztzl")}}</span>
+                            <span class="more" @click='$router.push("/nav")'>
+                                {{$t("message.notice.more")}}
+                                <i class="el-icon-circle-plus-outline"></i>
+                            </span>
+                        </p>
+                        <div class="scrollWrap" @mouseenter="on_top_enter" @mouseleave="on_top_leave">
+                            <swiper :options="swiperOption" ref="mySwiper">
+                                <swiper-slide v-for="it in toTw" :class="{'active':it.id==='3'}" :key='it.id'>
+                                    <div class="twIcon"  @click="toOuter(it.url)">
+                                        <img :src="imgHttp+it.icon" alt="">
+                                    </div>
+                                    <p class="twName" @click="toOuter(it.url)">{{it.name}}</p>
+                                </swiper-slide>
+                            </swiper> 
+                            <div class="swiper-pagination" style="display:none;" slot="pagination"></div>
+                            <div class="swiper-button-prev" slot="button-prev" v-if="!showBtn"></div>
+                            <div class="swiper-button-next" slot="button-next" v-if="!showBtn"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="home-main-two">
+                    <div class="main-two-one">
+                        <p class="news-title">
+                            <span class="title">{{$t("message.htzc.htzcjd")}}</span>
+                            <span class="more" @click='$router.push("/benContaner")'>
+                                {{$t("message.notice.more")}}
+                                <i class="el-icon-circle-plus-outline"></i>
+                            </span>
+                        </p>
+                        <ul class="news-list">
+                            <li v-for="(item,index) in beneList" :key="index" @click="toDetail(item,'bene1')">
+                                <span class="title">{{item.title}}</span>
+                                <span class="time">{{item.createTime | timeFormat('YYYY-MM-DD')}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="main-two-four">
+                        <p class="news-title">
+                            <span class="title">{{$t("message.htzc.htfwxx")}}</span>
+                            <span class="more" @click="$router.push({path:'/serviceContaner',query:{type:'2'}})">
+                                {{$t("message.notice.more")}}
+                                <i class="el-icon-circle-plus-outline"></i>
+                            </span>
+                        </p>
+                        <ul class="news-list">
+                            <li v-for="(item,index) in benesServiceList" :key="index"  @click="toDetail(item,'service1')">
+                                <span class="title">{{item.title}}</span>
+                                <span class="time">{{item.createTime | timeFormat('YYYY-MM-DD')}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="main-two-three info">
+                        <p class="news-title infoTitle"  @click='$router.push("/aboutMe")'>
+                            <span class="title">{{$t("message.hdl.hdl")}}</span>
+                            <span class="resultCheck">
+                                <span class="icon"></span>
+                                <span class="text">{{$t("message.hdl.jgcx")}}</span>
+                            </span>
+                            <span class="toInfo">
+                                <span class="icon"></span>
+                                <span class="text">{{$t("message.hdl.wyzx")}}</span>
+                            </span>
+                        </p>
+                        <ul class="infoWrap">
+                            <li class="onlineOnfo" v-for="(item,index) in navList" :key="index"  @click='$router.push("/aboutMe")'>
+                                <span class="icon">
+                                    <img :src="item.img" alt="">
+                                </span>
+                                <span class='title'>{{$t(item.title)}}</span>
+                                <span class="name">{{$t(item.name)}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="service">
+                        <p class="news-title">
+                            <span class="title">{{$t("message.navList.service")}}</span>
+                            <span class="more" @click="$router.push({path:'/serviceContaner',query:{type:'1'}})">
+                                {{$t("message.notice.more")}}
+                                <i class="el-icon-circle-plus-outline"></i>
+                            </span>
+                        </p>
+                        <ul class="news-list">
+                            <li class='service-list' v-for="(item,index) in serviceList" :key="index" @click="toDetail(item.url,'service3')">
+                                <span class="icon">
+                                    <img :src="imgHttp+item.icon" alt="">
+                                </span>
+                                <span class="name">{{item.name}}</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="home-main-two">
-                <div class="main-two-one">
-                    <p class="news-title">
-                        <span class="title">{{$t("message.htzc.htzcjd")}}</span>
-                        <span class="more" @click='$router.push("/benContaner")'>
-                            {{$t("message.notice.more")}}
-                            <i class="el-icon-circle-plus-outline"></i>
-                        </span>
-                    </p>
-                    <ul class="news-list">
-                        <li v-for="(item,index) in beneList" :key="index" @click="toDetail(item,'bene1')">
-                            <span class="title">{{item.title}}</span>
-                            <span class="time">{{item.createTime | timeFormat('YYYY-MM-DD')}}</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="main-two-four">
-                    <p class="news-title">
-                        <span class="title">{{$t("message.htzc.htfwxx")}}</span>
-                        <span class="more" @click="$router.push({path:'/serviceContaner',query:{type:'1'}})">
-                            {{$t("message.notice.more")}}
-                            <i class="el-icon-circle-plus-outline"></i>
-                        </span>
-                    </p>
-                    <ul class="news-list">
-                        <li v-for="(item,index) in benesServiceList" :key="index"  @click="toDetail(item,'service1')">
-                            <span class="title">{{item.title}}</span>
-                            <span class="time">{{item.createTime | timeFormat('YYYY-MM-DD')}}</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="main-two-three info">
-                    <p class="news-title infoTitle"  @click='$router.push("/aboutMe")'>
-                        <span class="title">{{$t("message.hdl.hdl")}}</span>
-                        <span class="resultCheck">
-                            <span class="icon"></span>
-                            <span class="text">{{$t("message.hdl.jgcx")}}</span>
-                        </span>
-                        <span class="toInfo">
-                            <span class="icon"></span>
-                            <span class="text">{{$t("message.hdl.wyzx")}}</span>
-                        </span>
-                    </p>
-                    <ul class="infoWrap">
-                        <li class="onlineOnfo" v-for="(item,index) in navList" :key="index"  @click='$router.push("/aboutMe")'>
-                            <span class="icon">
-                                <img :src="item.img" alt="">
-                            </span>
-                            <span class='title'>{{$t(item.title)}}</span>
-                            <span class="name">{{$t(item.name)}}</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="service">
-                    <p class="news-title">
-                        <span class="title">{{$t("message.navList.service")}}</span>
-                        <span class="more" @click="$router.push({path:'/serviceContaner',query:{type:'2'}})">
-                            {{$t("message.notice.more")}}
-                            <i class="el-icon-circle-plus-outline"></i>
-                        </span>
-                    </p>
-                    <ul class="news-list">
-                        <li class='service-list' v-for="(item,index) in serviceList" :key="index" @click="toDetail(item.url,'service3')">
-                            <span class="icon">
-                                <img :src="imgHttp+item.icon" alt="">
-                            </span>
-                            <span class="name">{{item.name}}</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        </transition>
     </div>
 </template>
 
@@ -221,7 +223,8 @@ export default {
             　　　　prevEl: '.swiper-button-prev'
             　　}
             },
-            showBtn:false
+            showBtn:false,
+            loading:false
         }
     },
     mounted(){
@@ -231,13 +234,18 @@ export default {
             document.getElementsByClassName('el-carousel__container')[0].style.height = h
         })
     },
-    created(){
-        this.getNoticeInfoPage()
-        this.querySiListPage()
-        this.getInfoListPage()
-        this.getNavigationList()
-        this.getPolicyPage()
-        this.getNavigationList()
+    async created(){
+        let _this = this
+        this.loading = false
+        await this.getNoticeInfoPage()
+        await this.querySiListPage()
+        await this.getInfoListPage()
+        await this.getNavigationList()
+        await this.getPolicyPage()
+        await this.getNavigationList()
+        setTimeout(()=>{
+            _this.loading = true
+        },500)
     },
     computed:{
         dataList(){
@@ -336,7 +344,7 @@ export default {
             let params = {
                 page:1,
                 rows:5,
-                type:'1'
+                type:'2'
             }
             this.$store.dispatch('querySiListPage',params)
         },
@@ -382,7 +390,7 @@ export default {
                         path:'/serviceContaner/serviceDetail',
                         query:{
                             id:item.id,
-                            type:'1'   //0 惠台服务信息 //1 金融商事服务
+                            type:'2'   //2 惠台服务信息 //1 金融商事服务
                         }
                     })
                     break;
@@ -391,7 +399,7 @@ export default {
                         path:'/serviceContaner',
                         query:{
                             id:item.id,
-                            type:'2'   //0 惠台服务信息 //1 金融商事服务
+                            type:'1'   //2 惠台服务信息 //1 金融商事服务
                         }
                     })
                     break;

@@ -64,7 +64,6 @@ export default {
     created () {
         this.$store.dispatch('getType',{ typeCode:'serviceBigType',class:'1'})
         this.$store.dispatch('getType',{ typeCode:'businessService',class:'2'})
-        debugger
         if (this.$route.query.type && this.$route.query.type==='2') {
             this.curType = '2'
         }else{

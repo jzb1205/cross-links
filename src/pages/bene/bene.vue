@@ -2,7 +2,7 @@
     <div class="bene">
         <div class="bene-dis-img">
             <img class="se-img" src="../../assets/img/bene-banner.jpg" alt="">
-            <com-tab-nav :tablist='typeMap' @getChildType='getChildType'></com-tab-nav>
+            <com-tab-nav :tablist='typeMap' :curCode='curType' @getChildType='getChildType'></com-tab-nav>
         </div>
         <div class="info-main">
             <com-more-condition :tagList='secTypeMap' @getChildTag='getChildTag' :curTab='curTab'></com-more-condition>
@@ -57,7 +57,8 @@ export default {
             page:1,
             rows:10,
             total:0,
-            curType:0,
+            // curType:0,
+            curType:'0',
             curTab:'',
             checked:false,
             list: [],
@@ -142,6 +143,8 @@ export default {
     },
     watch:{
         'curType'(){
+            this.address.provinceCode = ''
+            this.address.provinceName = '请选择省份'
             this.curTab = '' //一级类型改变时 二级类型默认 全部类型 项
             let typeCode = 'huiTaipolicy'
             switch (this.curType) {
