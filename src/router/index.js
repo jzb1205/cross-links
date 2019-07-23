@@ -157,12 +157,12 @@ export default new Router({
                     name: 'aboutMe',
                     component: aboutMe
                 },
+                {
+                    path: '/login',
+                    name: 'login',
+                    component: login
+                },
             ]
-        },
-        {
-            path: '/login',
-            name: 'login',
-            component: login
         },
     ]
 })
