@@ -21,7 +21,6 @@ export default {
     },
     data(){
         return {
-            dialogVisible:'false',
             imgHttp:this.$imgUrl
         }
     },

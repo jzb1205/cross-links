@@ -25,7 +25,7 @@
                         <p class="type">
                                 {{$t("message.service.lx")}}：{{it.name?it.name:it.type}}</p>
                         <p class="tag">
-                                {{$t("message.service.sfsf")}}：{{it.payType==='0'?'免费':it.amount}}</p>
+                                {{$t("message.service.sfsf")}}：{{it.payType==='0'?'免费':it.amount+ $t("message.moreService.item1.y")}}</p>
                         <p class="address">
                                 {{$t("message.service.fwqx")}}：<span>{{it.timeLimit}}</span></p>
                     </div>

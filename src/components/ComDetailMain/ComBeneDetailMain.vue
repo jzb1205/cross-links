@@ -22,9 +22,9 @@
                 <div class="item-content-wrap" v-html='dataMap.content'></div>
             </div>
             <div class="asideCom" v-if='attachmentList.length>0' >
-                <p class="item-title">{{$t("message.bene.fjxz")}}：</p>
+                <p class="item-title">{{$t("message.service.fjxz")}}：</p>
                 <p class="item-content-wrap" v-for="it in attachmentList" :key="it.id">
-                    <a :href="'http://47.101.183.77:8089/file/downloadFile?id='+it.id.toString()">{{it.name}}</a>
+                    <a :href="$imgUrl+'/file/downloadFile?id='+it.id.toString()">{{it.name}}</a>
                 </p>
             </div>
         </div>

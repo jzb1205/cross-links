@@ -39,14 +39,14 @@
                 <p class="item-title">
                         {{$t("message.service.fwlc")}}：</p>
                 <div class="item-content-wrap">
-                    <img class="processImg" @click='showPop=!showPop' :src="imgHttp+dataMap.process" alt="">
+                    <img class="processImg" @click='showPop=true' :src="imgHttp+dataMap.process" alt="图片加载中。。。。">
                 </div>
             </div>
             <div class="asideCom" v-if='attachmentList.length>0' >
                 <p class="item-title">
                         {{$t("message.service.fjxz")}}：</p>
                 <p class="affixList" v-for="it in attachmentList" :key="it.id">
-                    <a :href="'http://47.101.183.77:8089/file/downloadFile?id='+it.id.toString()">{{it.name}}</a>
+                    <a :href="$imgUrl+'/file/downloadFile?id='+it.id.toString()">{{it.name}}</a>
                 </p>
             </div>
         </div>
@@ -114,6 +114,7 @@ export default {
                 return;
             }
             if (this.dataMap.formTemplate === '{}') {
+                this.showPop = false
                 this.dialogVisible = true
             }else{
                 this.$router.push({

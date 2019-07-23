@@ -32,7 +32,7 @@
                         <p class="title" @click="toDetail(it.id)" >{{it.title}}</p>
                         <p class="type">{{$t("message.bene.lx")}}：<span>{{it.type}}</span></p>
                         <p class="tag" v-if="it.tag && it.tag.split(',').length>0">{{$t("message.bene.bq")}}：<el-tag v-for="(is,index) in it.tag.split(',').slice(0,12)" :key="index">{{is}}</el-tag></p>
-                        <p class="address">{{$t("message.bene.szqy")}}：<span>{{it.provinceName+it.cityName}}</span></p>
+                        <p class="address">{{$t("message.bene.szqy")}}：<span>{{it.provinceName}}</span></p>
                     </div>
                     <div class="fr detailBtn" @click="toDetail(it.id)">
                             {{$t("message.bene.ckxq")}}
