@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import { Message,MessageBox } from 'element-ui'
 
 import index from '../pages/index.vue'
 //登录注册
@@ -172,6 +173,14 @@ function verifyLogin(next) {
     if (window.sessionStorage.getItem('token')) {
       next();
     } else {
-      next('/');
+        MessageBox.confirm('此操作需要登录才能执行?', '提示', {
+            confirmButtonText: '登陆',
+            cancelButtonText: '取消',
+            type: 'error'
+            }).then(() => {
+                next('/login');
+            }).catch(() => {
+                next(false);       
+        });
     }
   }
