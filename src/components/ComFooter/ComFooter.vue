@@ -5,9 +5,9 @@
                 <div class="top-left">
                     <p class="link">
                         <span @click="$router.push('/aboutMe')">关于两岸通</span>
-                        <span @click="$router.push('/aboutMe')">商贸通服务</span>
-                        <span @click="$router.push('/aboutMe')">推广服务</span>
-                        <span @click="$router.push('/aboutMe')">帮助中心</span>
+                        <!--<span @click="$router.push('/aboutMe')">商贸通服务</span>-->
+                        <!--<span @click="$router.push('/aboutMe')">推广服务</span>-->
+                        <!--<span @click="$router.push('/aboutMe')">帮助中心</span>-->
                         <span @click="$router.push('/aboutMe')">友情链接</span>
                         <span @click="$router.push('/aboutMe')">联系我们</span>
                     </p>
@@ -44,11 +44,11 @@ export default {
         height:116px;
         margin:0 auto;
         .top{
-            overflow: hidden;    
+            overflow: hidden;
             width: 942px;
             margin: 0 auto;
             position: relative;
-            .top-left{  
+            .top-left{
                 margin: 0 auto;
                 font-size: 14px;
                 .link{
@@ -93,7 +93,7 @@ export default {
         }
     }
     .bottom{
-        background: #444; 
+        background: #444;
         height:35px;
         line-height: 35px;
         text-align: center;

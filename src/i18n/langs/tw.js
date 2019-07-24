@@ -24,6 +24,7 @@ const tw = {
             'yhm':'用戶名',
             'mm' : '密碼',
             'zh':'賬號',
+            'myzh':'没有賬號',
             'lxdh':'聯繫電話',
         },
         userCenter:{

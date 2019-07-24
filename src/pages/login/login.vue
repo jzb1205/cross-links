@@ -11,7 +11,7 @@
                     <p class="btn" v-show="type===0">
                         <el-button type="danger" @click="toHome(0)">{{$t('message.login.dl')}}</el-button>
                     </p>
-                    <p class="toOption" v-show="type===0">沒有{{$t('message.login.zh')}}<span @click="type=1">去{{$t('message.login.zc')}}</span></p>
+                    <p class="toOption" v-show="type===0">{{$t('message.login.myzh')}}<span @click="type=1">去{{$t('message.login.zc')}}</span></p>
                     <p class="btn" v-show="type===1">
                         <el-button type="danger" @click="toHome(1)">{{$t('message.login.zc')}}</el-button>
                     </p>
@@ -47,7 +47,7 @@ export default {
                 }
             ],
             loginData:[
-                
+
                 {
                     label:'message.login.yhm',
                     value:'',
@@ -92,7 +92,7 @@ export default {
                     });
                     return;
                 }
-                
+
             }
             //type==0 登录  1 注册
             let url = type==0?this.$api.login.login:this.$api.login.register;
@@ -144,7 +144,7 @@ export default {
             this.curList = this.type !== 0?this.register:this.login
             this.title = this.type !== 0?'message.login.zc':"message.login.dl"
         }
-        
+
     }
 }
 </script>
