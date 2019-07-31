@@ -64,7 +64,7 @@
                                     </div>
                                     <p class="twName" @click="toOuter(it.url)">{{it.name}}</p>
                                 </swiper-slide>
-                            </swiper> 
+                            </swiper>
                             <div class="swiper-pagination" style="display:none;" slot="pagination"></div>
                             <div class="swiper-button-prev" slot="button-prev" v-if="!showBtn"></div>
                             <div class="swiper-button-next" slot="button-next" v-if="!showBtn"></div>
@@ -155,7 +155,7 @@ export default {
             bannerList:[
                 {
                     id:0,
-                    imgUrl:require(`../../assets/img/home-banner1.jpg`),
+                    imgUrl:require(`../../assets/img/banner1.png`),
                     path:''
                 },
                 {
@@ -259,11 +259,11 @@ export default {
                         case '0':
                             this.serviceList.goverList.children.push(item)
                             break;
-                    
+
                         case '1':
                             this.serviceList.convenientList.children.push(item)
                             break;
-                    
+
                         case '2':
                             this.serviceList.enterpriseList.children.push(item)
                             break;
@@ -364,7 +364,7 @@ export default {
         //获取惠政
         getPolicyPage(){
             let params = {
-                type:'',  
+                type:'',
                 page:1,
                 rows:5
             }
@@ -409,7 +409,7 @@ export default {
                 case 'bene1':
                     this.$router.push({
                         path:'/benContaner/beneDetail',
-                        query:{ 
+                        query:{
                             id:item.id
                         }
                     })
@@ -420,7 +420,7 @@ export default {
                         query:{id:item.id}
                     })
                     break;
-            
+
                 default:
                     break;
             }
@@ -444,8 +444,8 @@ export default {
 <style lang='less' scoped>
 .home{
     .home-banner{
-        width:100%;  
-        min-width:1200px;  
+        width:100%;
+        min-width:1200px;
         .banner{
             width:1200px;
         }
@@ -551,7 +551,7 @@ export default {
                     }
                 }
                 .news-list{
-                    li{    
+                    li{
                         height: 44px;
                         line-height: 44px;
                         list-style-type: circle!important;
@@ -577,7 +577,7 @@ export default {
                         &:hover{
                             color:rgba(187, 17, 26);
                         }
-                    } 
+                    }
                 }
             }
         }
@@ -606,7 +606,7 @@ export default {
                     }
                     .more{
                         cursor: pointer;
-                        float: right;    
+                        float: right;
                         position: relative;
                         top: 23px;
                         font-size:12px;
@@ -647,7 +647,7 @@ export default {
                             color:rgba(187, 17, 26);
                         }
                     }
-                    
+
                 }
             }
             .main-two-two{
@@ -673,13 +673,13 @@ export default {
                         }
                         &.more{
                            color:rgba(187, 17, 26);
-                            background: #ffff; 
+                            background: #ffff;
                         }
                         &:hover{
                             color:rgba(187, 17, 26);
                         }
                     }
-                    
+
                 }
             }
             .main-two-three{
@@ -692,7 +692,7 @@ export default {
                         width:80px;
                         // height:80px;
                         margin-right:35px;
-                        border-radius:4px;    
+                        border-radius:4px;
                         border-radius: 10px;
                         overflow: hidden;
                         &:nth-last-of-type(1){
@@ -721,7 +721,7 @@ export default {
                             color:rgba(187, 17, 26);
                         }
                     }
-                    
+
                 }
             }
             .info{
@@ -739,7 +739,7 @@ export default {
                         }
                         .text{
                             position: relative;
-                            top: -8px;  
+                            top: -8px;
                             font-size: 12px;
                         }
                     }
@@ -758,7 +758,7 @@ export default {
                 }
             }
             .main-two-four{
-                .news-list{    
+                .news-list{
                     margin: 30px 0 40px;
                     li{
                         height:35px;
@@ -787,7 +787,7 @@ export default {
                         &:hover{
                             color:rgba(187, 17, 26);
                         }
-                    } 
+                    }
                 }
             }
         }
@@ -813,7 +813,7 @@ export default {
                     }
                     .more{
                         cursor: pointer;
-                        float: right;    
+                        float: right;
                         position: relative;
                         top: 23px;
                         font-size:12px;
@@ -826,22 +826,22 @@ export default {
         }
         .service{
             ul{
-                overflow: hidden;    
+                overflow: hidden;
                 padding-top: 35px;
                 padding-bottom: 25px;
                 .service-list{
                     list-style: none!important;
                     width:64px;
                     float: left;
-                    margin-top:15px;    
+                    margin-top:15px;
                     margin-left: 55px;
                     cursor: pointer;
-                    .icon{    
-                        display: inline-block;    
+                    .icon{
+                        display: inline-block;
                         width: 64px;
                         height: 63px;
                         overflow: hidden;
-                        img{ 
+                        img{
                             width: 64px;
                             height: 63px;
                         }
@@ -892,11 +892,11 @@ export default {
                         color: #fff;
                         font-size: 13px;
                     }
-                    .name{    
+                    .name{
                         position: absolute;
                         top: 32px;
                         left: 163px;
-                        font-size: 18px; 
+                        font-size: 18px;
                     }
                     &:nth-of-type(1){
                         margin-left:-12px;
@@ -904,51 +904,51 @@ export default {
                             top: 36px;
                             left: 65px;
                         }
-                        .name{    
+                        .name{
                             top: 29px;
                             left: 159px;
                         }
                     }
-                    &:nth-of-type(2){        
+                    &:nth-of-type(2){
                         right: -10px;
                     }
-                    &:nth-of-type(3){   
-                        margin-left:-5px; 
+                    &:nth-of-type(3){
+                        margin-left:-5px;
                         margin-top: 25px;
-                        .title{    
+                        .title{
                             top: 43px;
                             left: 57px;
                         }
-                        .name{        
+                        .name{
                             top: 39px;
                             left: 154px;
                         }
                     }
-                    &:nth-of-type(4){        
+                    &:nth-of-type(4){
                         margin-left: 3px;
                         margin-top: 43px;
                         .title{
                             top: 39px;
                             left: 68px;
                         }
-                        .name{    
+                        .name{
                             top: 32px;
                             left: 163px;
                         }
                     }
                 }
-            } 
+            }
         }
     }
 }
 .scrollWrap{
-    position: relative;   
+    position: relative;
     width: 92%;
     margin: 0 auto;
 }
 .swiper-container{
     height:190px;
-    width:895px;     
+    width:895px;
     background: rgba(187, 17, 26);
     margin:20px auto;
     padding-left: 20px;
@@ -956,15 +956,15 @@ export default {
     margin-left:60px;
     .swiper-wrapper{
         float:left;
-        width:935px; 
-        margin-left:114px!important; 
+        width:935px;
+        margin-left:114px!important;
         .swiper-slide{
             display:inline-block;
             text-align:center;
             margin-top:25px;
             overflow: hidden;
             .twIcon{
-                overflow: hidden;    
+                overflow: hidden;
                 background: #fff;
                 padding-bottom:10px;
                 img{
@@ -978,7 +978,7 @@ export default {
                 color:#333;
                 padding:4px 0;
             }
-        }    
+        }
     }
-} 
+}
 </style>
